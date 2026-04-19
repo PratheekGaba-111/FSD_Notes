@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Full Stack Development – Complete Exam Notes</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap');
+
+  :root {
+    --bg: #0f0e0c;
+    --surface: #1a1916;
+    --border: #2e2c28;
+    --accent: #e8c14a;
+    --accent2: #c47a3a;
+    --text: #e8e4dc;
+    --muted: #9a9488;
+    --code-bg: #141310;
+    --unit1: #4a9e6a;
+    --unit2: #4a7ec4;
+    --unit3: #c44a7e;
+    --unit4: #c47a3a;
+    --unit5: #7a4ac4;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.75;
+    font-size: 15px;
+  }
+
+  /* TOC Header */
+  .hero {
+    background: linear-gradient(135deg, #1a1612 0%, #0f0e0c 60%);
+    border-bottom: 2px solid var(--accent);
+    padding: 40px 60px 30px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--accent);
+    letter-spacing: 1px;
+  }
+  .hero p { color: var(--muted); font-size: 13px; margin-top: 4px; font-style: italic; }
+  .toc-nav {
+    display: flex; gap: 12px; margin-top: 14px; flex-wrap: wrap;
+  }
+  .toc-nav a {
+    text-decoration: none;
+    padding: 5px 14px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.2s;
+  }
+  .toc-nav a:nth-child(1) { background: rgba(74,158,106,0.15); color: var(--unit1); border: 1px solid rgba(74,158,106,0.4); }
+  .toc-nav a:nth-child(2) { background: rgba(74,126,196,0.15); color: var(--unit2); border: 1px solid rgba(74,126,196,0.4); }
+  .toc-nav a:nth-child(3) { background: rgba(196,74,126,0.15); color: var(--unit3); border: 1px solid rgba(196,74,126,0.4); }
+  .toc-nav a:nth-child(4) { background: rgba(196,122,58,0.15); color: var(--unit4); border: 1px solid rgba(196,122,58,0.4); }
+  .toc-nav a:nth-child(5) { background: rgba(122,74,196,0.15); color: var(--unit5); border: 1px solid rgba(122,74,196,0.4); }
+  .toc-nav a:hover { transform: translateY(-1px); filter: brightness(1.3); }
+
+  /* Layout */
+  .container { max-width: 960px; margin: 0 auto; padding: 40px 40px 80px; }
+
+  /* Unit Sections */
+  .unit {
+    margin-bottom: 60px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .unit-header {
+    padding: 22px 32px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .unit[data-u="1"] .unit-header { background: linear-gradient(135deg, rgba(74,158,106,0.2), transparent); border-bottom: 1px solid rgba(74,158,106,0.3); }
+  .unit[data-u="2"] .unit-header { background: linear-gradient(135deg, rgba(74,126,196,0.2), transparent); border-bottom: 1px solid rgba(74,126,196,0.3); }
+  .unit[data-u="3"] .unit-header { background: linear-gradient(135deg, rgba(196,74,126,0.2), transparent); border-bottom: 1px solid rgba(196,74,126,0.3); }
+  .unit[data-u="4"] .unit-header { background: linear-gradient(135deg, rgba(196,122,58,0.2), transparent); border-bottom: 1px solid rgba(196,122,58,0.3); }
+  .unit[data-u="5"] .unit-header { background: linear-gradient(135deg, rgba(122,74,196,0.2), transparent); border-bottom: 1px solid rgba(122,74,196,0.3); }
+
+  .unit-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 600;
+    padding: 4px 10px; border-radius: 3px; letter-spacing: 1px;
+  }
+  .unit[data-u="1"] .unit-badge { background: rgba(74,158,106,0.2); color: var(--unit1); border: 1px solid rgba(74,158,106,0.5); }
+  .unit[data-u="2"] .unit-badge { background: rgba(74,126,196,0.2); color: var(--unit2); border: 1px solid rgba(74,126,196,0.5); }
+  .unit[data-u="3"] .unit-badge { background: rgba(196,74,126,0.2); color: var(--unit3); border: 1px solid rgba(196,74,126,0.5); }
+  .unit[data-u="4"] .unit-badge { background: rgba(196,122,58,0.2); color: var(--unit4); border: 1px solid rgba(196,122,58,0.5); }
+  .unit[data-u="5"] .unit-badge { background: rgba(122,74,196,0.2); color: var(--unit5); border: 1px solid rgba(122,74,196,0.5); }
+
+  .unit-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 21px; font-weight: 700;
+    color: var(--text);
+  }
+
+  .unit-body { padding: 32px; background: var(--surface); }
+
+  /* Question blocks */
+  .q-block {
+    margin-bottom: 38px;
+    padding-bottom: 38px;
+    border-bottom: 1px solid var(--border);
+  }
+  .q-block:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .q-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; font-weight: 600; letter-spacing: 2px;
+    color: var(--accent); text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .q-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px; font-weight: 700;
+    color: var(--text); margin-bottom: 18px;
+    line-height: 1.4;
+  }
+
+  /* Answer body */
+  h3 { font-family: 'Source Serif 4', serif; font-size: 15px; font-weight: 600; color: var(--accent2); margin: 18px 0 8px; }
+  p { margin-bottom: 10px; color: var(--text); }
+  ul, ol { padding-left: 22px; margin-bottom: 12px; }
+  li { margin-bottom: 5px; }
+  strong { color: var(--accent); font-weight: 600; }
+  em { color: var(--muted); }
+
+  /* Code blocks */
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent2);
+    border-radius: 4px;
+    padding: 16px 18px;
+    overflow-x: auto;
+    margin: 12px 0 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    line-height: 1.65;
+    color: #c8c0b0;
+  }
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    background: rgba(232,193,74,0.1);
+    color: var(--accent);
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+  pre code { background: none; color: inherit; padding: 0; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; margin: 14px 0 18px; font-size: 13px; }
+  th { background: rgba(232,193,74,0.1); color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.5px; padding: 8px 12px; text-align: left; border: 1px solid var(--border); }
+  td { padding: 7px 12px; border: 1px solid var(--border); color: var(--text); vertical-align: top; }
+  tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+
+  /* Definition boxes */
+  .def-box {
+    background: rgba(232,193,74,0.05);
+    border: 1px solid rgba(232,193,74,0.2);
+    border-left: 3px solid var(--accent);
+    border-radius: 4px;
+    padding: 14px 18px;
+    margin: 12px 0;
+    font-style: italic;
+    color: #d0cabb;
+  }
+
+  /* Highlight tip */
+  .tip {
+    background: rgba(74,158,106,0.08);
+    border: 1px solid rgba(74,158,106,0.3);
+    border-radius: 4px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #90c8a0;
+    margin: 12px 0;
+  }
+
+  /* Print friendly */
+  @media print {
+    .hero { position: static; }
+    body { background: white; color: black; }
+    pre { border: 1px solid #ccc; }
+    .unit { border: 1px solid #ccc; break-inside: avoid-page; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Full Stack Development — Complete Exam Notes</h1>
+  <p>All 5 Units · Exam-ready answers · Based on your uploaded notes</p>
+  <nav class="toc-nav">
+    <a href="#unit1">Unit I — HTML, CSS, Git</a>
+    <a href="#unit2">Unit II — JS, jQuery, AJAX</a>
+    <a href="#unit3">Unit III — React &amp; Redux</a>
+    <a href="#unit4">Unit IV — Spring MVC &amp; REST</a>
+    <a href="#unit5">Unit V — SQL, JDBC &amp; Cloud</a>
+  </nav>
+</div>
+
+<div class="container">
+
+<!-- ══════════════ UNIT I ══════════════ -->
+<section class="unit" data-u="1" id="unit1">
+  <div class="unit-header">
+    <span class="unit-badge">UNIT I</span>
+    <div class="unit-title">Web Development Basics — HTML, CSS, Web Servers, Git</div>
+  </div>
+  <div class="unit-body">
+
+    <div class="q-block">
+      <div class="q-label">Q1 — 20 Marks</div>
+      <div class="q-title">What is HTML? Explain its basic structure, tags, and key elements with examples.</div>
+
+      <h3>Definition</h3>
+      <div class="def-box">HTML (HyperText Markup Language) is a standard markup language used to create web pages. It describes the structure of a web page using markup tags.</div>
+
+      <ul>
+        <li><strong>HyperText</strong> — Text that contains links to other documents/pages.</li>
+        <li><strong>Markup Language</strong> — Uses tags to annotate/format text content.</li>
+        <li><strong>Web Page</strong> — A document written in HTML, rendered by a browser. Can be static or dynamic.</li>
+      </ul>
+
+      <h3>Basic HTML Structure</h3>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Page Title&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Main Heading&lt;/h1&gt;
+    &lt;p&gt;First paragraph.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <table>
+        <tr><th>Tag</th><th>Purpose</th></tr>
+        <tr><td><code>&lt;!DOCTYPE&gt;</code></td><td>Declares document type / HTML version to the browser</td></tr>
+        <tr><td><code>&lt;html&gt;</code></td><td>Root element; container for all HTML content</td></tr>
+        <tr><td><code>&lt;head&gt;</code></td><td>Contains metadata (title, links, scripts)</td></tr>
+        <tr><td><code>&lt;title&gt;</code></td><td>Sets the page title shown in browser tab</td></tr>
+        <tr><td><code>&lt;body&gt;</code></td><td>Contains all visible content of the page</td></tr>
+        <tr><td><code>&lt;h1&gt;–&lt;h6&gt;</code></td><td>Headings from most important (h1) to least (h6)</td></tr>
+        <tr><td><code>&lt;p&gt;</code></td><td>Defines a paragraph</td></tr>
+      </table>
+
+      <h3>Important HTML Elements</h3>
+      <p><strong>Anchor Tag (Hyperlink):</strong></p>
+<pre><code>&lt;a href="https://example.com" target="_blank"&gt;Click Here&lt;/a&gt;</code></pre>
+      <p><strong>Image Tag:</strong></p>
+<pre><code>&lt;img src="photo.jpg" alt="description" width="300" height="200"&gt;</code></pre>
+      <p><strong>Table:</strong></p>
+<pre><code>&lt;table border="1"&gt;
+  &lt;tr&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Marks&lt;/th&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;Ram&lt;/td&gt;&lt;td&gt;85&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+
+      <h3>HTML Lists</h3>
+      <ul>
+        <li><strong>Ordered List</strong> <code>&lt;ol&gt;</code> — numbered items</li>
+        <li><strong>Unordered List</strong> <code>&lt;ul&gt;</code> — bulleted items (type: disc, circle, square)</li>
+        <li>List items use <code>&lt;li&gt;</code> tag</li>
+      </ul>
+
+      <h3>HTML Forms</h3>
+      <p>Forms collect user input and send it to a server.</p>
+<pre><code>&lt;form action="server_url" method="post"&gt;
+  &lt;label&gt;Name: &lt;input type="text" name="name"&gt;&lt;/label&gt;
+  &lt;label&gt;Email: &lt;input type="email" name="email"&gt;&lt;/label&gt;
+  &lt;input type="radio" name="gender" value="male"&gt; Male
+  &lt;input type="checkbox" name="hobby" value="cricket"&gt; Cricket
+  &lt;input type="submit" value="Submit"&gt;
+&lt;/form&gt;</code></pre>
+      <table>
+        <tr><th>Input Type</th><th>Purpose</th></tr>
+        <tr><td>text</td><td>Single-line text input</td></tr>
+        <tr><td>password</td><td>Hidden text input</td></tr>
+        <tr><td>email</td><td>Email validation input</td></tr>
+        <tr><td>radio</td><td>Select one option from many</td></tr>
+        <tr><td>checkbox</td><td>Select multiple options</td></tr>
+        <tr><td>submit</td><td>Submit the form to the server</td></tr>
+        <tr><td>textarea</td><td>Multi-line text input</td></tr>
+      </table>
+    </div>
+
+    <div class="q-block">
+      <div class="q-label">Q2 — 20 Marks</div>
+      <div class="q-title">Explain CSS — Inline, Internal, and External. Describe the three ways to apply styles.</div>
+
+      <div class="def-box">CSS (Cascading Style Sheets) describes the look and formatting of an HTML document. It controls colors, fonts, layouts, padding, margins, and more.</div>
+
+      <h3>Three Ways to Apply CSS</h3>
+
+      <p><strong>1. Inline CSS</strong> — Applied directly inside an HTML element using the <code>style</code> attribute. Affects only that single element.</p>
+<pre><code>&lt;h3 style="color: red; font-size: 30px; text-align: center;"&gt;
+  Hello World
+&lt;/h3&gt;</code></pre>
+
+      <p><strong>2. Internal CSS</strong> — Defined using <code>&lt;style&gt;</code> tag inside the <code>&lt;head&gt;</code> section. Applies to one HTML page.</p>
+<pre><code>&lt;head&gt;
+  &lt;style&gt;
+    body { background-color: lavender; }
+    h2   { color: red; font-size: 30px; }
+    .blue { color: blue; }
+    #main { font-weight: bold; }
+  &lt;/style&gt;
+&lt;/head&gt;</code></pre>
+
+      <p><strong>3. External CSS</strong> — CSS rules stored in a separate <code>.css</code> file and linked to HTML. Best for large projects with multiple pages.</p>
+<pre><code>&lt;!-- In HTML --&gt;
+&lt;link rel="stylesheet" type="text/css" href="style.css"&gt;
+
+/* style.css */
+body { background-color: lavender; text-align: center; }
+h2   { color: #f08080; }
+.blue { color: blue; }
+.red  { color: red; }</code></pre>
+
+      <table>
+        <tr><th>Type</th><th>Location</th><th>Scope</th><th>Best Use</th></tr>
+        <tr><td>Inline</td><td>Inside HTML element</td><td>Single element</td><td>Quick one-off overrides</td></tr>
+        <tr><td>Internal</td><td>&lt;head&gt; section</td><td>Single page</td><td>Page-specific styles</td></tr>
+        <tr><td>External</td><td>Separate .css file</td><td>Multiple pages</td><td>Large projects</td></tr>
+      </table>
+    </div>
+
+    <div class="q-block">
+      <div class="q-label">Q3 — 20 Marks</div>
+      <div class="q-title">What is a Web Server? Explain Client-Server architecture, HTTP methods and status codes.</div>
+
+      <div class="def-box">A web server is a computer that stores web server software and a website's files (HTML, CSS, JS, images). It connects to the Internet and responds to HTTP requests from browsers.</div>
+
+      <h3>How a Web Server Works</h3>
+      <ol>
+        <li>Browser sends an HTTP request with a URL to the web server.</li>
+        <li>The HTTP server software finds the requested file.</li>
+        <li>It sends the file back to the browser via HTTP.</li>
+        <li>If the file is not found, it returns a <strong>404 Not Found</strong> response.</li>
+      </ol>
+
+      <h3>Static vs Dynamic Web Server</h3>
+      <ul>
+        <li><strong>Static Web Server:</strong> Serves files exactly as stored. No processing. Simple.</li>
+        <li><strong>Dynamic Web Server:</strong> Has an application server + database. Generates HTML content dynamically (e.g., user-specific pages).</li>
+      </ul>
+
+      <h3>Client-Server Architecture</h3>
+      <p>A model where the <strong>client</strong> (browser) sends a request and the <strong>server</strong> provides the response. Communication uses the HTTP protocol.</p>
+
+      <h3>HTTP Methods</h3>
+      <table>
+        <tr><th>Method</th><th>Purpose</th></tr>
+        <tr><td>GET</td><td>Fetch/retrieve data from the server</td></tr>
+        <tr><td>POST</td><td>Send new data to the server (create)</td></tr>
+        <tr><td>PUT</td><td>Update existing data on the server</td></tr>
+        <tr><td>DELETE</td><td>Remove data from the server</td></tr>
+      </table>
+
+      <h3>HTTP Status Codes</h3>
+      <table>
+        <tr><th>Code</th><th>Meaning</th></tr>
+        <tr><td>200</td><td>OK — Request succeeded</td></tr>
+        <tr><td>301</td><td>Moved Permanently — Resource has a new URL</td></tr>
+        <tr><td>404</td><td>Not Found — Resource doesn't exist</td></tr>
+        <tr><td>500</td><td>Internal Server Error — Server-side problem</td></tr>
+      </table>
+    </div>
+
+    <div class="q-block">
+      <div class="q-label">Q4 — 20 Marks</div>
+      <div class="q-title">Explain Version Control using Git and GitHub. Describe the Git workflow and common commands.</div>
+
+      <div class="def-box">Git is a distributed version control system (VCS) that tracks changes in files. GitHub is an online platform for hosting Git repositories and enabling collaboration.</div>
+
+      <h3>Key Terminology</h3>
+      <table>
+        <tr><th>Term</th><th>Meaning</th></tr>
+        <tr><td>Repository</td><td>Project folder tracked by Git (contains .git folder)</td></tr>
+        <tr><td>Commit</td><td>A saved snapshot of changes with a message</td></tr>
+        <tr><td>Branch</td><td>A separate line of development</td></tr>
+        <tr><td>Merge</td><td>Combining changes from one branch into another</td></tr>
+        <tr><td>Clone</td><td>Download a full copy of a remote repo to local</td></tr>
+        <tr><td>Push</td><td>Upload local commits to remote (GitHub)</td></tr>
+        <tr><td>Pull</td><td>Download and merge remote changes to local</td></tr>
+        <tr><td>Fork</td><td>Your own copy of someone else's GitHub repo</td></tr>
+      </table>
+
+      <h3>Basic Git Workflow</h3>
+      <ol>
+        <li>Edit files in the <strong>Working Directory</strong></li>
+        <li>Check status: <code>git status</code></li>
+        <li>Stage changes: <code>git add .</code></li>
+        <li>Commit: <code>git commit -m "message"</code></li>
+        <li>Push to GitHub: <code>git push origin main</code></li>
+      </ol>
+
+      <h3>Common Git Commands</h3>
+<pre><code>git init                     # Initialize new repo
+git clone &lt;url&gt;              # Clone remote repo locally
+git status                   # Check modified/staged files
+git add filename             # Stage a specific file
+git add .                    # Stage all changes
+git commit -m "msg"          # Save snapshot with message
+git push origin main         # Upload to GitHub
+git pull origin main         # Download latest from GitHub
+git branch feature1          # Create new branch
+git checkout feature1        # Switch to branch
+git checkout -b feature1     # Create + switch in one step
+git merge feature1           # Merge branch into current
+git remote add origin &lt;url&gt;  # Link local repo to GitHub</code></pre>
+
+      <h3>Git vs GitHub</h3>
+      <table>
+        <tr><th>Aspect</th><th>Git</th><th>GitHub</th></tr>
+        <tr><td>Type</td><td>Distributed VCS tool</td><td>Online hosting service</td></tr>
+        <tr><td>Location</td><td>Installed locally</td><td>Cloud-based (web)</td></tr>
+        <tr><td>Main Use</td><td>Track changes, branch, merge</td><td>Share, collaborate, PRs</td></tr>
+        <tr><td>Offline Use</td><td>Yes, works offline</td><td>No, needs internet</td></tr>
+      </table>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════ UNIT II ══════════════ -->
+<section class="unit" data-u="2" id="unit2">
+  <div class="unit-header">
+    <span class="unit-badge">UNIT II</span>
+    <div class="unit-title">Frontend Development — JavaScript, jQuery, AJAX, JSON</div>
+  </div>
+  <div class="unit-body">
+
+    <div class="q-block">
+      <div class="q-label">Q1 — 20 Marks</div>
+      <div class="q-title">Explain JavaScript OOP concepts — Objects, Classes, and the three ways to create objects.</div>
+
+      <div class="def-box">JavaScript is an object-based scripting language. An object is an entity having state (properties) and behavior (methods). JavaScript is template-based, not class-based — we can directly create objects.</div>
+
+      <h3>3 Ways to Create JavaScript Objects</h3>
+
+      <p><strong>1. Object Literal</strong></p>
+<pre><code>var emp = { id: 102, name: "Shyam Kumar", salary: 40000 };
+document.write(emp.id + " " + emp.name + " " + emp.salary);
+// Output: 102 Shyam Kumar 40000</code></pre>
+
+      <p><strong>2. Using new Object()</strong></p>
+<pre><code>var emp = new Object();
+emp.id = 101;
+emp.name = "Ravi Malik";
+emp.salary = 50000;
+document.write(emp.id + " " + emp.name + " " + emp.salary);</code></pre>
+
+      <p><strong>3. Using Object Constructor Function</strong></p>
+<pre><code>function emp(id, name, salary) {
+    this.id = id;
+    this.name = name;
+    this.salary = salary;
+}
+var e = new emp(103, "Vimal Jaiswal", 30000);
+document.write(e.id + " " + e.name + " " + e.salary);</code></pre>
+
+      <h3>ES6 Class Declaration</h3>
+<pre><code>class Employee {
+    constructor(id, name) {
+        this.id = id;
+        this.name = name;
+    }
+    detail() {
+        document.writeln(this.id + " " + this.name);
+    }
+}
+var e1 = new Employee(101, "Martin Roy");
+var e2 = new Employee(102, "Duke William");
+e1.detail();  // Output: 101 Martin Roy
+e2.detail();  // Output: 102 Duke William</code></pre>
+    </div>
+
+    <div class="q-block">
+      <div class="q-label">Q2 — 20 Marks</div>
+      <div class="q-title">Explain JavaScript Memory Management — Memory Life Cycle, Allocation, and Garbage Collection.</div>
+
+      <div class="def-box">JavaScript automatically allocates memory when objects are created and frees it when no longer used — this is called Garbage Collection.</div>
+
+      <h3>Memory Life Cycle</h3>
+      <ol>
+        <li><strong>Allocate</strong> — Memory is allocated when values are declared</li>
+        <li><strong>Use</strong> — Read from / write to allocated memory</li>
+        <li><strong>Release</strong> — Free memory when no longer needed</li>
+      </ol>
+
+      <h3>Memory Allocation Examples</h3>
+<pre><code>// Value initialization
+const n = 123;          // number — allocates memory
+const s = "hello";      // string — allocates memory
+const o = { a: 1 };     // object — allocates memory for object + values
+const a = [1, 2, 3];    // array — allocates memory
+
+// Allocation via function calls
+const d = new Date();   // allocates a Date object
+const el = document.createElement("div"); // allocates DOM element
+
+// Methods that allocate new values
+const s2 = s.substr(0, 3);  // new string allocated</code></pre>
+
+      <h3>Garbage Collection</h3>
+      <p>The most common algorithm is <strong>Mark-and-Sweep</strong>. The garbage collector periodically marks all objects still reachable from the root (global object), and sweeps away the unmarked objects. Developers in JavaScript don't need to manually free memory — the engine handles it automatically. This is different from low-level languages like C where you must call <code>free()</code> manually.</p>
+    </div>
+
+    <div class="q-block">
+      <div class="q-label">Q3 — 20 Marks</div>
+      <div class="q-title">What is jQuery? Explain jQuery events with examples — click(), focus(), submit(), mouseover().</div>
+
+      <div class="def-box">jQuery is a fast, small, cross-platform JavaScript library. Its motto is "Write Less, Do More." It simplifies HTML DOM manipulation, event handling, animations, and AJAX.</div>
+
+      <h3>Features of jQuery</h3>
+      <ul>
+        <li>Small, lightweight and fast</li>
+        <li>Platform-independent (works on all browsers)</li>
+        <li>Simplifies AJAX and DOM manipulation</li>
+        <li>Supports method chaining</li>
+      </ul>
+
+      <h3>Including jQuery</h3>
+<pre><code>&lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"&gt;
+&lt;/script&gt;</code></pre>
+
+      <h3>jQuery click() Event</h3>
+<pre><code>$(document).ready(function() {
+    $("p").click(function() {
+        alert("This paragraph was clicked.");
+    });
+    // Hide heading on click
+    $("h1, h2").click(function() {
+        $(this).hide();
+    });
+});</code></pre>
+
+      <h3>jQuery focus() Event</h3>
+<pre><code>// Triggered when an input field gains focus
+$("input").focus(function() {
+    $(this).next("span").css("display", "inline").fadeOut(2000);
+});</code></pre>
+
+      <h3>jQuery submit() Event</h3>
+<pre><code>$("form").submit(function(event) {
+    if ($("input:first").val() === "MRCET") {
+        $("span").text("Submitted Successfully.").show();
+        return;
+    }
+    $("span").text("Not valid!").show().fadeOut(2000);
+    event.preventDefault();
+});</code></pre>
+
+      <h3>jQuery mouseover() Event</h3>
+<pre><code>$("p").mouseover(function() {
+    $("p").css("background-color", "lightgreen");
+});
+$("p").mouseout(function() {
+    $("p").css("background-color", "orange");
+});</code></pre>
+
+      <h3>jQuery UI Categories</h3>
+      <table>
+        <tr><th>Category</th><th>Examples</th></tr>
+        <tr><td>Interactions</td><td>Draggable, Droppable, Resizable, Sortable</td></tr>
+        <tr><td>Widgets</td><td>Accordion, DatePicker, Dialog, Tabs, ProgressBar, Tooltip</td></tr>
+        <tr><td>Effects</td><td>Hide, Show, Add/Remove Class, Toggle, Color Animation</td></tr>
+        <tr><td>Utilities</td><td>Position (align element relative to another)</td></tr>
+      </table>
+    </div>
+
+    <div class="q-block">
+      <div class="q-label">Q4 — 20 Marks</div>
+      <div class="q-title">Explain AJAX and JSON with examples.</div>
+
+      <h3>AJAX</h3>
+      <div class="def-box">AJAX (Asynchronous JavaScript and XML) is a technique for exchanging data with a server in the background without reloading the full page. It uses XMLHttpRequest to fetch data asynchronously.</div>
+
+<pre><code>function fun1() {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function() {
+        document.getElementById("demo").innerHTML = xhr.responseText;
+    };
+    xhr.open("GET", "ajaxinfo.txt", true);  // true = asynchronous
+    xhr.send();
+}
+// Button: &lt;button onclick="fun1()"&gt;Load Data&lt;/button&gt;
+// &lt;p id="demo"&gt;&lt;/p&gt;</code></pre>
+
+      <h3>JSON</h3>
+      <div class="def-box">JSON (JavaScript Object Notation) is a lightweight data-interchange format. Data is in key/value pairs, easy to read and write by humans, and easy to parse for machines.</div>
+
+      <p><strong>JSON Object Example:</strong></p>
+<pre><code>{
+    "employee": {
+        "name":    "Sonoo",
+        "salary":  56000,
+        "married": true
+    }
+}</code></pre>
+      <p><strong>JSON Array Example:</strong></p>
+<pre><code>{
+    "employees": [
+        { "name": "Ram",   "age": 25 },
+        { "name": "Sita",  "age": 22 },
+        { "name": "Laxman","age": 27 }
+    ]
+}</code></pre>
+
+      <table>
+        <tr><th>Feature</th><th>AJAX</th><th>JSON</th></tr>
+        <tr><td>Full form</td><td>Asynchronous JS and XML</td><td>JavaScript Object Notation</td></tr>
+        <tr><td>Purpose</td><td>Async data exchange with server</td><td>Data format for transfer/storage</td></tr>
+        <tr><td>Reload page</td><td>No — partial update only</td><td>N/A</td></tr>
+        <tr><td>Data types</td><td>XML, JSON, plain text</td><td>string, number, boolean, array, object, null</td></tr>
+      </table>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════ UNIT III ══════════════ -->
+<section class="unit" data-u="3" id="unit3">
+  <div class="unit-header">
+    <span class="unit-badge">UNIT III</span>
+    <div class="unit-title">React JS — Components, State, Props, Router, Redux</div>
+  </div>
+  <div class="unit-body">
+
+    <div class="q-block">
+      <div class="q-label">Q1 — 20 Marks</div>
+      <div class="q-title">Introduce React JS. Explain its features — JSX, Virtual DOM, Components, one-way data binding.</div>
+
+      <div class="def-box">ReactJS is a declarative, efficient, flexible JavaScript library for building reusable UI components. Created by Jordan Walke at Facebook (released 2013). It handles the View layer (V in MVC). Applications are built from components.</div>
+
+      <h3>Key Features of React</h3>
+
+      <p><strong>1. JSX (JavaScript XML)</strong></p>
+      <p>JSX is a syntax extension that lets you write HTML-like code inside JavaScript. Preprocessors like Babel convert JSX to <code>React.createElement()</code> calls.</p>
+<pre><code>// JSX
+const element = &lt;div&gt;Hello JavaTpoint&lt;/div&gt;;
+
+// Converted to:
+React.createElement("div", null, "Hello JavaTpoint");</code></pre>
+
+      <p><strong>2. Components</strong></p>
+      <p>An app is divided into small, independent, reusable pieces called components. Each component outputs a piece of HTML and has its own logic.</p>
+
+      <p><strong>3. Virtual DOM</strong></p>
+      <p>React maintains a virtual copy of the DOM in memory. When state changes, it re-renders the virtual DOM, computes the diff with the previous virtual DOM, and updates only the changed parts in the real DOM. This makes it very fast.</p>
+
+      <p><strong>4. One-Way Data Binding</strong></p>
+      <p>Data flows in one direction — from parent to child via props. This gives better control and makes the app easier to debug. Flux/Redux patterns support this.</p>
+
+      <p><strong>5. Performance</strong></p>
+      <p>Because of the Virtual DOM mechanism, React avoids unnecessary re-renders and is much faster than direct DOM manipulation.</p>
+
+      <h3>Setup — Create React App</h3>
+<pre><code>npx create-react-app myapp
+cd myapp
+npm start     # starts at http://localhost:3000
+npm run build # production build</code></pre>
+    </div>
+
+    <div class="q-block">
+      <div class="q-label">Q2 — 20 Marks</div>
+      <div class="q-title">Explain React Components — Functional and Class Components, State, and Props with examples.</div>
+
+      <h3>1. Functional Components (Stateless)</h3>
+      <p>Simple JavaScript functions that accept props and return JSX. No state management.</p>
+<pre><code>function WelcomeMessage(props) {
+    return &lt;h1&gt;Welcome, {props.name}&lt;/h1&gt;;
+}</code></pre>
+
+      <h3>2. Class Components (Stateful)</h3>
+      <p>Extend <code>React.Component</code>, must have a <code>render()</code> method. Can hold and manage local state.</p>
+<pre><code>class App extends React.Component {
+    render() {
+        return (
+            &lt;div&gt;
+                &lt;h1&gt;Hello React!&lt;/h1&gt;
+            &lt;/div&gt;
+        );
+    }
+}</code></pre>
+
+      <h3>State</h3>
+      <p>State is an updatable structure that holds data about the component. Changes in state trigger a re-render. Use <code>setState()</code> to update.</p>
+<pre><code>class App extends React.Component {
+    constructor() {
+        super();
+        this.state = { displayBio: false };
+        this.toggleBio = this.toggleBio.bind(this);
+    }
+    toggleBio() {
+        this.setState({ displayBio: !this.state.displayBio });
+    }
+    render() {
+        return (
+            &lt;div&gt;
+                { this.state.displayBio ? &lt;p&gt;Bio content...&lt;/p&gt; : null }
+                &lt;button onClick={this.toggleBio}&gt;Toggle&lt;/button&gt;
+            &lt;/div&gt;
+        );
+    }
+}</code></pre>
+
+      <h3>Props</h3>
+      <p>Props (Properties) are read-only data passed from parent to child component. Similar to function arguments. Immutable inside the component.</p>
+<pre><code>// Parent passes prop:
+&lt;App name="JavaTpoint" /&gt;
+
+// Child uses prop:
+class App extends React.Component {
+    render() {
+        return &lt;h1&gt;Welcome to {this.props.name}&lt;/h1&gt;;
+    }
+}</code></pre>
+
+      <h3>State vs Props</h3>
+      <table>
+        <tr><th>Feature</th><th>State</th><th>Props</th></tr>
+        <tr><td>Mutable</td><td>Yes — via setState()</td><td>No — read-only</td></tr>
+        <tr><td>Owned by</td><td>The component itself</td><td>Parent component</td></tr>
+        <tr><td>Used for</td><td>Internal data, UI updates</td><td>Passing data to children</td></tr>
+      </table>
+    </div>
+
+    <div class="q-block">
+      <div class="q-label">Q3 — 20 Marks</div>
+      <div class="q-title">Explain React Forms — Controlled and Uncontrolled Components. Explain React Router and SPA.</div>
+
+      <h3>Uncontrolled Component</h3>
+      <p>The DOM handles form data. Access values using <code>ref</code>. Simpler but less control.</p>
+<pre><code>class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.input = React.createRef();
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+    handleSubmit(event) {
+        alert("Submitted: " + this.input.current.value);
+        event.preventDefault();
+    }
+    render() {
+        return (
+            &lt;form onSubmit={this.handleSubmit}&gt;
+                &lt;input type="text" ref={this.input} /&gt;
+                &lt;input type="submit" value="Submit" /&gt;
+            &lt;/form&gt;
+        );
+    }
+}</code></pre>
+
+      <h3>Controlled Component</h3>
+      <p>React state is the single source of truth. Every change goes through <code>setState()</code>. Better control over form data.</p>
+<pre><code>class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { value: '' };
+    }
+    handleChange(event) {
+        this.setState({ value: event.target.value });
+    }
+    handleSubmit(event) {
+        alert("Submitted: " + this.state.value);
+        event.preventDefault();
+    }
+    render() {
+        return (
+            &lt;form onSubmit={this.handleSubmit.bind(this)}&gt;
+                &lt;input type="text"
+                       value={this.state.value}
+                       onChange={this.handleChange.bind(this)} /&gt;
+                &lt;input type="submit" value="Submit" /&gt;
+            &lt;/form&gt;
+        );
+    }
+}</code></pre>
+
+      <h3>React Router &amp; Single Page Applications (SPA)</h3>
+      <div class="def-box">A Single Page Application (SPA) loads a single HTML page and dynamically updates content as the user navigates, without full page reloads. React Router enables this by mapping URLs to components.</div>
+
+<pre><code>// Install: npm i react-router-dom --save
+
+import { Route, NavLink, HashRouter } from "react-router-dom";
+import Home from "./Home";
+import Stuff from "./Stuff";
+import Contact from "./Contact";
+
+class Main extends Component {
+    render() {
+        return (
+            &lt;HashRouter&gt;
+                &lt;div&gt;
+                    &lt;ul&gt;
+                        &lt;li&gt;&lt;NavLink exact to="/"&gt;Home&lt;/NavLink&gt;&lt;/li&gt;
+                        &lt;li&gt;&lt;NavLink to="/stuff"&gt;Stuff&lt;/NavLink&gt;&lt;/li&gt;
+                        &lt;li&gt;&lt;NavLink to="/contact"&gt;Contact&lt;/NavLink&gt;&lt;/li&gt;
+                    &lt;/ul&gt;
+                    &lt;div&gt;
+                        &lt;Route exact path="/" component={Home}/&gt;
+                        &lt;Route path="/stuff" component={Stuff}/&gt;
+                        &lt;Route path="/contact" component={Contact}/&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/HashRouter&gt;
+        );
+    }
+}</code></pre>
+      <p>The <code>exact</code> prop ensures the home route only matches <code>/</code> and not <code>/stuff</code> or <code>/contact</code>.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════ UNIT IV ══════════════ -->
+<section class="unit" data-u="4" id="unit4">
+  <div class="unit-header">
+    <span class="unit-badge">UNIT IV</span>
+    <div class="unit-title">Java Web Development — Spring MVC, RESTful API, Maven</div>
+  </div>
+  <div class="unit-body">
+
+    <div class="q-block">
+      <div class="q-label">Q1 — 20 Marks</div>
+      <div class="q-title">Explain Spring MVC Architecture. What is DispatcherServlet? How does request processing work?</div>
+
+      <div class="def-box">Spring Web MVC is a framework based on the Model-View-Controller pattern. It separates application concerns: input logic (Controller), business logic (Model), and UI logic (View).</div>
+
+      <h3>MVC Components</h3>
+      <ul>
+        <li><strong>Model</strong> — Encapsulates application data. Usually POJOs (Plain Old Java Objects).</li>
+        <li><strong>View</strong> — Renders model data as HTML output sent to the browser (JSP, Thymeleaf).</li>
+        <li><strong>Controller</strong> — Processes user requests, builds the model, returns view name.</li>
+      </ul>
+
+      <h3>DispatcherServlet — The Front Controller</h3>
+      <p>The <strong>DispatcherServlet</strong> is the central dispatcher in Spring MVC. All HTTP requests go through it. It delegates responsibilities to other components.</p>
+
+      <h3>Request Processing Flow (Step by Step)</h3>
+      <ol>
+        <li><strong>HTTP Request</strong> arrives at the DispatcherServlet.</li>
+        <li><strong>HandlerMapping</strong> is consulted — maps the request URL to the appropriate Controller.</li>
+        <li><strong>Controller</strong> processes the request, calls service/business logic, builds the Model object, and returns a logical view name to DispatcherServlet.</li>
+        <li><strong>ViewResolver</strong> maps the logical view name to the actual view file (e.g., hello → /WEB-INF/jsp/hello.jsp).</li>
+        <li><strong>View</strong> renders the model data as HTML.</li>
+        <li>Response is sent back to the browser.</li>
+      </ol>
+
+      <h3>Configuration — web.xml</h3>
+<pre><code>&lt;servlet&gt;
+    &lt;servlet-name&gt;HelloWeb&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+    &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+&lt;/servlet&gt;
+&lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;HelloWeb&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;*.jsp&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;</code></pre>
+
+      <h3>Defining a Controller</h3>
+<pre><code>@Controller
+public class HelloController {
+
+    @RequestMapping(value = "/hello", method = RequestMethod.GET)
+    public String printHello(ModelMap model) {
+        model.addAttribute("message", "Hello Spring MVC!");
+        return "hello";   // logical view name
+    }
+}</code></pre>
+
+      <h3>JSP View</h3>
+<pre><code>&lt;!-- /WEB-INF/jsp/hello.jsp --&gt;
+&lt;html&gt;&lt;body&gt;
+    &lt;h2&gt;${message}&lt;/h2&gt;
+&lt;/body&gt;&lt;/html&gt;</code></pre>
+    </div>
+
+    <div class="q-block">
+      <div class="q-label">Q2 — 20 Marks</div>
+      <div class="q-title">Explain RESTful API using Spring Framework. What is REST? Show CRUD operations with @RestController.</div>
+
+      <div class="def-box">REST (Representational State Transfer) is an architectural style for building web services. REST resources are identified by URLs, and operations are performed using HTTP methods (GET, POST, PUT, DELETE).</div>
+
+      <h3>REST + HTTP Method → CRUD Mapping</h3>
+      <table>
+        <tr><th>URL</th><th>HTTP Method</th><th>Operation</th></tr>
+        <tr><td>/employees</td><td>GET</td><td>Get all employees</td></tr>
+        <tr><td>/employees/101</td><td>GET</td><td>Get employee with ID 101</td></tr>
+        <tr><td>/employees</td><td>POST</td><td>Create new employee</td></tr>
+        <tr><td>/employees/101</td><td>PUT</td><td>Update employee 101</td></tr>
+        <tr><td>/employees/101</td><td>DELETE</td><td>Delete employee 101</td></tr>
+      </table>
+
+      <h3>Employee Model Class</h3>
+<pre><code>public class Employee {
+    private String id, name, address;
+
+    public Employee(String id, String name, String address) {
+        this.id = id; this.name = name; this.address = address;
+    }
+    // Getters and Setters...
+}</code></pre>
+
+      <h3>REST Controller</h3>
+<pre><code>@RestController  // combines @Controller + @ResponseBody
+public class EmployeeController {
+
+    @Autowired
+    private EmployeeService employeeService;
+
+    @RequestMapping("/employees")
+    public List&lt;Employee&gt; getEmployees() {
+        return employeeService.getEmployees();
+    }
+
+    @RequestMapping("/employees/{empid}")
+    public Employee getEmployee(@PathVariable("empid") String id) {
+        return employeeService.getEmployee(id);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/employees")
+    public void addEmployee(@RequestBody Employee employee) {
+        employeeService.addEmployee(employee);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/employees/{id}")
+    public void updateEmployee(@RequestBody Employee e, @PathVariable String id) {
+        employeeService.updateEmployee(e, id);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/employees/{id}")
+    public void deleteEmployee(@PathVariable String id) {
+        employeeService.deleteEmployee(id);
+    }
+}</code></pre>
+
+      <h3>Key Annotations</h3>
+      <table>
+        <tr><th>Annotation</th><th>Purpose</th></tr>
+        <tr><td>@RestController</td><td>Marks class as REST controller (= @Controller + @ResponseBody)</td></tr>
+        <tr><td>@RequestMapping</td><td>Maps URL to controller method</td></tr>
+        <tr><td>@PathVariable</td><td>Extracts value from URL path (e.g., /employees/101 → id=101)</td></tr>
+        <tr><td>@RequestBody</td><td>Deserializes JSON request body into Java object</td></tr>
+        <tr><td>@Autowired</td><td>Spring injects the dependency automatically</td></tr>
+      </table>
+    </div>
+
+    <div class="q-block">
+      <div class="q-label">Q3 — 20 Marks</div>
+      <div class="q-title">Explain Maven — Lifecycle, Phases, Goals, and Plugins. How do you build a Java application using Maven?</div>
+
+      <div class="def-box">Maven is a build automation and project management tool for Java. It manages the build lifecycle, dependencies, and project structure through configuration in <code>pom.xml</code>.</div>
+
+      <h3>Maven's 3 Lifecycles</h3>
+      <table>
+        <tr><th>Lifecycle</th><th>Purpose</th></tr>
+        <tr><td>clean</td><td>Removes unneeded files/build artifacts from previous builds</td></tr>
+        <tr><td>default</td><td>Builds the project (compile, test, package, deploy)</td></tr>
+        <tr><td>site</td><td>Generates project documentation</td></tr>
+      </table>
+
+      <h3>Default Lifecycle Phases (in order)</h3>
+      <ol>
+        <li><strong>validate</strong> — Check the project structure is correct</li>
+        <li><strong>compile</strong> — Compile source code</li>
+        <li><strong>test</strong> — Run unit tests</li>
+        <li><strong>package</strong> — Package compiled code into a JAR/WAR</li>
+        <li><strong>deploy</strong> — Deploy to remote repository/server</li>
+      </ol>
+      <div class="tip">⚠️ Running a later phase automatically runs all earlier phases. Running <code>mvn package</code> also runs validate, compile, and test first.</div>
+
+      <h3>Goals &amp; Plugins</h3>
+      <p>Each phase is composed of <strong>goals</strong> which are specific tasks. Goals are provided by <strong>plugins</strong>. Format: <code>plugin:goal</code></p>
+      <ul>
+        <li><code>compiler:compile</code> — compiles main source</li>
+        <li><code>compiler:testCompile</code> — compiles test source</li>
+      </ul>
+
+      <h3>Key Maven Commands</h3>
+<pre><code>mvn compile          # Compile source code
+mvn test             # Run tests
+mvn package          # Create JAR/WAR
+mvn clean            # Remove target/ folder
+mvn clean install    # Clean then build and install to local repo
+mvn foo:bar          # Run a specific goal directly</code></pre>
+
+      <h3>Sample pom.xml</h3>
+<pre><code>&lt;project&gt;
+    &lt;groupId&gt;com.example&lt;/groupId&gt;
+    &lt;artifactId&gt;myapp&lt;/artifactId&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;
+            &lt;version&gt;5.3.0&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/project&gt;</code></pre>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════ UNIT V ══════════════ -->
+<section class="unit" data-u="5" id="unit5">
+  <div class="unit-header">
+    <span class="unit-badge">UNIT V</span>
+    <div class="unit-title">Databases &amp; Deployment — SQL, Normalization, Spring JDBC, Cloud</div>
+  </div>
+  <div class="unit-body">
+
+    <div class="q-block">
+      <div class="q-label">Q1 — 20 Marks</div>
+      <div class="q-title">Explain SQL — DDL, DML, TCL with examples. Describe aggregation functions and GROUP BY.</div>
+
+      <div class="def-box">SQL (Structured Query Language) is used to create, maintain, and retrieve data in relational databases. It is case-insensitive. Used in MySQL, Oracle, SQL Server, PostgreSQL etc.</div>
+
+      <h3>DDL — Data Definition Language</h3>
+      <p>Defines the structure of the database. Commands: <code>CREATE</code>, <code>ALTER</code>, <code>DROP</code>, <code>RENAME</code></p>
+<pre><code>CREATE TABLE Student (
+    ROLL_NO INT PRIMARY KEY,
+    NAME    VARCHAR(20) NOT NULL,
+    ADDRESS VARCHAR(50),
+    AGE     INT
+);
+
+ALTER TABLE Student ADD PHONE VARCHAR(15);</code></pre>
+
+      <h3>DML — Data Manipulation Language</h3>
+      <p>Manipulates data in tables. Commands: <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code></p>
+<pre><code>INSERT INTO Student VALUES (1, 'RAM', 'DELHI', 18);
+UPDATE Student SET AGE = 20 WHERE ROLL_NO = 3;
+DELETE FROM Student WHERE ROLL_NO = 4;</code></pre>
+
+      <h3>DQL — Data Query Language</h3>
+<pre><code>-- Select all
+SELECT * FROM Student;
+
+-- Select with condition
+SELECT ROLL_NO, NAME FROM Student WHERE ROLL_NO > 2;
+
+-- ORDER BY
+SELECT * FROM Student ORDER BY AGE DESC;
+
+-- DISTINCT
+SELECT DISTINCT ADDRESS FROM Student;
+
+-- GROUP BY with aggregation
+SELECT ADDRESS, SUM(AGE) FROM Student GROUP BY (ADDRESS);</code></pre>
+
+      <h3>Aggregation Functions</h3>
+      <table>
+        <tr><th>Function</th><th>Purpose</th><th>Example</th></tr>
+        <tr><td>COUNT()</td><td>Count number of rows</td><td>SELECT COUNT(ROLL_NO) FROM Student;</td></tr>
+        <tr><td>SUM()</td><td>Sum of values</td><td>SELECT SUM(AGE) FROM Student;</td></tr>
+        <tr><td>AVG()</td><td>Average of values</td><td>SELECT AVG(AGE) FROM Student;</td></tr>
+        <tr><td>MAX()</td><td>Maximum value</td><td>SELECT MAX(AGE) FROM Student;</td></tr>
+        <tr><td>MIN()</td><td>Minimum value</td><td>SELECT MIN(AGE) FROM Student;</td></tr>
+      </table>
+
+      <h3>TCL — Transaction Control Language</h3>
+      <p>Manages transactions. Commands: <code>COMMIT</code>, <code>ROLLBACK</code>, <code>SAVEPOINT</code></p>
+<pre><code>BEGIN TRANSACTION
+    UPDATE employees SET empname = 'Bob' WHERE empid = '001';
+IF @@ROWCOUNT = 5
+    COMMIT TRANSACTION
+ELSE
+    ROLLBACK TRANSACTION</code></pre>
+      <table>
+        <tr><th>Command</th><th>Purpose</th></tr>
+        <tr><td>COMMIT</td><td>Permanently saves all DML changes in the transaction</td></tr>
+        <tr><td>ROLLBACK</td><td>Undoes changes back to last committed state</td></tr>
+        <tr><td>SAVEPOINT</td><td>Sets a point within a transaction to roll back to</td></tr>
+      </table>
+
+      <h3>DDL vs DML Summary</h3>
+      <table>
+        <tr><th>Feature</th><th>DDL</th><th>DML</th></tr>
+        <tr><td>Full Form</td><td>Data Definition Language</td><td>Data Manipulation Language</td></tr>
+        <tr><td>Purpose</td><td>Define/alter DB structure</td><td>Insert, update, delete records</td></tr>
+        <tr><td>Commands</td><td>CREATE, DROP, ALTER, RENAME</td><td>INSERT, UPDATE, DELETE</td></tr>
+        <tr><td>Rollback</td><td>Cannot be rolled back</td><td>Can be rolled back</td></tr>
+      </table>
+    </div>
+
+    <div class="q-block">
+      <div class="q-label">Q2 — 20 Marks</div>
+      <div class="q-title">Explain Normalization in SQL — what it is, why it is needed, and normal forms.</div>
+
+      <div class="def-box">Normalization is the process of organizing database tables to reduce data redundancy and improve data integrity. It splits large tables into smaller related tables.</div>
+
+      <h3>Why Normalization?</h3>
+      <p>Without normalization, databases suffer from three anomalies:</p>
+      <ul>
+        <li><strong>Insert Anomaly</strong> — Cannot insert data without adding other unrelated data</li>
+        <li><strong>Update Anomaly</strong> — Updating one record requires updating multiple redundant copies</li>
+        <li><strong>Delete Anomaly</strong> — Deleting a record causes loss of other useful information</li>
+      </ul>
+
+      <h3>Normal Forms</h3>
+      <table>
+        <tr><th>Normal Form</th><th>Condition</th></tr>
+        <tr><td>1NF</td><td>All columns have atomic (indivisible) values. No repeating groups.</td></tr>
+        <tr><td>2NF</td><td>Is in 1NF + every non-key attribute is fully dependent on the entire primary key (no partial dependency)</td></tr>
+        <tr><td>3NF</td><td>Is in 2NF + no transitive dependency (non-key attributes depend only on primary key, not on other non-key attributes)</td></tr>
+        <tr><td>BCNF</td><td>Stricter version of 3NF — every determinant must be a candidate key</td></tr>
+      </table>
+
+      <h3>Benefits of Normalization</h3>
+      <ul>
+        <li>Eliminates redundant data storage</li>
+        <li>Ensures data consistency and integrity</li>
+        <li>Makes updates/inserts/deletes efficient</li>
+        <li>Simplifies database design</li>
+      </ul>
+    </div>
+
+    <div class="q-block">
+      <div class="q-label">Q3 — 20 Marks</div>
+      <div class="q-title">Write programs for CRUD operations using Spring JDBC — Insert, Select, Update, Delete.</div>
+
+      <div class="def-box">Spring JDBC simplifies JDBC usage by eliminating boilerplate code for connections and result set handling. The key class is <code>JdbcTemplate</code>.</div>
+
+      <h3>Student Table</h3>
+<pre><code>CREATE TABLE Student (
+    ID   INT NOT NULL AUTO_INCREMENT,
+    NAME VARCHAR(20) NOT NULL,
+    AGE  INT NOT NULL,
+    PRIMARY KEY (ID)
+);</code></pre>
+
+      <h3>Beans.xml — DataSource Configuration</h3>
+<pre><code>&lt;bean id="dataSource"
+      class="org.springframework.jdbc.datasource.DriverManagerDataSource"&gt;
+    &lt;property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/&gt;
+    &lt;property name="url"      value="jdbc:mysql://localhost:3306/TEST"/&gt;
+    &lt;property name="username" value="root"/&gt;
+    &lt;property name="password" value="admin"/&gt;
+&lt;/bean&gt;
+&lt;bean id="studentJDBCTemplate" class="com.mrcet.StudentJDBCTemplate"&gt;
+    &lt;property name="dataSource" ref="dataSource"/&gt;
+&lt;/bean&gt;</code></pre>
+
+      <h3>1. INSERT</h3>
+<pre><code>public void create(String name, Integer age) {
+    String SQL = "INSERT INTO Student (name, age) VALUES (?, ?)";
+    jdbcTemplateObject.update(SQL, name, age);
+    System.out.println("Created: " + name);
+}</code></pre>
+
+      <h3>2. SELECT (List All)</h3>
+<pre><code>// StudentMapper.java
+public class StudentMapper implements RowMapper&lt;Student&gt; {
+    public Student mapRow(ResultSet rs, int rowNum) throws SQLException {
+        Student s = new Student();
+        s.setId(rs.getInt("id"));
+        s.setName(rs.getString("name"));
+        s.setAge(rs.getInt("age"));
+        return s;
+    }
+}
+
+// In StudentJDBCTemplate.java
+public List&lt;Student&gt; listStudents() {
+    String SQL = "SELECT * FROM Student";
+    return jdbcTemplateObject.query(SQL, new StudentMapper());
+}</code></pre>
+
+      <h3>3. UPDATE</h3>
+<pre><code>public void update(Integer id, Integer age) {
+    String SQL = "UPDATE Student SET age = ? WHERE id = ?";
+    jdbcTemplateObject.update(SQL, age, id);
+    System.out.println("Updated Record with ID = " + id);
+}</code></pre>
+
+      <h3>4. DELETE</h3>
+<pre><code>public void delete(Integer id) {
+    String SQL = "DELETE FROM Student WHERE id = ?";
+    jdbcTemplateObject.update(SQL, id);
+    System.out.println("Deleted Record with ID = " + id);
+}</code></pre>
+
+      <h3>MainApp.java</h3>
+<pre><code>ApplicationContext context =
+    new ClassPathXmlApplicationContext("Beans.xml");
+StudentJDBCTemplate t =
+    (StudentJDBCTemplate) context.getBean("studentJDBCTemplate");
+
+t.create("Zara", 11);          // INSERT
+t.update(2, 20);               // UPDATE
+t.delete(3);                   // DELETE
+List&lt;Student&gt; list = t.listStudents();  // SELECT ALL
+for (Student s : list) {
+    System.out.println(s.getId() + " " + s.getName() + " " + s.getAge());
+}</code></pre>
+    </div>
+
+    <div class="q-block">
+      <div class="q-label">Q4 — 20 Marks</div>
+      <div class="q-title">Describe different types of Cloud Computing Deployment Models and Real-World Applications.</div>
+
+      <div class="def-box">Cloud Computing is the on-demand availability of IT resources (servers, storage, databases, software) over the Internet. Resources are delivered as services and billed on a pay-per-use basis.</div>
+
+      <h3>Service Models</h3>
+      <table>
+        <tr><th>Model</th><th>Full Form</th><th>Description</th></tr>
+        <tr><td>IaaS</td><td>Infrastructure as a Service</td><td>Provides virtualized computing resources (VMs, storage, networking)</td></tr>
+        <tr><td>PaaS</td><td>Platform as a Service</td><td>Provides platform for deploying applications (runtime, middleware)</td></tr>
+        <tr><td>SaaS</td><td>Software as a Service</td><td>Delivers software applications over the internet (Gmail, Office 365)</td></tr>
+      </table>
+
+      <h3>Cloud Deployment Models</h3>
+
+      <p><strong>1. Public Cloud</strong></p>
+      <p>Accessible to the general public. Managed by cloud providers (AWS, Azure, GCP). Pay-per-use. Best for fluctuating demands.</p>
+      <p>✅ Minimal upfront cost, no hardware setup &nbsp; ❌ Data security concerns, reliability issues</p>
+
+      <p><strong>2. Private Cloud</strong></p>
+      <p>Dedicated to a single organization. Hosted internally or externally. Greater control over data and security.</p>
+      <p>✅ High security, supports legacy systems &nbsp; ❌ Higher cost, high maintenance</p>
+
+      <p><strong>3. Community Cloud</strong></p>
+      <p>Shared among organizations with common objectives (e.g., government agencies, hospitals). Managed internally or by a vendor.</p>
+      <p>✅ Cost-effective, meets industry standards &nbsp; ❌ Shared bandwidth, limited capacity</p>
+
+      <p><strong>4. Hybrid Cloud</strong></p>
+      <p>Combination of public and private cloud. Sensitive data on private, less sensitive data on public. Supports "cloud bursting" — overflow to public during peak load.</p>
+      <p>✅ Cost-effective, flexible, more secure &nbsp; ❌ Complex to set up and manage</p>
+
+      <h3>Real-World Applications of Cloud Computing</h3>
+      <table>
+        <tr><th>Application Area</th><th>Description</th></tr>
+        <tr><td>Online Data Storage</td><td>Store files, images, audio, video (Google Drive, Dropbox)</td></tr>
+        <tr><td>Backup and Recovery</td><td>Automatic data backup; easy recovery without physical media</td></tr>
+        <tr><td>Big Data Analytics</td><td>Store and analyze large datasets using cloud processing power</td></tr>
+        <tr><td>Testing &amp; Development</td><td>Scalable environments for development and testing</td></tr>
+        <tr><td>Anti-Virus</td><td>Cloud-based antivirus monitors and protects systems remotely</td></tr>
+        <tr><td>E-Commerce</td><td>Manage customer/product data; respond quickly to market</td></tr>
+        <tr><td>Education</td><td>e-Learning platforms, student portals, online exams</td></tr>
+        <tr><td>Healthcare</td><td>Store patient records; enable remote access by doctors and labs</td></tr>
+        <tr><td>E-Governance</td><td>Government services management, digital records</td></tr>
+        <tr><td>Entertainment</td><td>Streaming services (Netflix, Spotify) — On-Demand Entertainment</td></tr>
+      </table>
+    </div>
+
+  </div>
+</section>
+
+</div><!-- end container -->
+
+<script>
+// Smooth scroll for TOC links
+document.querySelectorAll('.toc-nav a').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
+</body>
+</html>
