@@ -3,871 +3,921 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Full Stack Development – Complete Exam Notes ~ Pratheek</title>
+<title>Full Stack Development — Complete Exam Notes + Full Programs</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap');
 
   :root {
     --bg: #0f0e0c;
     --surface: #1a1916;
+    --surface2: #141210;
     --border: #2e2c28;
     --accent: #e8c14a;
     --accent2: #c47a3a;
     --text: #e8e4dc;
     --muted: #9a9488;
-    --code-bg: #141310;
-    --unit1: #4a9e6a;
-    --unit2: #4a7ec4;
-    --unit3: #c44a7e;
-    --unit4: #c47a3a;
-    --unit5: #7a4ac4;
+    --code-bg: #0d0c0a;
+    --u1: #4a9e6a; --u1a: rgba(74,158,106,0.15); --u1b: rgba(74,158,106,0.35);
+    --u2: #4a7ec4; --u2a: rgba(74,126,196,0.15); --u2b: rgba(74,126,196,0.35);
+    --u3: #c44a7e; --u3a: rgba(196,74,126,0.15); --u3b: rgba(196,74,126,0.35);
+    --u4: #c47a3a; --u4a: rgba(196,122,58,0.15);  --u4b: rgba(196,122,58,0.35);
+    --u5: #7a4ac4; --u5a: rgba(122,74,196,0.15);  --u5b: rgba(122,74,196,0.35);
+    --code: #e8774e; --kw: #c47a9e; --str: #98c47a; --cmt: #6a6458;
+    --num: #7ac4c4; --fn: #c4a84a;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
 
   body {
     font-family: 'Source Serif 4', Georgia, serif;
     background: var(--bg);
     color: var(--text);
-    line-height: 1.75;
+    line-height: 1.8;
     font-size: 15px;
   }
 
-  /* TOC Header */
+  /* ── STICKY HEADER ── */
   .hero {
-    background: linear-gradient(135deg, #1a1612 0%, #0f0e0c 60%);
+    background: linear-gradient(135deg, #1a1612 0%, #0f0e0c 70%);
     border-bottom: 2px solid var(--accent);
-    padding: 40px 60px 30px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    padding: 28px 48px 22px;
+    position: sticky; top: 0; z-index: 200;
   }
+  .hero-top { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; }
   .hero h1 {
     font-family: 'Playfair Display', serif;
-    font-size: 28px;
-    font-weight: 900;
-    color: var(--accent);
-    letter-spacing: 1px;
+    font-size: 24px; font-weight: 900;
+    color: var(--accent); letter-spacing: 0.5px;
   }
-  .hero p { color: var(--muted); font-size: 13px; margin-top: 4px; font-style: italic; }
-  .toc-nav {
-    display: flex; gap: 12px; margin-top: 14px; flex-wrap: wrap;
-  }
+  .hero p { color: var(--muted); font-size: 12px; margin-top: 3px; font-style: italic; }
+  .toc-nav { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
   .toc-nav a {
-    text-decoration: none;
-    padding: 5px 14px;
-    border-radius: 3px;
-    font-size: 12px;
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    transition: all 0.2s;
+    text-decoration: none; padding: 4px 12px; border-radius: 3px;
+    font-size: 11px; font-family: 'JetBrains Mono', monospace;
+    font-weight: 600; letter-spacing: 0.5px; transition: all 0.2s;
+    white-space: nowrap;
   }
-  .toc-nav a:nth-child(1) { background: rgba(74,158,106,0.15); color: var(--unit1); border: 1px solid rgba(74,158,106,0.4); }
-  .toc-nav a:nth-child(2) { background: rgba(74,126,196,0.15); color: var(--unit2); border: 1px solid rgba(74,126,196,0.4); }
-  .toc-nav a:nth-child(3) { background: rgba(196,74,126,0.15); color: var(--unit3); border: 1px solid rgba(196,74,126,0.4); }
-  .toc-nav a:nth-child(4) { background: rgba(196,122,58,0.15); color: var(--unit4); border: 1px solid rgba(196,122,58,0.4); }
-  .toc-nav a:nth-child(5) { background: rgba(122,74,196,0.15); color: var(--unit5); border: 1px solid rgba(122,74,196,0.4); }
-  .toc-nav a:hover { transform: translateY(-1px); filter: brightness(1.3); }
+  .toc-nav a:nth-child(1){ background:var(--u1a); color:var(--u1); border:1px solid var(--u1b); }
+  .toc-nav a:nth-child(2){ background:var(--u2a); color:var(--u2); border:1px solid var(--u2b); }
+  .toc-nav a:nth-child(3){ background:var(--u3a); color:var(--u3); border:1px solid var(--u3b); }
+  .toc-nav a:nth-child(4){ background:var(--u4a); color:var(--u4); border:1px solid var(--u4b); }
+  .toc-nav a:nth-child(5){ background:var(--u5a); color:var(--u5); border:1px solid var(--u5b); }
+  .toc-nav a.prog{ background:rgba(232,193,74,0.12); color:var(--accent); border:1px solid rgba(232,193,74,0.4); }
+  .toc-nav a:hover{ transform:translateY(-1px); filter:brightness(1.3); }
 
-  /* Layout */
-  .container { max-width: 960px; margin: 0 auto; padding: 40px 40px 80px; }
+  /* ── LAYOUT ── */
+  .container { max-width: 980px; margin: 0 auto; padding: 36px 36px 80px; }
 
-  /* Unit Sections */
-  .unit {
-    margin-bottom: 60px;
-    border-radius: 8px;
-    overflow: hidden;
-    border: 1px solid var(--border);
-  }
-  .unit-header {
-    padding: 22px 32px;
-    display: flex; align-items: center; gap: 14px;
-  }
-  .unit[data-u="1"] .unit-header { background: linear-gradient(135deg, rgba(74,158,106,0.2), transparent); border-bottom: 1px solid rgba(74,158,106,0.3); }
-  .unit[data-u="2"] .unit-header { background: linear-gradient(135deg, rgba(74,126,196,0.2), transparent); border-bottom: 1px solid rgba(74,126,196,0.3); }
-  .unit[data-u="3"] .unit-header { background: linear-gradient(135deg, rgba(196,74,126,0.2), transparent); border-bottom: 1px solid rgba(196,74,126,0.3); }
-  .unit[data-u="4"] .unit-header { background: linear-gradient(135deg, rgba(196,122,58,0.2), transparent); border-bottom: 1px solid rgba(196,122,58,0.3); }
-  .unit[data-u="5"] .unit-header { background: linear-gradient(135deg, rgba(122,74,196,0.2), transparent); border-bottom: 1px solid rgba(122,74,196,0.3); }
+  /* ── UNIT SECTIONS ── */
+  .unit { margin-bottom: 56px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
+  .unit-header { padding: 20px 28px; display:flex; align-items:center; gap:12px; }
+  .unit[data-u="1"] .unit-header{ background:linear-gradient(135deg,var(--u1a),transparent); border-bottom:1px solid var(--u1b); }
+  .unit[data-u="2"] .unit-header{ background:linear-gradient(135deg,var(--u2a),transparent); border-bottom:1px solid var(--u2b); }
+  .unit[data-u="3"] .unit-header{ background:linear-gradient(135deg,var(--u3a),transparent); border-bottom:1px solid var(--u3b); }
+  .unit[data-u="4"] .unit-header{ background:linear-gradient(135deg,var(--u4a),transparent); border-bottom:1px solid var(--u4b); }
+  .unit[data-u="5"] .unit-header{ background:linear-gradient(135deg,var(--u5a),transparent); border-bottom:1px solid var(--u5b); }
+  .prog-section .unit-header{ background:linear-gradient(135deg,rgba(232,193,74,0.1),transparent); border-bottom:1px solid rgba(232,193,74,0.3); }
 
   .unit-badge {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 11px; font-weight: 600;
-    padding: 4px 10px; border-radius: 3px; letter-spacing: 1px;
+    font-size: 10px; font-weight: 600; padding: 3px 9px;
+    border-radius: 3px; letter-spacing: 1px; white-space:nowrap;
   }
-  .unit[data-u="1"] .unit-badge { background: rgba(74,158,106,0.2); color: var(--unit1); border: 1px solid rgba(74,158,106,0.5); }
-  .unit[data-u="2"] .unit-badge { background: rgba(74,126,196,0.2); color: var(--unit2); border: 1px solid rgba(74,126,196,0.5); }
-  .unit[data-u="3"] .unit-badge { background: rgba(196,74,126,0.2); color: var(--unit3); border: 1px solid rgba(196,74,126,0.5); }
-  .unit[data-u="4"] .unit-badge { background: rgba(196,122,58,0.2); color: var(--unit4); border: 1px solid rgba(196,122,58,0.5); }
-  .unit[data-u="5"] .unit-badge { background: rgba(122,74,196,0.2); color: var(--unit5); border: 1px solid rgba(122,74,196,0.5); }
+  .unit[data-u="1"] .unit-badge{ background:var(--u1a); color:var(--u1); border:1px solid var(--u1b); }
+  .unit[data-u="2"] .unit-badge{ background:var(--u2a); color:var(--u2); border:1px solid var(--u2b); }
+  .unit[data-u="3"] .unit-badge{ background:var(--u3a); color:var(--u3); border:1px solid var(--u3b); }
+  .unit[data-u="4"] .unit-badge{ background:var(--u4a); color:var(--u4); border:1px solid var(--u4b); }
+  .unit[data-u="5"] .unit-badge{ background:var(--u5a); color:var(--u5); border:1px solid var(--u5b); }
+  .prog-section .unit-badge{ background:rgba(232,193,74,0.12); color:var(--accent); border:1px solid rgba(232,193,74,0.4); }
 
   .unit-title {
     font-family: 'Playfair Display', serif;
-    font-size: 21px; font-weight: 700;
-    color: var(--text);
+    font-size: 19px; font-weight: 700; color: var(--text);
   }
+  .unit-body { padding: 28px; background: var(--surface); }
 
-  .unit-body { padding: 32px; background: var(--surface); }
-
-  /* Question blocks */
-  .q-block {
-    margin-bottom: 38px;
-    padding-bottom: 38px;
-    border-bottom: 1px solid var(--border);
-  }
+  /* ── Q BLOCKS ── */
+  .q-block { margin-bottom: 34px; padding-bottom: 34px; border-bottom: 1px solid var(--border); }
   .q-block:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-
   .q-label {
     font-family: 'JetBrains Mono', monospace;
     font-size: 10px; font-weight: 600; letter-spacing: 2px;
-    color: var(--accent); text-transform: uppercase;
-    margin-bottom: 6px;
+    color: var(--accent); text-transform: uppercase; margin-bottom: 5px;
   }
   .q-title {
     font-family: 'Playfair Display', serif;
-    font-size: 18px; font-weight: 700;
-    color: var(--text); margin-bottom: 18px;
-    line-height: 1.4;
+    font-size: 17px; font-weight: 700;
+    color: var(--text); margin-bottom: 16px; line-height: 1.4;
   }
 
-  /* Answer body */
-  h3 { font-family: 'Source Serif 4', serif; font-size: 15px; font-weight: 600; color: var(--accent2); margin: 18px 0 8px; }
-  p { margin-bottom: 10px; color: var(--text); }
-  ul, ol { padding-left: 22px; margin-bottom: 12px; }
-  li { margin-bottom: 5px; }
+  /* ── PROG BLOCKS ── */
+  .prog-block {
+    margin-bottom: 40px; padding-bottom: 40px;
+    border-bottom: 1px solid var(--border);
+  }
+  .prog-block:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .prog-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; font-weight: 600; letter-spacing: 2px;
+    color: var(--accent2); text-transform: uppercase; margin-bottom: 5px;
+  }
+  .prog-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px; font-weight: 700;
+    color: var(--text); margin-bottom: 6px; line-height: 1.4;
+  }
+  .prog-desc { color: var(--muted); font-size: 13px; margin-bottom: 14px; font-style: italic; }
+
+  /* ── TEXT STYLES ── */
+  h3 { font-family:'Source Serif 4',serif; font-size:14px; font-weight:600; color:var(--accent2); margin:16px 0 7px; }
+  p { margin-bottom: 9px; color: var(--text); }
+  ul,ol { padding-left: 20px; margin-bottom: 11px; }
+  li { margin-bottom: 4px; }
   strong { color: var(--accent); font-weight: 600; }
   em { color: var(--muted); }
 
-  /* Code blocks */
+  .def-box {
+    background: rgba(232,193,74,0.05); border: 1px solid rgba(232,193,74,0.2);
+    border-left: 3px solid var(--accent); border-radius: 4px;
+    padding: 12px 16px; margin: 10px 0 14px;
+    font-style: italic; color: #d0cabb; font-size: 14px;
+  }
+  .tip {
+    background: rgba(74,158,106,0.07); border: 1px solid rgba(74,158,106,0.3);
+    border-radius: 4px; padding: 9px 13px; font-size: 13px; color: #80b890; margin: 10px 0;
+  }
+
+  /* ── TABLES ── */
+  table { width:100%; border-collapse:collapse; margin:12px 0 16px; font-size:13px; }
+  th { background:rgba(232,193,74,0.08); color:var(--accent); font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.5px; padding:7px 10px; text-align:left; border:1px solid var(--border); }
+  td { padding:6px 10px; border:1px solid var(--border); color:var(--text); vertical-align:top; font-size:13px; }
+  tr:nth-child(even) td { background:rgba(255,255,255,0.02); }
+
+  /* ── CODE BLOCKS ── */
+  .code-wrap { position: relative; margin: 10px 0 16px; }
+  .code-file {
+    background: #0a0908;
+    border: 1px solid var(--border); border-bottom: none;
+    border-radius: 5px 5px 0 0;
+    padding: 5px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--muted); letter-spacing: 0.5px;
+  }
   pre {
     background: var(--code-bg);
     border: 1px solid var(--border);
     border-left: 3px solid var(--accent2);
     border-radius: 4px;
-    padding: 16px 18px;
+    padding: 14px 16px;
     overflow-x: auto;
-    margin: 12px 0 16px;
+    margin: 10px 0 14px;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
+    font-size: 12.5px;
     line-height: 1.65;
     color: #c8c0b0;
   }
+  .code-wrap pre { border-radius: 0 0 5px 5px; margin: 0; }
   code {
     font-family: 'JetBrains Mono', monospace;
     font-size: 12px;
     background: rgba(232,193,74,0.1);
     color: var(--accent);
-    padding: 1px 5px;
-    border-radius: 3px;
+    padding: 1px 5px; border-radius: 3px;
   }
-  pre code { background: none; color: inherit; padding: 0; }
+  pre code { background:none; color:inherit; padding:0; }
 
-  /* Tables */
-  table { width: 100%; border-collapse: collapse; margin: 14px 0 18px; font-size: 13px; }
-  th { background: rgba(232,193,74,0.1); color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.5px; padding: 8px 12px; text-align: left; border: 1px solid var(--border); }
-  td { padding: 7px 12px; border: 1px solid var(--border); color: var(--text); vertical-align: top; }
-  tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+  /* syntax highlights */
+  .kw  { color: #c47a9e; }
+  .str { color: #98c47a; }
+  .cmt { color: #6a6458; font-style:italic; }
+  .num { color: #7ac4c4; }
+  .fn  { color: #c4a84a; }
+  .tag { color: #4a9ec4; }
+  .att { color: #c49e4a; }
 
-  /* Definition boxes */
-  .def-box {
-    background: rgba(232,193,74,0.05);
-    border: 1px solid rgba(232,193,74,0.2);
-    border-left: 3px solid var(--accent);
-    border-radius: 4px;
-    padding: 14px 18px;
-    margin: 12px 0;
-    font-style: italic;
-    color: #d0cabb;
+  /* ── PROGRAM SUBSECTION ── */
+  .prog-sub {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-bottom: 18px;
+    overflow: hidden;
   }
-
-  /* Highlight tip */
-  .tip {
-    background: rgba(74,158,106,0.08);
-    border: 1px solid rgba(74,158,106,0.3);
-    border-radius: 4px;
-    padding: 10px 14px;
-    font-size: 13px;
-    color: #90c8a0;
-    margin: 12px 0;
+  .prog-sub-header {
+    padding: 8px 16px;
+    background: rgba(196,122,58,0.08);
+    border-bottom: 1px solid var(--border);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--accent2); letter-spacing: 0.5px;
   }
+  .prog-sub-body { padding: 16px; }
+  .prog-sub-body pre { margin: 0; }
 
-  /* Print friendly */
+  /* output box */
+  .output {
+    background: #080706; border: 1px solid rgba(74,158,106,0.3);
+    border-left: 3px solid var(--u1);
+    border-radius: 4px; padding: 10px 14px; margin-top: 10px;
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    color: #80b890;
+  }
+  .output::before { content: "Output ▶ "; color: var(--u1); font-size: 10px; font-weight: 600; letter-spacing: 1px; }
+
   @media print {
     .hero { position: static; }
-    body { background: white; color: black; }
-    pre { border: 1px solid #ccc; }
-    .unit { border: 1px solid #ccc; break-inside: avoid-page; }
+    .unit { break-inside: avoid-page; }
   }
 </style>
 </head>
 <body>
 
 <div class="hero">
-  <h1>Full Stack Development — Complete Exam Notes ~ Pratheek</h1>
-  <p>All 5 Units · Exam-ready answers · Based on your uploaded notes</p>
+  <div class="hero-top">
+    <div>
+      <h1>Full Stack Development — Exam Notes + Full Programs ~ Pratheek</h1>
+      <p>All 5 Units · Theory Answers · Complete Code Programs · Based on your uploaded notes</p>
+    </div>
+  </div>
   <nav class="toc-nav">
-    <a href="#unit1">Unit I — HTML, CSS, Git</a>
-    <a href="#unit2">Unit II — JS, jQuery, AJAX</a>
-    <a href="#unit3">Unit III — React &amp; Redux</a>
-    <a href="#unit4">Unit IV — Spring MVC &amp; REST</a>
-    <a href="#unit5">Unit V — SQL, JDBC &amp; Cloud</a>
+    <a href="#unit1">I — HTML &amp; CSS</a>
+    <a href="#unit2">II — JS &amp; jQuery</a>
+    <a href="#unit3">III — React</a>
+    <a href="#unit4">IV — Spring</a>
+    <a href="#unit5">V — SQL &amp; Cloud</a>
+    <a href="#programs" class="prog">⬡ Full Programs</a>
   </nav>
 </div>
 
 <div class="container">
 
-<!-- ══════════════ UNIT I ══════════════ -->
+<!-- ═══════════════════════════════════════════
+     UNIT I
+═══════════════════════════════════════════ -->
 <section class="unit" data-u="1" id="unit1">
   <div class="unit-header">
-    <span class="unit-badge">UNIT I</span>
-    <div class="unit-title">Web Development Basics — HTML, CSS, Web Servers, Git</div>
+    <span class="unit-badge">UNIT I · 9 Hours</span>
+    <div class="unit-title">Web Development Basics — HTML, CSS, Web Servers, Shell, Git</div>
   </div>
   <div class="unit-body">
 
     <div class="q-block">
-      <div class="q-label">Q1 — 20 Marks</div>
-      <div class="q-title">What is HTML? Explain its basic structure, tags, and key elements with examples.</div>
+      <div class="q-label">Important Question</div>
+      <div class="q-title">What is HTML? Explain its basic structure, key tags, forms, and tables with examples.</div>
 
-      <h3>Definition</h3>
-      <div class="def-box">HTML (HyperText Markup Language) is a standard markup language used to create web pages. It describes the structure of a web page using markup tags.</div>
+      <div class="def-box">HTML (HyperText Markup Language) is the standard markup language for creating web pages. It describes the structure and content of a webpage using tags.</div>
 
-      <ul>
-        <li><strong>HyperText</strong> — Text that contains links to other documents/pages.</li>
-        <li><strong>Markup Language</strong> — Uses tags to annotate/format text content.</li>
-        <li><strong>Web Page</strong> — A document written in HTML, rendered by a browser. Can be static or dynamic.</li>
-      </ul>
-
-      <h3>Basic HTML Structure</h3>
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-  &lt;head&gt;
+      <h3>HTML Document Structure</h3>
+<pre><code>&lt;!DOCTYPE html&gt;          <span class="cmt">&lt;!-- declares HTML5 document type --&gt;</span>
+&lt;html&gt;                   <span class="cmt">&lt;!-- root element --&gt;</span>
+  &lt;head&gt;                 <span class="cmt">&lt;!-- metadata section --&gt;</span>
     &lt;title&gt;Page Title&lt;/title&gt;
   &lt;/head&gt;
-  &lt;body&gt;
+  &lt;body&gt;                 <span class="cmt">&lt;!-- visible content --&gt;</span>
     &lt;h1&gt;Main Heading&lt;/h1&gt;
-    &lt;p&gt;First paragraph.&lt;/p&gt;
+    &lt;p&gt;A paragraph.&lt;/p&gt;
   &lt;/body&gt;
 &lt;/html&gt;</code></pre>
 
       <table>
         <tr><th>Tag</th><th>Purpose</th></tr>
-        <tr><td><code>&lt;!DOCTYPE&gt;</code></td><td>Declares document type / HTML version to the browser</td></tr>
-        <tr><td><code>&lt;html&gt;</code></td><td>Root element; container for all HTML content</td></tr>
-        <tr><td><code>&lt;head&gt;</code></td><td>Contains metadata (title, links, scripts)</td></tr>
-        <tr><td><code>&lt;title&gt;</code></td><td>Sets the page title shown in browser tab</td></tr>
-        <tr><td><code>&lt;body&gt;</code></td><td>Contains all visible content of the page</td></tr>
-        <tr><td><code>&lt;h1&gt;–&lt;h6&gt;</code></td><td>Headings from most important (h1) to least (h6)</td></tr>
-        <tr><td><code>&lt;p&gt;</code></td><td>Defines a paragraph</td></tr>
+        <tr><td><code>&lt;!DOCTYPE&gt;</code></td><td>Declares document type to the browser</td></tr>
+        <tr><td><code>&lt;html&gt;</code></td><td>Root container for all HTML content</td></tr>
+        <tr><td><code>&lt;head&gt;</code></td><td>Contains metadata (title, CSS links, scripts)</td></tr>
+        <tr><td><code>&lt;body&gt;</code></td><td>All visible page content lives here</td></tr>
+        <tr><td><code>&lt;h1&gt;–&lt;h6&gt;</code></td><td>Headings — h1 is largest/most important</td></tr>
+        <tr><td><code>&lt;p&gt;</code></td><td>Paragraph of text</td></tr>
+        <tr><td><code>&lt;a href=""&gt;</code></td><td>Hyperlink to another page or URL</td></tr>
+        <tr><td><code>&lt;img src="" alt=""&gt;</code></td><td>Embeds an image</td></tr>
+        <tr><td><code>&lt;br&gt;</code></td><td>Line break (no closing tag)</td></tr>
+        <tr><td><code>&lt;hr&gt;</code></td><td>Horizontal rule / divider line</td></tr>
       </table>
 
-      <h3>Important HTML Elements</h3>
-      <p><strong>Anchor Tag (Hyperlink):</strong></p>
-<pre><code>&lt;a href="https://example.com" target="_blank"&gt;Click Here&lt;/a&gt;</code></pre>
-      <p><strong>Image Tag:</strong></p>
-<pre><code>&lt;img src="photo.jpg" alt="description" width="300" height="200"&gt;</code></pre>
-      <p><strong>Table:</strong></p>
+      <h3>HTML Table</h3>
 <pre><code>&lt;table border="1"&gt;
-  &lt;tr&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Marks&lt;/th&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;td&gt;Ram&lt;/td&gt;&lt;td&gt;85&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;th&gt;Roll No&lt;/th&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Marks&lt;/th&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;Ram&lt;/td&gt;&lt;td&gt;85&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;2&lt;/td&gt;&lt;td&gt;Sita&lt;/td&gt;&lt;td&gt;90&lt;/td&gt;&lt;/tr&gt;
 &lt;/table&gt;</code></pre>
 
-      <h3>HTML Lists</h3>
-      <ul>
-        <li><strong>Ordered List</strong> <code>&lt;ol&gt;</code> — numbered items</li>
-        <li><strong>Unordered List</strong> <code>&lt;ul&gt;</code> — bulleted items (type: disc, circle, square)</li>
-        <li>List items use <code>&lt;li&gt;</code> tag</li>
-      </ul>
+      <h3>HTML Form (Complete Registration Form)</h3>
+<pre><code>&lt;form action="register.php" method="post"&gt;
+  &lt;fieldset&gt;
+    &lt;legend&gt;User Information&lt;/legend&gt;
 
-      <h3>HTML Forms</h3>
-      <p>Forms collect user input and send it to a server.</p>
-<pre><code>&lt;form action="server_url" method="post"&gt;
-  &lt;label&gt;Name: &lt;input type="text" name="name"&gt;&lt;/label&gt;
-  &lt;label&gt;Email: &lt;input type="email" name="email"&gt;&lt;/label&gt;
-  &lt;input type="radio" name="gender" value="male"&gt; Male
-  &lt;input type="checkbox" name="hobby" value="cricket"&gt; Cricket
-  &lt;input type="submit" value="Submit"&gt;
+    &lt;label&gt;Name:&lt;/label&gt;
+    &lt;input type="text" name="name"&gt;&lt;br&gt;
+
+    &lt;label&gt;Email:&lt;/label&gt;
+    &lt;input type="email" name="email"&gt;&lt;br&gt;
+
+    &lt;label&gt;Password:&lt;/label&gt;
+    &lt;input type="password" name="pass"&gt;&lt;br&gt;
+
+    &lt;label&gt;Gender:&lt;/label&gt;
+    &lt;input type="radio" name="gender" value="male"&gt; Male
+    &lt;input type="radio" name="gender" value="female"&gt; Female&lt;br&gt;
+
+    &lt;label&gt;Hobbies:&lt;/label&gt;
+    &lt;input type="checkbox" name="h" value="cricket"&gt; Cricket
+    &lt;input type="checkbox" name="h" value="reading"&gt; Reading&lt;br&gt;
+
+    &lt;label&gt;Country:&lt;/label&gt;
+    &lt;select name="country"&gt;
+      &lt;option value="india"&gt;India&lt;/option&gt;
+      &lt;option value="usa"&gt;USA&lt;/option&gt;
+    &lt;/select&gt;&lt;br&gt;
+
+    &lt;label&gt;Address:&lt;/label&gt;
+    &lt;textarea rows="3" cols="30"&gt;&lt;/textarea&gt;&lt;br&gt;
+
+    &lt;input type="submit" value="Register"&gt;
+  &lt;/fieldset&gt;
 &lt;/form&gt;</code></pre>
-      <table>
-        <tr><th>Input Type</th><th>Purpose</th></tr>
-        <tr><td>text</td><td>Single-line text input</td></tr>
-        <tr><td>password</td><td>Hidden text input</td></tr>
-        <tr><td>email</td><td>Email validation input</td></tr>
-        <tr><td>radio</td><td>Select one option from many</td></tr>
-        <tr><td>checkbox</td><td>Select multiple options</td></tr>
-        <tr><td>submit</td><td>Submit the form to the server</td></tr>
-        <tr><td>textarea</td><td>Multi-line text input</td></tr>
-      </table>
+
+      <h3>HTML Lists</h3>
+<pre><code><span class="cmt">&lt;!-- Ordered List (numbered) --&gt;</span>
+&lt;ol&gt;
+  &lt;li&gt;HTML&lt;/li&gt;
+  &lt;li&gt;CSS&lt;/li&gt;
+  &lt;li&gt;JavaScript&lt;/li&gt;
+&lt;/ol&gt;
+
+<span class="cmt">&lt;!-- Unordered List (bullets) --&gt;</span>
+&lt;ul type="disc"&gt;
+  &lt;li&gt;React&lt;/li&gt;
+  &lt;li&gt;Angular&lt;/li&gt;
+  &lt;li&gt;Vue&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
     </div>
 
     <div class="q-block">
-      <div class="q-label">Q2 — 20 Marks</div>
-      <div class="q-title">Explain CSS — Inline, Internal, and External. Describe the three ways to apply styles.</div>
+      <div class="q-label">Important Question</div>
+      <div class="q-title">Explain CSS — Inline, Internal, External with examples.</div>
 
-      <div class="def-box">CSS (Cascading Style Sheets) describes the look and formatting of an HTML document. It controls colors, fonts, layouts, padding, margins, and more.</div>
+      <div class="def-box">CSS (Cascading Style Sheets) controls the visual presentation of HTML elements — colors, fonts, spacing, layout.</div>
 
-      <h3>Three Ways to Apply CSS</h3>
+      <h3>1. Inline CSS</h3>
+<pre><code>&lt;h2 style="color: red; font-size: 30px; text-align: center;"&gt;
+  Inline Styled Heading
+&lt;/h2&gt;</code></pre>
 
-      <p><strong>1. Inline CSS</strong> — Applied directly inside an HTML element using the <code>style</code> attribute. Affects only that single element.</p>
-<pre><code>&lt;h3 style="color: red; font-size: 30px; text-align: center;"&gt;
-  Hello World
-&lt;/h3&gt;</code></pre>
-
-      <p><strong>2. Internal CSS</strong> — Defined using <code>&lt;style&gt;</code> tag inside the <code>&lt;head&gt;</code> section. Applies to one HTML page.</p>
+      <h3>2. Internal CSS</h3>
 <pre><code>&lt;head&gt;
   &lt;style&gt;
-    body { background-color: lavender; }
-    h2   { color: red; font-size: 30px; }
-    .blue { color: blue; }
-    #main { font-weight: bold; }
+    body  { background-color: #f0f0f0; }
+    h2    { color: darkblue; font-size: 28px; }
+    p     { font-size: 16px; line-height: 1.6; }
+    .red  { color: red; }
+    #main { border: 2px solid black; padding: 20px; }
   &lt;/style&gt;
 &lt;/head&gt;</code></pre>
 
-      <p><strong>3. External CSS</strong> — CSS rules stored in a separate <code>.css</code> file and linked to HTML. Best for large projects with multiple pages.</p>
-<pre><code>&lt;!-- In HTML --&gt;
+      <h3>3. External CSS</h3>
+<pre><code><span class="cmt">&lt;!-- In HTML file --&gt;</span>
 &lt;link rel="stylesheet" type="text/css" href="style.css"&gt;
 
-/* style.css */
-body { background-color: lavender; text-align: center; }
-h2   { color: #f08080; }
+<span class="cmt">/* In style.css */</span>
+body  { background-color: lavender; text-align: center; }
+h2    { color: #f08080; font-size: 28px; }
 .blue { color: blue; }
-.red  { color: red; }</code></pre>
+.red  { color: red; }
+.green{ color: green; }</code></pre>
 
       <table>
-        <tr><th>Type</th><th>Location</th><th>Scope</th><th>Best Use</th></tr>
-        <tr><td>Inline</td><td>Inside HTML element</td><td>Single element</td><td>Quick one-off overrides</td></tr>
-        <tr><td>Internal</td><td>&lt;head&gt; section</td><td>Single page</td><td>Page-specific styles</td></tr>
-        <tr><td>External</td><td>Separate .css file</td><td>Multiple pages</td><td>Large projects</td></tr>
+        <tr><th>Type</th><th>Where Written</th><th>Scope</th><th>Use When</th></tr>
+        <tr><td>Inline</td><td>Inside element tag</td><td>Single element</td><td>Quick one-off override</td></tr>
+        <tr><td>Internal</td><td>&lt;head&gt; using &lt;style&gt;</td><td>One page only</td><td>Single page unique styles</td></tr>
+        <tr><td>External</td><td>Separate .css file</td><td>Multiple pages</td><td>Large multi-page projects</td></tr>
       </table>
     </div>
 
     <div class="q-block">
-      <div class="q-label">Q3 — 20 Marks</div>
-      <div class="q-title">What is a Web Server? Explain Client-Server architecture, HTTP methods and status codes.</div>
+      <div class="q-label">Important Question</div>
+      <div class="q-title">Explain Web Server, HTTP protocol, HTTP Methods, and Status Codes.</div>
 
-      <div class="def-box">A web server is a computer that stores web server software and a website's files (HTML, CSS, JS, images). It connects to the Internet and responds to HTTP requests from browsers.</div>
-
-      <h3>How a Web Server Works</h3>
-      <ol>
-        <li>Browser sends an HTTP request with a URL to the web server.</li>
-        <li>The HTTP server software finds the requested file.</li>
-        <li>It sends the file back to the browser via HTTP.</li>
-        <li>If the file is not found, it returns a <strong>404 Not Found</strong> response.</li>
-      </ol>
+      <div class="def-box">A Web Server is software and hardware that stores, processes and delivers web pages to clients. It handles HTTP requests and returns responses.</div>
 
       <h3>Static vs Dynamic Web Server</h3>
       <ul>
-        <li><strong>Static Web Server:</strong> Serves files exactly as stored. No processing. Simple.</li>
-        <li><strong>Dynamic Web Server:</strong> Has an application server + database. Generates HTML content dynamically (e.g., user-specific pages).</li>
+        <li><strong>Static:</strong> Sends files exactly as stored. Only an HTTP server needed.</li>
+        <li><strong>Dynamic:</strong> Has application server + database. Generates content on the fly (e.g., user-specific pages, login systems).</li>
       </ul>
-
-      <h3>Client-Server Architecture</h3>
-      <p>A model where the <strong>client</strong> (browser) sends a request and the <strong>server</strong> provides the response. Communication uses the HTTP protocol.</p>
 
       <h3>HTTP Methods</h3>
       <table>
-        <tr><th>Method</th><th>Purpose</th></tr>
-        <tr><td>GET</td><td>Fetch/retrieve data from the server</td></tr>
-        <tr><td>POST</td><td>Send new data to the server (create)</td></tr>
-        <tr><td>PUT</td><td>Update existing data on the server</td></tr>
-        <tr><td>DELETE</td><td>Remove data from the server</td></tr>
+        <tr><th>Method</th><th>Purpose</th><th>Example Use</th></tr>
+        <tr><td>GET</td><td>Retrieve data</td><td>Load a web page</td></tr>
+        <tr><td>POST</td><td>Send/create data</td><td>Submit a form</td></tr>
+        <tr><td>PUT</td><td>Update existing data</td><td>Edit a profile</td></tr>
+        <tr><td>DELETE</td><td>Remove data</td><td>Delete a record</td></tr>
       </table>
 
       <h3>HTTP Status Codes</h3>
       <table>
         <tr><th>Code</th><th>Meaning</th></tr>
-        <tr><td>200</td><td>OK — Request succeeded</td></tr>
-        <tr><td>301</td><td>Moved Permanently — Resource has a new URL</td></tr>
-        <tr><td>404</td><td>Not Found — Resource doesn't exist</td></tr>
-        <tr><td>500</td><td>Internal Server Error — Server-side problem</td></tr>
+        <tr><td>200</td><td>OK — Success</td></tr>
+        <tr><td>301</td><td>Moved Permanently — Resource at new URL</td></tr>
+        <tr><td>404</td><td>Not Found — Resource does not exist</td></tr>
+        <tr><td>500</td><td>Internal Server Error — Server-side bug</td></tr>
       </table>
     </div>
 
     <div class="q-block">
-      <div class="q-label">Q4 — 20 Marks</div>
-      <div class="q-title">Explain Version Control using Git and GitHub. Describe the Git workflow and common commands.</div>
+      <div class="q-label">Important Question</div>
+      <div class="q-title">Explain Git and GitHub — Version control, Git commands, workflow, branching.</div>
 
-      <div class="def-box">Git is a distributed version control system (VCS) that tracks changes in files. GitHub is an online platform for hosting Git repositories and enabling collaboration.</div>
+      <div class="def-box">Git is a distributed version control system. GitHub is a cloud platform for hosting Git repositories. Together they enable collaboration, history tracking, and code management.</div>
 
-      <h3>Key Terminology</h3>
+      <h3>Key Concepts</h3>
       <table>
         <tr><th>Term</th><th>Meaning</th></tr>
-        <tr><td>Repository</td><td>Project folder tracked by Git (contains .git folder)</td></tr>
-        <tr><td>Commit</td><td>A saved snapshot of changes with a message</td></tr>
-        <tr><td>Branch</td><td>A separate line of development</td></tr>
-        <tr><td>Merge</td><td>Combining changes from one branch into another</td></tr>
-        <tr><td>Clone</td><td>Download a full copy of a remote repo to local</td></tr>
-        <tr><td>Push</td><td>Upload local commits to remote (GitHub)</td></tr>
-        <tr><td>Pull</td><td>Download and merge remote changes to local</td></tr>
-        <tr><td>Fork</td><td>Your own copy of someone else's GitHub repo</td></tr>
+        <tr><td>Repository</td><td>Project folder tracked by Git (has a hidden .git directory)</td></tr>
+        <tr><td>Commit</td><td>A saved snapshot of changes with a description message</td></tr>
+        <tr><td>Branch</td><td>Separate line of development (e.g., feature branches)</td></tr>
+        <tr><td>Merge</td><td>Combining a branch's changes into another branch</td></tr>
+        <tr><td>Clone</td><td>Downloading a full copy of a remote repo locally</td></tr>
+        <tr><td>Push</td><td>Uploading local commits to GitHub</td></tr>
+        <tr><td>Pull</td><td>Downloading latest changes from GitHub to local</td></tr>
+        <tr><td>Fork</td><td>Personal copy of someone else's GitHub repository</td></tr>
       </table>
 
       <h3>Basic Git Workflow</h3>
-      <ol>
-        <li>Edit files in the <strong>Working Directory</strong></li>
-        <li>Check status: <code>git status</code></li>
-        <li>Stage changes: <code>git add .</code></li>
-        <li>Commit: <code>git commit -m "message"</code></li>
-        <li>Push to GitHub: <code>git push origin main</code></li>
-      </ol>
+<pre><code>git init                          <span class="cmt"># Initialize new repo</span>
+git clone https://github.com/...  <span class="cmt"># Clone existing repo</span>
 
-      <h3>Common Git Commands</h3>
-<pre><code>git init                     # Initialize new repo
-git clone &lt;url&gt;              # Clone remote repo locally
-git status                   # Check modified/staged files
-git add filename             # Stage a specific file
-git add .                    # Stage all changes
-git commit -m "msg"          # Save snapshot with message
-git push origin main         # Upload to GitHub
-git pull origin main         # Download latest from GitHub
-git branch feature1          # Create new branch
-git checkout feature1        # Switch to branch
-git checkout -b feature1     # Create + switch in one step
-git merge feature1           # Merge branch into current
-git remote add origin &lt;url&gt;  # Link local repo to GitHub</code></pre>
+git status                        <span class="cmt"># Check changed files</span>
+git add index.html                <span class="cmt"># Stage specific file</span>
+git add .                         <span class="cmt"># Stage all changes</span>
+git commit -m "Add login page"    <span class="cmt"># Save snapshot</span>
 
-      <h3>Git vs GitHub</h3>
+git remote add origin &lt;url&gt;       <span class="cmt"># Link to GitHub repo</span>
+git push origin main              <span class="cmt"># Upload to GitHub</span>
+git pull origin main              <span class="cmt"># Download from GitHub</span>
+
+git branch feature-login          <span class="cmt"># Create branch</span>
+git checkout feature-login        <span class="cmt"># Switch to branch</span>
+git checkout -b hotfix            <span class="cmt"># Create + switch</span>
+git merge feature-login           <span class="cmt"># Merge branch into current</span></code></pre>
+
       <table>
-        <tr><th>Aspect</th><th>Git</th><th>GitHub</th></tr>
-        <tr><td>Type</td><td>Distributed VCS tool</td><td>Online hosting service</td></tr>
-        <tr><td>Location</td><td>Installed locally</td><td>Cloud-based (web)</td></tr>
-        <tr><td>Main Use</td><td>Track changes, branch, merge</td><td>Share, collaborate, PRs</td></tr>
-        <tr><td>Offline Use</td><td>Yes, works offline</td><td>No, needs internet</td></tr>
+        <tr><th>Git</th><th>GitHub</th></tr>
+        <tr><td>Distributed VCS tool installed locally</td><td>Online cloud platform for Git repos</td></tr>
+        <tr><td>Works completely offline</td><td>Requires internet connection</td></tr>
+        <tr><td>Track changes, branch, merge</td><td>Share, collaborate, pull requests, issues</td></tr>
       </table>
     </div>
 
   </div>
 </section>
 
-<!-- ══════════════ UNIT II ══════════════ -->
+<!-- ═══════════════════════════════════════════
+     UNIT II
+═══════════════════════════════════════════ -->
 <section class="unit" data-u="2" id="unit2">
   <div class="unit-header">
-    <span class="unit-badge">UNIT II</span>
-    <div class="unit-title">Frontend Development — JavaScript, jQuery, AJAX, JSON</div>
+    <span class="unit-badge">UNIT II · 10 Hours</span>
+    <div class="unit-title">Frontend Development — JavaScript, OOP, Memory, AJAX, jQuery, JSON</div>
   </div>
   <div class="unit-body">
 
     <div class="q-block">
-      <div class="q-label">Q1 — 20 Marks</div>
-      <div class="q-title">Explain JavaScript OOP concepts — Objects, Classes, and the three ways to create objects.</div>
+      <div class="q-label">Important Question</div>
+      <div class="q-title">Explain JavaScript OOP — Objects, Classes, Constructors. Give all 3 ways to create objects.</div>
 
-      <div class="def-box">JavaScript is an object-based scripting language. An object is an entity having state (properties) and behavior (methods). JavaScript is template-based, not class-based — we can directly create objects.</div>
+      <div class="def-box">JavaScript is an object-based language. Everything is an object. Objects have state (properties) and behavior (methods). JS is template-based — objects can be created directly without defining classes first.</div>
 
       <h3>3 Ways to Create JavaScript Objects</h3>
 
-      <p><strong>1. Object Literal</strong></p>
-<pre><code>var emp = { id: 102, name: "Shyam Kumar", salary: 40000 };
-document.write(emp.id + " " + emp.name + " " + emp.salary);
-// Output: 102 Shyam Kumar 40000</code></pre>
+      <p><strong>Method 1: Object Literal</strong></p>
+<pre><code><span class="kw">var</span> emp = { id: <span class="num">102</span>, name: <span class="str">"Shyam Kumar"</span>, salary: <span class="num">40000</span> };
+document.write(emp.id + <span class="str">" "</span> + emp.name + <span class="str">" "</span> + emp.salary);</code></pre>
+      <div class="output">102 Shyam Kumar 40000</div>
 
-      <p><strong>2. Using new Object()</strong></p>
-<pre><code>var emp = new Object();
-emp.id = 101;
-emp.name = "Ravi Malik";
-emp.salary = 50000;
-document.write(emp.id + " " + emp.name + " " + emp.salary);</code></pre>
+      <p><strong>Method 2: new Object()</strong></p>
+<pre><code><span class="kw">var</span> emp = <span class="kw">new</span> Object();
+emp.id = <span class="num">101</span>;
+emp.name = <span class="str">"Ravi Malik"</span>;
+emp.salary = <span class="num">50000</span>;
+document.write(emp.id + <span class="str">" "</span> + emp.name + <span class="str">" "</span> + emp.salary);</code></pre>
+      <div class="output">101 Ravi Malik 50000</div>
 
-      <p><strong>3. Using Object Constructor Function</strong></p>
-<pre><code>function emp(id, name, salary) {
-    this.id = id;
-    this.name = name;
-    this.salary = salary;
+      <p><strong>Method 3: Constructor Function</strong></p>
+<pre><code><span class="kw">function</span> <span class="fn">emp</span>(id, name, salary) {
+    <span class="kw">this</span>.id = id;
+    <span class="kw">this</span>.name = name;
+    <span class="kw">this</span>.salary = salary;
 }
-var e = new emp(103, "Vimal Jaiswal", 30000);
-document.write(e.id + " " + e.name + " " + e.salary);</code></pre>
+<span class="kw">var</span> e = <span class="kw">new</span> emp(<span class="num">103</span>, <span class="str">"Vimal Jaiswal"</span>, <span class="num">30000</span>);
+document.write(e.id + <span class="str">" "</span> + e.name + <span class="str">" "</span> + e.salary);</code></pre>
+      <div class="output">103 Vimal Jaiswal 30000</div>
 
       <h3>ES6 Class Declaration</h3>
-<pre><code>class Employee {
-    constructor(id, name) {
-        this.id = id;
-        this.name = name;
+<pre><code><span class="kw">class</span> Employee {
+    <span class="fn">constructor</span>(id, name) {
+        <span class="kw">this</span>.id = id;
+        <span class="kw">this</span>.name = name;
     }
-    detail() {
-        document.writeln(this.id + " " + this.name);
+    <span class="fn">detail</span>() {
+        document.writeln(<span class="kw">this</span>.id + <span class="str">" "</span> + <span class="kw">this</span>.name + <span class="str">"&lt;br&gt;"</span>);
     }
 }
-var e1 = new Employee(101, "Martin Roy");
-var e2 = new Employee(102, "Duke William");
-e1.detail();  // Output: 101 Martin Roy
-e2.detail();  // Output: 102 Duke William</code></pre>
+<span class="kw">var</span> e1 = <span class="kw">new</span> Employee(<span class="num">101</span>, <span class="str">"Martin Roy"</span>);
+<span class="kw">var</span> e2 = <span class="kw">new</span> Employee(<span class="num">102</span>, <span class="str">"Duke William"</span>);
+e1.detail();
+e2.detail();</code></pre>
+      <div class="output">101 Martin Roy<br>102 Duke William</div>
     </div>
 
     <div class="q-block">
-      <div class="q-label">Q2 — 20 Marks</div>
-      <div class="q-title">Explain JavaScript Memory Management — Memory Life Cycle, Allocation, and Garbage Collection.</div>
+      <div class="q-label">Important Question</div>
+      <div class="q-title">Explain JavaScript Memory Management — life cycle, allocation, and garbage collection.</div>
 
-      <div class="def-box">JavaScript automatically allocates memory when objects are created and frees it when no longer used — this is called Garbage Collection.</div>
+      <div class="def-box">JavaScript automatically allocates memory when objects are created and frees it when no longer needed, through a process called Garbage Collection.</div>
 
       <h3>Memory Life Cycle</h3>
       <ol>
-        <li><strong>Allocate</strong> — Memory is allocated when values are declared</li>
-        <li><strong>Use</strong> — Read from / write to allocated memory</li>
-        <li><strong>Release</strong> — Free memory when no longer needed</li>
+        <li><strong>Allocate</strong> — JS automatically allocates memory when values/objects are declared</li>
+        <li><strong>Use</strong> — Read from and write to the allocated memory</li>
+        <li><strong>Release</strong> — Garbage collector frees memory no longer referenced</li>
       </ol>
 
-      <h3>Memory Allocation Examples</h3>
-<pre><code>// Value initialization
-const n = 123;          // number — allocates memory
-const s = "hello";      // string — allocates memory
-const o = { a: 1 };     // object — allocates memory for object + values
-const a = [1, 2, 3];    // array — allocates memory
+      <h3>Allocation Examples</h3>
+<pre><code><span class="kw">const</span> n = <span class="num">123</span>;         <span class="cmt">// allocates memory for a number</span>
+<span class="kw">const</span> s = <span class="str">"hello"</span>;    <span class="cmt">// allocates memory for a string</span>
+<span class="kw">const</span> o = { a: <span class="num">1</span> };   <span class="cmt">// allocates for object + values</span>
+<span class="kw">const</span> a = [<span class="num">1</span>,<span class="num">2</span>,<span class="num">3</span>];   <span class="cmt">// allocates for array</span>
 
-// Allocation via function calls
-const d = new Date();   // allocates a Date object
-const el = document.createElement("div"); // allocates DOM element
+<span class="cmt">// Via function calls</span>
+<span class="kw">const</span> d = <span class="kw">new</span> Date();                    <span class="cmt">// allocates Date</span>
+<span class="kw">const</span> el = document.<span class="fn">createElement</span>(<span class="str">"div"</span>); <span class="cmt">// allocates DOM node</span>
 
-// Methods that allocate new values
-const s2 = s.substr(0, 3);  // new string allocated</code></pre>
+<span class="cmt">// Via methods that return new objects</span>
+<span class="kw">const</span> s2 = s.<span class="fn">substr</span>(<span class="num">0</span>, <span class="num">3</span>);              <span class="cmt">// new string allocated</span>
+<span class="kw">const</span> a3 = a1.<span class="fn">concat</span>(a2);              <span class="cmt">// new array with merged items</span></code></pre>
 
-      <h3>Garbage Collection</h3>
-      <p>The most common algorithm is <strong>Mark-and-Sweep</strong>. The garbage collector periodically marks all objects still reachable from the root (global object), and sweeps away the unmarked objects. Developers in JavaScript don't need to manually free memory — the engine handles it automatically. This is different from low-level languages like C where you must call <code>free()</code> manually.</p>
+      <p>The <strong>Garbage Collector</strong> uses the <em>Mark-and-Sweep</em> algorithm — it marks all objects reachable from the global root, then sweeps away everything else. Developers don't need to free memory manually in JS (unlike C/C++).</p>
     </div>
 
     <div class="q-block">
-      <div class="q-label">Q3 — 20 Marks</div>
-      <div class="q-title">What is jQuery? Explain jQuery events with examples — click(), focus(), submit(), mouseover().</div>
+      <div class="q-label">Important Question</div>
+      <div class="q-title">What is jQuery? Explain jQuery events — click(), focus(), submit(), mouseover() with examples.</div>
 
-      <div class="def-box">jQuery is a fast, small, cross-platform JavaScript library. Its motto is "Write Less, Do More." It simplifies HTML DOM manipulation, event handling, animations, and AJAX.</div>
-
-      <h3>Features of jQuery</h3>
-      <ul>
-        <li>Small, lightweight and fast</li>
-        <li>Platform-independent (works on all browsers)</li>
-        <li>Simplifies AJAX and DOM manipulation</li>
-        <li>Supports method chaining</li>
-      </ul>
+      <div class="def-box">jQuery is a fast, small, cross-platform JavaScript library. Its philosophy: "Write Less, Do More." It simplifies DOM traversal, event handling, animations, and AJAX calls with a clean API.</div>
 
       <h3>Including jQuery</h3>
-<pre><code>&lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"&gt;
-&lt;/script&gt;</code></pre>
+<pre><code>&lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"&gt;&lt;/script&gt;</code></pre>
 
-      <h3>jQuery click() Event</h3>
-<pre><code>$(document).ready(function() {
-    $("p").click(function() {
-        alert("This paragraph was clicked.");
+      <h3>$(document).ready()</h3>
+<pre><code>$(document).<span class="fn">ready</span>(<span class="kw">function</span>() {
+    <span class="cmt">// All jQuery code goes inside here</span>
+    $(<span class="str">"p"</span>).css(<span class="str">"background-color"</span>, <span class="str">"pink"</span>);
+});</code></pre>
+
+      <h3>click() Event</h3>
+<pre><code>$(document).<span class="fn">ready</span>(<span class="kw">function</span>() {
+    $(<span class="str">"p"</span>).<span class="fn">click</span>(<span class="kw">function</span>() {
+        alert(<span class="str">"Paragraph clicked!"</span>);
     });
-    // Hide heading on click
-    $("h1, h2").click(function() {
-        $(this).hide();
+    <span class="cmt">// Hide heading on click</span>
+    $(<span class="str">"h1,h2,h3"</span>).<span class="fn">click</span>(<span class="kw">function</span>() {
+        $(<span class="kw">this</span>).<span class="fn">hide</span>();
     });
 });</code></pre>
 
-      <h3>jQuery focus() Event</h3>
-<pre><code>// Triggered when an input field gains focus
-$("input").focus(function() {
-    $(this).next("span").css("display", "inline").fadeOut(2000);
+      <h3>focus() Event</h3>
+<pre><code>$(<span class="str">"input"</span>).<span class="fn">focus</span>(<span class="kw">function</span>() {
+    $(<span class="kw">this</span>).<span class="fn">next</span>(<span class="str">"span"</span>).css(<span class="str">"display"</span>, <span class="str">"inline"</span>).<span class="fn">fadeOut</span>(<span class="num">2000</span>);
 });</code></pre>
 
-      <h3>jQuery submit() Event</h3>
-<pre><code>$("form").submit(function(event) {
-    if ($("input:first").val() === "MRCET") {
-        $("span").text("Submitted Successfully.").show();
-        return;
+      <h3>submit() Event</h3>
+<pre><code>$(<span class="str">"form"</span>).<span class="fn">submit</span>(<span class="kw">function</span>(event) {
+    <span class="kw">if</span> ($(<span class="str">"input:first"</span>).<span class="fn">val</span>() === <span class="str">"MRCET"</span>) {
+        $(<span class="str">"span"</span>).<span class="fn">text</span>(<span class="str">"Submitted Successfully!"</span>).<span class="fn">show</span>();
+        <span class="kw">return</span>;
     }
-    $("span").text("Not valid!").show().fadeOut(2000);
-    event.preventDefault();
+    $(<span class="str">"span"</span>).<span class="fn">text</span>(<span class="str">"Invalid!"</span>).<span class="fn">show</span>().<span class="fn">fadeOut</span>(<span class="num">2000</span>);
+    event.<span class="fn">preventDefault</span>();
 });</code></pre>
 
-      <h3>jQuery mouseover() Event</h3>
-<pre><code>$("p").mouseover(function() {
-    $("p").css("background-color", "lightgreen");
+      <h3>mouseover() / mouseout() Events</h3>
+<pre><code>$(<span class="str">"p"</span>).<span class="fn">mouseover</span>(<span class="kw">function</span>() {
+    $(<span class="str">"p"</span>).css(<span class="str">"background-color"</span>, <span class="str">"lightgreen"</span>);
 });
-$("p").mouseout(function() {
-    $("p").css("background-color", "orange");
+$(<span class="str">"p"</span>).<span class="fn">mouseout</span>(<span class="kw">function</span>() {
+    $(<span class="str">"p"</span>).css(<span class="str">"background-color"</span>, <span class="str">"orange"</span>);
 });</code></pre>
 
       <h3>jQuery UI Categories</h3>
       <table>
         <tr><th>Category</th><th>Examples</th></tr>
-        <tr><td>Interactions</td><td>Draggable, Droppable, Resizable, Sortable</td></tr>
-        <tr><td>Widgets</td><td>Accordion, DatePicker, Dialog, Tabs, ProgressBar, Tooltip</td></tr>
-        <tr><td>Effects</td><td>Hide, Show, Add/Remove Class, Toggle, Color Animation</td></tr>
-        <tr><td>Utilities</td><td>Position (align element relative to another)</td></tr>
+        <tr><td>Interactions</td><td>Draggable, Droppable, Resizable, Selectable, Sortable</td></tr>
+        <tr><td>Widgets</td><td>Accordion, Autocomplete, DatePicker, Dialog, Tabs, Tooltip, ProgressBar, Slider</td></tr>
+        <tr><td>Effects</td><td>Hide, Show, Toggle, Add Class, Remove Class, Color Animation</td></tr>
+        <tr><td>Utilities</td><td>Position (position element relative to another)</td></tr>
       </table>
     </div>
 
     <div class="q-block">
-      <div class="q-label">Q4 — 20 Marks</div>
-      <div class="q-title">Explain AJAX and JSON with examples.</div>
+      <div class="q-label">Important Question</div>
+      <div class="q-title">Explain AJAX and JSON — what they are, how they work, with full examples.</div>
 
-      <h3>AJAX</h3>
-      <div class="def-box">AJAX (Asynchronous JavaScript and XML) is a technique for exchanging data with a server in the background without reloading the full page. It uses XMLHttpRequest to fetch data asynchronously.</div>
+      <div class="def-box">AJAX (Asynchronous JavaScript and XML) allows web pages to exchange data with a server in the background without full page reloads. JSON (JavaScript Object Notation) is the lightweight data format used for that exchange.</div>
 
-<pre><code>function fun1() {
-    var xhr = new XMLHttpRequest();
-    xhr.onload = function() {
-        document.getElementById("demo").innerHTML = xhr.responseText;
+      <h3>AJAX using XMLHttpRequest</h3>
+<pre><code><span class="kw">function</span> <span class="fn">loadData</span>() {
+    <span class="kw">var</span> xhr = <span class="kw">new</span> XMLHttpRequest();
+    xhr.onload = <span class="kw">function</span>() {
+        document.<span class="fn">getElementById</span>(<span class="str">"demo"</span>).innerHTML = xhr.responseText;
     };
-    xhr.open("GET", "ajaxinfo.txt", true);  // true = asynchronous
-    xhr.send();
-}
-// Button: &lt;button onclick="fun1()"&gt;Load Data&lt;/button&gt;
-// &lt;p id="demo"&gt;&lt;/p&gt;</code></pre>
-
-      <h3>JSON</h3>
-      <div class="def-box">JSON (JavaScript Object Notation) is a lightweight data-interchange format. Data is in key/value pairs, easy to read and write by humans, and easy to parse for machines.</div>
-
-      <p><strong>JSON Object Example:</strong></p>
-<pre><code>{
-    "employee": {
-        "name":    "Sonoo",
-        "salary":  56000,
-        "married": true
-    }
+    xhr.<span class="fn">open</span>(<span class="str">"GET"</span>, <span class="str">"ajaxinfo.txt"</span>, <span class="kw">true</span>); <span class="cmt">// true = async</span>
+    xhr.<span class="fn">send</span>();
 }</code></pre>
-      <p><strong>JSON Array Example:</strong></p>
-<pre><code>{
-    "employees": [
-        { "name": "Ram",   "age": 25 },
-        { "name": "Sita",  "age": 22 },
-        { "name": "Laxman","age": 27 }
+<pre><code>&lt;!-- HTML --&gt;
+&lt;button onclick="loadData()"&gt;Load Data&lt;/button&gt;
+&lt;p id="demo"&gt;&lt;/p&gt;</code></pre>
+
+      <h3>JSON Format</h3>
+<pre><code><span class="cmt">// JSON Object</span>
+{
+    <span class="str">"employee"</span>: {
+        <span class="str">"name"</span>:    <span class="str">"Sonoo"</span>,
+        <span class="str">"salary"</span>:  <span class="num">56000</span>,
+        <span class="str">"married"</span>: <span class="kw">true</span>
+    }
+}
+
+<span class="cmt">// JSON Array</span>
+{
+    <span class="str">"students"</span>: [
+        { <span class="str">"id"</span>: <span class="num">1</span>, <span class="str">"name"</span>: <span class="str">"Ram"</span>,  <span class="str">"age"</span>: <span class="num">20</span> },
+        { <span class="str">"id"</span>: <span class="num">2</span>, <span class="str">"name"</span>: <span class="str">"Sita"</span>, <span class="str">"age"</span>: <span class="num">22</span> }
     ]
 }</code></pre>
 
-      <table>
-        <tr><th>Feature</th><th>AJAX</th><th>JSON</th></tr>
-        <tr><td>Full form</td><td>Asynchronous JS and XML</td><td>JavaScript Object Notation</td></tr>
-        <tr><td>Purpose</td><td>Async data exchange with server</td><td>Data format for transfer/storage</td></tr>
-        <tr><td>Reload page</td><td>No — partial update only</td><td>N/A</td></tr>
-        <tr><td>Data types</td><td>XML, JSON, plain text</td><td>string, number, boolean, array, object, null</td></tr>
-      </table>
+      <h3>Parsing JSON in JavaScript</h3>
+<pre><code><span class="kw">var</span> text = <span class="str">'{"name":"Ram","age":20}'</span>;
+<span class="kw">var</span> obj = JSON.<span class="fn">parse</span>(text);   <span class="cmt">// string → object</span>
+console.<span class="fn">log</span>(obj.name);        <span class="cmt">// Ram</span>
+
+<span class="kw">var</span> str = JSON.<span class="fn">stringify</span>(obj); <span class="cmt">// object → string</span></code></pre>
     </div>
 
   </div>
 </section>
 
-<!-- ══════════════ UNIT III ══════════════ -->
+<!-- ═══════════════════════════════════════════
+     UNIT III
+═══════════════════════════════════════════ -->
 <section class="unit" data-u="3" id="unit3">
   <div class="unit-header">
-    <span class="unit-badge">UNIT III</span>
-    <div class="unit-title">React JS — Components, State, Props, Router, Redux</div>
+    <span class="unit-badge">UNIT III · 9 Hours</span>
+    <div class="unit-title">React JS — Introduction, Components, State, Props, Router, Redux</div>
   </div>
   <div class="unit-body">
 
     <div class="q-block">
-      <div class="q-label">Q1 — 20 Marks</div>
-      <div class="q-title">Introduce React JS. Explain its features — JSX, Virtual DOM, Components, one-way data binding.</div>
+      <div class="q-label">Important Question</div>
+      <div class="q-title">Introduce ReactJS. Explain its features — JSX, Virtual DOM, Components, One-way Data Binding.</div>
 
-      <div class="def-box">ReactJS is a declarative, efficient, flexible JavaScript library for building reusable UI components. Created by Jordan Walke at Facebook (released 2013). It handles the View layer (V in MVC). Applications are built from components.</div>
+      <div class="def-box">ReactJS is a declarative, efficient, and flexible JavaScript library for building reusable UI components. Developed by Facebook (2013). It handles only the View (V) of MVC architecture. Redux/Flux handles the model.</div>
 
-      <h3>Key Features of React</h3>
+      <h3>Key Features</h3>
+      <table>
+        <tr><th>Feature</th><th>Description</th></tr>
+        <tr><td>JSX</td><td>JavaScript syntax extension that looks like HTML. Compiled by Babel to React.createElement() calls.</td></tr>
+        <tr><td>Components</td><td>App is split into small, reusable, independent pieces. Each component has its own logic.</td></tr>
+        <tr><td>Virtual DOM</td><td>React keeps a virtual copy in memory. On state change, it diffs virtual DOM and updates only changed nodes in the real DOM — very fast.</td></tr>
+        <tr><td>One-Way Data Binding</td><td>Data flows parent → child via props. Gives better control and simpler debugging.</td></tr>
+        <tr><td>Performance</td><td>Virtual DOM avoids unnecessary re-renders. Faster than direct DOM manipulation.</td></tr>
+        <tr><td>Simplicity</td><td>Component-based code is reusable and easy to understand/maintain.</td></tr>
+      </table>
 
-      <p><strong>1. JSX (JavaScript XML)</strong></p>
-      <p>JSX is a syntax extension that lets you write HTML-like code inside JavaScript. Preprocessors like Babel convert JSX to <code>React.createElement()</code> calls.</p>
-<pre><code>// JSX
-const element = &lt;div&gt;Hello JavaTpoint&lt;/div&gt;;
+      <h3>JSX Example</h3>
+<pre><code><span class="cmt">// JSX (what you write)</span>
+<span class="kw">const</span> element = <span class="tag">&lt;div&gt;</span>Hello World<span class="tag">&lt;/div&gt;</span>;
 
-// Converted to:
-React.createElement("div", null, "Hello JavaTpoint");</code></pre>
+<span class="cmt">// What Babel compiles it to:</span>
+<span class="kw">const</span> element = React.<span class="fn">createElement</span>(<span class="str">"div"</span>, <span class="kw">null</span>, <span class="str">"Hello World"</span>);</code></pre>
 
-      <p><strong>2. Components</strong></p>
-      <p>An app is divided into small, independent, reusable pieces called components. Each component outputs a piece of HTML and has its own logic.</p>
-
-      <p><strong>3. Virtual DOM</strong></p>
-      <p>React maintains a virtual copy of the DOM in memory. When state changes, it re-renders the virtual DOM, computes the diff with the previous virtual DOM, and updates only the changed parts in the real DOM. This makes it very fast.</p>
-
-      <p><strong>4. One-Way Data Binding</strong></p>
-      <p>Data flows in one direction — from parent to child via props. This gives better control and makes the app easier to debug. Flux/Redux patterns support this.</p>
-
-      <p><strong>5. Performance</strong></p>
-      <p>Because of the Virtual DOM mechanism, React avoids unnecessary re-renders and is much faster than direct DOM manipulation.</p>
-
-      <h3>Setup — Create React App</h3>
-<pre><code>npx create-react-app myapp
+      <h3>React Project Setup</h3>
+<pre><code>npx create-react-app myapp    <span class="cmt"># Create project</span>
 cd myapp
-npm start     # starts at http://localhost:3000
-npm run build # production build</code></pre>
+npm start                     <span class="cmt"># Run at localhost:3000</span>
+npm run build                 <span class="cmt"># Production build</span></code></pre>
     </div>
 
     <div class="q-block">
-      <div class="q-label">Q2 — 20 Marks</div>
-      <div class="q-title">Explain React Components — Functional and Class Components, State, and Props with examples.</div>
+      <div class="q-label">Important Question</div>
+      <div class="q-title">Explain Functional and Class Components. Explain State and Props with examples.</div>
 
-      <h3>1. Functional Components (Stateless)</h3>
-      <p>Simple JavaScript functions that accept props and return JSX. No state management.</p>
-<pre><code>function WelcomeMessage(props) {
-    return &lt;h1&gt;Welcome, {props.name}&lt;/h1&gt;;
+      <h3>1. Functional Component (Stateless)</h3>
+<pre><code><span class="kw">function</span> <span class="fn">WelcomeMessage</span>(props) {
+    <span class="kw">return</span> <span class="tag">&lt;h1&gt;</span>Welcome, {props.name}<span class="tag">&lt;/h1&gt;</span>;
 }</code></pre>
 
-      <h3>2. Class Components (Stateful)</h3>
-      <p>Extend <code>React.Component</code>, must have a <code>render()</code> method. Can hold and manage local state.</p>
-<pre><code>class App extends React.Component {
-    render() {
-        return (
-            &lt;div&gt;
-                &lt;h1&gt;Hello React!&lt;/h1&gt;
-            &lt;/div&gt;
+      <h3>2. Class Component (Stateful)</h3>
+<pre><code><span class="kw">import</span> React, { Component } <span class="kw">from</span> <span class="str">'react'</span>;
+
+<span class="kw">class</span> App <span class="kw">extends</span> React.Component {
+    <span class="fn">render</span>() {
+        <span class="kw">return</span> (
+            <span class="tag">&lt;div&gt;</span>
+                <span class="tag">&lt;First /&gt;</span>
+                <span class="tag">&lt;Second /&gt;</span>
+            <span class="tag">&lt;/div&gt;</span>
         );
     }
-}</code></pre>
+}
+<span class="kw">class</span> First <span class="kw">extends</span> React.Component {
+    <span class="fn">render</span>() { <span class="kw">return</span> <span class="tag">&lt;h1&gt;</span>JavaTpoint<span class="tag">&lt;/h1&gt;</span>; }
+}
+<span class="kw">class</span> Second <span class="kw">extends</span> React.Component {
+    <span class="fn">render</span>() { <span class="kw">return</span> <span class="tag">&lt;p&gt;</span>www.javatpoint.com<span class="tag">&lt;/p&gt;</span>; }
+}
+<span class="kw">export default</span> App;</code></pre>
 
-      <h3>State</h3>
-      <p>State is an updatable structure that holds data about the component. Changes in state trigger a re-render. Use <code>setState()</code> to update.</p>
-<pre><code>class App extends React.Component {
-    constructor() {
-        super();
-        this.state = { displayBio: false };
-        this.toggleBio = this.toggleBio.bind(this);
+      <h3>State — Managing Internal Data</h3>
+<pre><code><span class="kw">class</span> App <span class="kw">extends</span> React.Component {
+    <span class="fn">constructor</span>() {
+        <span class="kw">super</span>();
+        <span class="kw">this</span>.state = { displayBio: <span class="kw">false</span> };
+        <span class="kw">this</span>.toggleDisplayBio = <span class="kw">this</span>.toggleDisplayBio.<span class="fn">bind</span>(<span class="kw">this</span>);
     }
-    toggleBio() {
-        this.setState({ displayBio: !this.state.displayBio });
+    <span class="fn">toggleDisplayBio</span>() {
+        <span class="kw">this</span>.<span class="fn">setState</span>({ displayBio: !<span class="kw">this</span>.state.displayBio });
     }
-    render() {
-        return (
-            &lt;div&gt;
-                { this.state.displayBio ? &lt;p&gt;Bio content...&lt;/p&gt; : null }
-                &lt;button onClick={this.toggleBio}&gt;Toggle&lt;/button&gt;
-            &lt;/div&gt;
+    <span class="fn">render</span>() {
+        <span class="kw">return</span> (
+            <span class="tag">&lt;div&gt;</span>
+                <span class="tag">&lt;h1&gt;</span>Welcome!<span class="tag">&lt;/h1&gt;</span>
+                { <span class="kw">this</span>.state.displayBio
+                    ? <span class="tag">&lt;p&gt;</span>This is the bio content.<span class="tag">&lt;/p&gt;</span>
+                    : <span class="kw">null</span>
+                }
+                <span class="tag">&lt;button</span> onClick={<span class="kw">this</span>.toggleDisplayBio}<span class="tag">&gt;</span>
+                    { <span class="kw">this</span>.state.displayBio ? <span class="str">"Show Less"</span> : <span class="str">"Read More"</span> }
+                <span class="tag">&lt;/button&gt;</span>
+            <span class="tag">&lt;/div&gt;</span>
         );
     }
-}</code></pre>
+}
+<span class="kw">export default</span> App;</code></pre>
 
-      <h3>Props</h3>
-      <p>Props (Properties) are read-only data passed from parent to child component. Similar to function arguments. Immutable inside the component.</p>
-<pre><code>// Parent passes prop:
-&lt;App name="JavaTpoint" /&gt;
-
-// Child uses prop:
-class App extends React.Component {
-    render() {
-        return &lt;h1&gt;Welcome to {this.props.name}&lt;/h1&gt;;
+      <h3>Props — Passing Data from Parent to Child</h3>
+<pre><code><span class="cmt">// App.js</span>
+<span class="kw">class</span> App <span class="kw">extends</span> React.Component {
+    <span class="fn">render</span>() {
+        <span class="kw">return</span> <span class="tag">&lt;h1&gt;</span>Welcome to { <span class="kw">this</span>.props.name }!<span class="tag">&lt;/h1&gt;</span>;
     }
-}</code></pre>
+}
+App.defaultProps = { name: <span class="str">"JavaTpoint"</span> };
+<span class="kw">export default</span> App;
 
-      <h3>State vs Props</h3>
+<span class="cmt">// Main.js</span>
+ReactDOM.<span class="fn">render</span>(<span class="tag">&lt;App</span> name=<span class="str">"MyWebsite"</span><span class="tag">/&gt;</span>, document.<span class="fn">getElementById</span>(<span class="str">'app'</span>));</code></pre>
+
       <table>
         <tr><th>Feature</th><th>State</th><th>Props</th></tr>
         <tr><td>Mutable</td><td>Yes — via setState()</td><td>No — read-only</td></tr>
         <tr><td>Owned by</td><td>The component itself</td><td>Parent component</td></tr>
-        <tr><td>Used for</td><td>Internal data, UI updates</td><td>Passing data to children</td></tr>
+        <tr><td>Purpose</td><td>Internal data / UI updates</td><td>Pass data to children</td></tr>
       </table>
     </div>
 
     <div class="q-block">
-      <div class="q-label">Q3 — 20 Marks</div>
-      <div class="q-title">Explain React Forms — Controlled and Uncontrolled Components. Explain React Router and SPA.</div>
+      <div class="q-label">Important Question</div>
+      <div class="q-title">Explain React Forms — Controlled vs Uncontrolled Components.</div>
 
-      <h3>Uncontrolled Component</h3>
-      <p>The DOM handles form data. Access values using <code>ref</code>. Simpler but less control.</p>
-<pre><code>class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.input = React.createRef();
-        this.handleSubmit = this.handleSubmit.bind(this);
+      <h3>Uncontrolled Component (DOM manages data via ref)</h3>
+<pre><code><span class="kw">class</span> App <span class="kw">extends</span> React.Component {
+    <span class="fn">constructor</span>(props) {
+        <span class="kw">super</span>(props);
+        <span class="kw">this</span>.input = React.<span class="fn">createRef</span>();
+        <span class="kw">this</span>.updateSubmit = <span class="kw">this</span>.updateSubmit.<span class="fn">bind</span>(<span class="kw">this</span>);
     }
-    handleSubmit(event) {
-        alert("Submitted: " + this.input.current.value);
-        event.preventDefault();
+    <span class="fn">updateSubmit</span>(event) {
+        alert(<span class="str">'Submitted successfully!'</span>);
+        event.<span class="fn">preventDefault</span>();
     }
-    render() {
-        return (
-            &lt;form onSubmit={this.handleSubmit}&gt;
-                &lt;input type="text" ref={this.input} /&gt;
-                &lt;input type="submit" value="Submit" /&gt;
-            &lt;/form&gt;
+    <span class="fn">render</span>() {
+        <span class="kw">return</span> (
+            <span class="tag">&lt;form</span> onSubmit={<span class="kw">this</span>.updateSubmit}<span class="tag">&gt;</span>
+                <span class="tag">&lt;label&gt;</span>Name: <span class="tag">&lt;input</span> type=<span class="str">"text"</span> ref={<span class="kw">this</span>.input}<span class="tag">/&gt;&lt;/label&gt;</span>
+                <span class="tag">&lt;input</span> type=<span class="str">"submit"</span> value=<span class="str">"Submit"</span><span class="tag">/&gt;</span>
+            <span class="tag">&lt;/form&gt;</span>
         );
     }
 }</code></pre>
 
-      <h3>Controlled Component</h3>
-      <p>React state is the single source of truth. Every change goes through <code>setState()</code>. Better control over form data.</p>
-<pre><code>class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { value: '' };
+      <h3>Controlled Component (React state manages data)</h3>
+<pre><code><span class="kw">class</span> App <span class="kw">extends</span> React.Component {
+    <span class="fn">constructor</span>(props) {
+        <span class="kw">super</span>(props);
+        <span class="kw">this</span>.state = { value: <span class="str">''</span> };
     }
-    handleChange(event) {
-        this.setState({ value: event.target.value });
+    <span class="fn">handleChange</span>(event) {
+        <span class="kw">this</span>.<span class="fn">setState</span>({ value: event.target.value });
     }
-    handleSubmit(event) {
-        alert("Submitted: " + this.state.value);
-        event.preventDefault();
+    <span class="fn">handleSubmit</span>(event) {
+        alert(<span class="str">'Submitted: '</span> + <span class="kw">this</span>.state.value);
+        event.<span class="fn">preventDefault</span>();
     }
-    render() {
-        return (
-            &lt;form onSubmit={this.handleSubmit.bind(this)}&gt;
-                &lt;input type="text"
-                       value={this.state.value}
-                       onChange={this.handleChange.bind(this)} /&gt;
-                &lt;input type="submit" value="Submit" /&gt;
-            &lt;/form&gt;
+    <span class="fn">render</span>() {
+        <span class="kw">return</span> (
+            <span class="tag">&lt;form</span> onSubmit={<span class="kw">this</span>.handleSubmit.<span class="fn">bind</span>(<span class="kw">this</span>)}<span class="tag">&gt;</span>
+                <span class="tag">&lt;label&gt;</span>Name:
+                    <span class="tag">&lt;input</span> type=<span class="str">"text"</span>
+                           value={<span class="kw">this</span>.state.value}
+                           onChange={<span class="kw">this</span>.handleChange.<span class="fn">bind</span>(<span class="kw">this</span>)}<span class="tag">/&gt;</span>
+                <span class="tag">&lt;/label&gt;</span>
+                <span class="tag">&lt;input</span> type=<span class="str">"submit"</span> value=<span class="str">"Submit"</span><span class="tag">/&gt;</span>
+            <span class="tag">&lt;/form&gt;</span>
         );
     }
 }</code></pre>
+    </div>
 
-      <h3>React Router &amp; Single Page Applications (SPA)</h3>
-      <div class="def-box">A Single Page Application (SPA) loads a single HTML page and dynamically updates content as the user navigates, without full page reloads. React Router enables this by mapping URLs to components.</div>
+    <div class="q-block">
+      <div class="q-label">Important Question</div>
+      <div class="q-title">Explain React Router and Single Page Applications (SPA).</div>
 
-<pre><code>// Install: npm i react-router-dom --save
+      <div class="def-box">A Single Page Application (SPA) dynamically updates the current page rather than loading new pages from the server. React Router provides navigation between components without full page reloads.</div>
 
-import { Route, NavLink, HashRouter } from "react-router-dom";
-import Home from "./Home";
-import Stuff from "./Stuff";
-import Contact from "./Contact";
+<pre><code><span class="cmt">// Install: npm i react-router-dom --save</span>
 
-class Main extends Component {
-    render() {
-        return (
-            &lt;HashRouter&gt;
-                &lt;div&gt;
-                    &lt;ul&gt;
-                        &lt;li&gt;&lt;NavLink exact to="/"&gt;Home&lt;/NavLink&gt;&lt;/li&gt;
-                        &lt;li&gt;&lt;NavLink to="/stuff"&gt;Stuff&lt;/NavLink&gt;&lt;/li&gt;
-                        &lt;li&gt;&lt;NavLink to="/contact"&gt;Contact&lt;/NavLink&gt;&lt;/li&gt;
-                    &lt;/ul&gt;
-                    &lt;div&gt;
-                        &lt;Route exact path="/" component={Home}/&gt;
-                        &lt;Route path="/stuff" component={Stuff}/&gt;
-                        &lt;Route path="/contact" component={Contact}/&gt;
-                    &lt;/div&gt;
-                &lt;/div&gt;
-            &lt;/HashRouter&gt;
+<span class="kw">import</span> React, { Component } <span class="kw">from</span> <span class="str">"react"</span>;
+<span class="kw">import</span> { Route, NavLink, HashRouter } <span class="kw">from</span> <span class="str">"react-router-dom"</span>;
+<span class="kw">import</span> Home    <span class="kw">from</span> <span class="str">"./Home"</span>;
+<span class="kw">import</span> Stuff   <span class="kw">from</span> <span class="str">"./Stuff"</span>;
+<span class="kw">import</span> Contact <span class="kw">from</span> <span class="str">"./Contact"</span>;
+
+<span class="kw">class</span> Main <span class="kw">extends</span> Component {
+    <span class="fn">render</span>() {
+        <span class="kw">return</span> (
+            <span class="tag">&lt;HashRouter&gt;</span>
+                <span class="tag">&lt;div&gt;</span>
+                    <span class="tag">&lt;h1&gt;</span>Simple SPA<span class="tag">&lt;/h1&gt;</span>
+                    <span class="tag">&lt;ul&gt;</span>
+                        <span class="tag">&lt;li&gt;&lt;NavLink</span> exact to=<span class="str">"/"</span><span class="tag">&gt;</span>Home<span class="tag">&lt;/NavLink&gt;&lt;/li&gt;</span>
+                        <span class="tag">&lt;li&gt;&lt;NavLink</span> to=<span class="str">"/stuff"</span><span class="tag">&gt;</span>Stuff<span class="tag">&lt;/NavLink&gt;&lt;/li&gt;</span>
+                        <span class="tag">&lt;li&gt;&lt;NavLink</span> to=<span class="str">"/contact"</span><span class="tag">&gt;</span>Contact<span class="tag">&lt;/NavLink&gt;&lt;/li&gt;</span>
+                    <span class="tag">&lt;/ul&gt;</span>
+                    <span class="tag">&lt;div&gt;</span>
+                        <span class="tag">&lt;Route</span> exact path=<span class="str">"/"</span>       component={Home}   <span class="tag">/&gt;</span>
+                        <span class="tag">&lt;Route</span>       path=<span class="str">"/stuff"</span>   component={Stuff}  <span class="tag">/&gt;</span>
+                        <span class="tag">&lt;Route</span>       path=<span class="str">"/contact"</span> component={Contact}<span class="tag">/&gt;</span>
+                    <span class="tag">&lt;/div&gt;</span>
+                <span class="tag">&lt;/div&gt;</span>
+            <span class="tag">&lt;/HashRouter&gt;</span>
         );
     }
-}</code></pre>
-      <p>The <code>exact</code> prop ensures the home route only matches <code>/</code> and not <code>/stuff</code> or <code>/contact</code>.</p>
+}
+<span class="kw">export default</span> Main;</code></pre>
+      <p>The <code>exact</code> prop on the home route ensures it only matches <code>/</code> and not <code>/stuff</code> or <code>/contact</code>. <code>NavLink</code> automatically adds an <code>active</code> CSS class to the currently active link.</p>
     </div>
 
   </div>
 </section>
 
-<!-- ══════════════ UNIT IV ══════════════ -->
+<!-- ═══════════════════════════════════════════
+     UNIT IV
+═══════════════════════════════════════════ -->
 <section class="unit" data-u="4" id="unit4">
   <div class="unit-header">
-    <span class="unit-badge">UNIT IV</span>
+    <span class="unit-badge">UNIT IV · 10 Hours</span>
     <div class="unit-title">Java Web Development — Spring MVC, RESTful API, Maven</div>
   </div>
   <div class="unit-body">
 
     <div class="q-block">
-      <div class="q-label">Q1 — 20 Marks</div>
-      <div class="q-title">Explain Spring MVC Architecture. What is DispatcherServlet? How does request processing work?</div>
+      <div class="q-label">Important Question</div>
+      <div class="q-title">Explain Spring MVC Architecture. What is DispatcherServlet? Describe the complete request flow.</div>
 
-      <div class="def-box">Spring Web MVC is a framework based on the Model-View-Controller pattern. It separates application concerns: input logic (Controller), business logic (Model), and UI logic (View).</div>
+      <div class="def-box">Spring MVC is a web framework built on the MVC pattern. It separates concerns: Model (data/business logic), View (UI presentation), Controller (request handling). The central component is the DispatcherServlet.</div>
 
       <h3>MVC Components</h3>
       <ul>
-        <li><strong>Model</strong> — Encapsulates application data. Usually POJOs (Plain Old Java Objects).</li>
-        <li><strong>View</strong> — Renders model data as HTML output sent to the browser (JSP, Thymeleaf).</li>
-        <li><strong>Controller</strong> — Processes user requests, builds the model, returns view name.</li>
+        <li><strong>Model</strong> — POJOs (Plain Old Java Objects) that hold application data</li>
+        <li><strong>View</strong> — JSP/HTML files that render model data as output to the browser</li>
+        <li><strong>Controller</strong> — Java class annotated with <code>@Controller</code> that handles HTTP requests, builds model, returns view name</li>
       </ul>
 
-      <h3>DispatcherServlet — The Front Controller</h3>
-      <p>The <strong>DispatcherServlet</strong> is the central dispatcher in Spring MVC. All HTTP requests go through it. It delegates responsibilities to other components.</p>
-
-      <h3>Request Processing Flow (Step by Step)</h3>
+      <h3>Request Processing Flow — 6 Steps</h3>
       <ol>
-        <li><strong>HTTP Request</strong> arrives at the DispatcherServlet.</li>
-        <li><strong>HandlerMapping</strong> is consulted — maps the request URL to the appropriate Controller.</li>
-        <li><strong>Controller</strong> processes the request, calls service/business logic, builds the Model object, and returns a logical view name to DispatcherServlet.</li>
-        <li><strong>ViewResolver</strong> maps the logical view name to the actual view file (e.g., hello → /WEB-INF/jsp/hello.jsp).</li>
-        <li><strong>View</strong> renders the model data as HTML.</li>
-        <li>Response is sent back to the browser.</li>
+        <li>HTTP request arrives at <strong>DispatcherServlet</strong> (front controller)</li>
+        <li><strong>HandlerMapping</strong> is consulted — maps URL to the appropriate Controller</li>
+        <li><strong>Controller</strong> calls service/business logic, builds the Model, returns logical view name to DispatcherServlet</li>
+        <li>DispatcherServlet asks <strong>ViewResolver</strong> to map the logical view name to actual view file</li>
+        <li><strong>View</strong> renders the model data as HTML</li>
+        <li>Final HTML response sent back to the <strong>browser</strong></li>
       </ol>
 
-      <h3>Configuration — web.xml</h3>
+      <h3>web.xml — DispatcherServlet Configuration</h3>
 <pre><code>&lt;servlet&gt;
     &lt;servlet-name&gt;HelloWeb&lt;/servlet-name&gt;
-    &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+    &lt;servlet-class&gt;
+        org.springframework.web.servlet.DispatcherServlet
+    &lt;/servlet-class&gt;
     &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
 &lt;/servlet&gt;
 &lt;servlet-mapping&gt;
@@ -875,143 +925,167 @@ class Main extends Component {
     &lt;url-pattern&gt;*.jsp&lt;/url-pattern&gt;
 &lt;/servlet-mapping&gt;</code></pre>
 
-      <h3>Defining a Controller</h3>
-<pre><code>@Controller
-public class HelloController {
+      <h3>HelloWeb-servlet.xml</h3>
+<pre><code>&lt;context:component-scan base-package="com.tutorialspoint"/&gt;
+&lt;bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"&gt;
+    &lt;property name="prefix" value="/WEB-INF/jsp/"/&gt;
+    &lt;property name="suffix" value=".jsp"/&gt;
+&lt;/bean&gt;</code></pre>
 
-    @RequestMapping(value = "/hello", method = RequestMethod.GET)
-    public String printHello(ModelMap model) {
-        model.addAttribute("message", "Hello Spring MVC!");
-        return "hello";   // logical view name
+      <h3>Controller Class</h3>
+<pre><code>@Controller
+@RequestMapping(<span class="str">"/hello"</span>)
+<span class="kw">public class</span> HelloController {
+
+    @RequestMapping(method = RequestMethod.GET)
+    <span class="kw">public</span> String <span class="fn">printHello</span>(ModelMap model) {
+        model.<span class="fn">addAttribute</span>(<span class="str">"message"</span>, <span class="str">"Hello Spring MVC!"</span>);
+        <span class="kw">return</span> <span class="str">"hello"</span>;   <span class="cmt">// maps to /WEB-INF/jsp/hello.jsp</span>
     }
 }</code></pre>
 
       <h3>JSP View</h3>
-<pre><code>&lt;!-- /WEB-INF/jsp/hello.jsp --&gt;
-&lt;html&gt;&lt;body&gt;
+<pre><code>&lt;html&gt;&lt;body&gt;
     &lt;h2&gt;${message}&lt;/h2&gt;
 &lt;/body&gt;&lt;/html&gt;</code></pre>
+      <div class="output">Hello Spring MVC!</div>
     </div>
 
     <div class="q-block">
-      <div class="q-label">Q2 — 20 Marks</div>
-      <div class="q-title">Explain RESTful API using Spring Framework. What is REST? Show CRUD operations with @RestController.</div>
+      <div class="q-label">Important Question</div>
+      <div class="q-title">Explain RESTful API using Spring. Describe REST, HTTP methods, and build a CRUD REST controller.</div>
 
-      <div class="def-box">REST (Representational State Transfer) is an architectural style for building web services. REST resources are identified by URLs, and operations are performed using HTTP methods (GET, POST, PUT, DELETE).</div>
+      <div class="def-box">REST (Representational State Transfer) is an architectural style for web services. Resources are identified by URLs. Operations use HTTP methods. Spring provides @RestController to build REST APIs easily.</div>
 
-      <h3>REST + HTTP Method → CRUD Mapping</h3>
+      <h3>REST + HTTP → CRUD</h3>
       <table>
-        <tr><th>URL</th><th>HTTP Method</th><th>Operation</th></tr>
+        <tr><th>URL</th><th>Method</th><th>Operation</th></tr>
         <tr><td>/employees</td><td>GET</td><td>Get all employees</td></tr>
         <tr><td>/employees/101</td><td>GET</td><td>Get employee with ID 101</td></tr>
         <tr><td>/employees</td><td>POST</td><td>Create new employee</td></tr>
-        <tr><td>/employees/101</td><td>PUT</td><td>Update employee 101</td></tr>
-        <tr><td>/employees/101</td><td>DELETE</td><td>Delete employee 101</td></tr>
+        <tr><td>/employees/101</td><td>PUT</td><td>Update employee with ID 101</td></tr>
+        <tr><td>/employees/101</td><td>DELETE</td><td>Delete employee with ID 101</td></tr>
       </table>
 
-      <h3>Employee Model Class</h3>
-<pre><code>public class Employee {
-    private String id, name, address;
+      <h3>Employee.java (Model)</h3>
+<pre><code><span class="kw">public class</span> Employee {
+    <span class="kw">private</span> String id, name, address;
 
-    public Employee(String id, String name, String address) {
-        this.id = id; this.name = name; this.address = address;
+    <span class="kw">public</span> <span class="fn">Employee</span>(String id, String name, String address) {
+        <span class="kw">this</span>.id = id; <span class="kw">this</span>.name = name; <span class="kw">this</span>.address = address;
     }
-    // Getters and Setters...
+    <span class="cmt">// Getters and Setters for id, name, address</span>
+    <span class="kw">public</span> String <span class="fn">getId</span>()   { <span class="kw">return</span> id; }
+    <span class="kw">public void</span>   <span class="fn">setId</span>(String id) { <span class="kw">this</span>.id = id; }
+    <span class="kw">public</span> String <span class="fn">getName</span>() { <span class="kw">return</span> name; }
+    <span class="kw">public void</span>   <span class="fn">setName</span>(String name) { <span class="kw">this</span>.name = name; }
 }</code></pre>
 
-      <h3>REST Controller</h3>
-<pre><code>@RestController  // combines @Controller + @ResponseBody
-public class EmployeeController {
+      <h3>EmployeeController.java (REST Controller)</h3>
+<pre><code>@RestController   <span class="cmt">// = @Controller + @ResponseBody</span>
+<span class="kw">public class</span> EmployeeController {
 
     @Autowired
-    private EmployeeService employeeService;
+    <span class="kw">private</span> EmployeeService employeeService;
 
-    @RequestMapping("/employees")
-    public List&lt;Employee&gt; getEmployees() {
-        return employeeService.getEmployees();
+    <span class="cmt">// GET all employees</span>
+    @RequestMapping(<span class="str">"/employees"</span>)
+    <span class="kw">public</span> List&lt;Employee&gt; <span class="fn">getEmployees</span>() {
+        <span class="kw">return</span> employeeService.<span class="fn">getEmployees</span>();
     }
 
-    @RequestMapping("/employees/{empid}")
-    public Employee getEmployee(@PathVariable("empid") String id) {
-        return employeeService.getEmployee(id);
+    <span class="cmt">// GET one employee by id</span>
+    @RequestMapping(<span class="str">"/employees/{empid}"</span>)
+    <span class="kw">public</span> Employee <span class="fn">getEmployee</span>(@PathVariable(<span class="str">"empid"</span>) String id) {
+        <span class="kw">return</span> employeeService.<span class="fn">getEmployee</span>(id);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/employees")
-    public void addEmployee(@RequestBody Employee employee) {
-        employeeService.addEmployee(employee);
+    <span class="cmt">// POST — create new employee</span>
+    @RequestMapping(method = RequestMethod.POST, value = <span class="str">"/employees"</span>)
+    <span class="kw">public void</span> <span class="fn">addEmployee</span>(@RequestBody Employee employee) {
+        employeeService.<span class="fn">addEmployee</span>(employee);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/employees/{id}")
-    public void updateEmployee(@RequestBody Employee e, @PathVariable String id) {
-        employeeService.updateEmployee(e, id);
+    <span class="cmt">// PUT — update employee</span>
+    @RequestMapping(method = RequestMethod.PUT, value = <span class="str">"/employees/{id}"</span>)
+    <span class="kw">public void</span> <span class="fn">updateEmployee</span>(@RequestBody Employee e,
+                                @PathVariable String id) {
+        employeeService.<span class="fn">updateEmployee</span>(e, id);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/employees/{id}")
-    public void deleteEmployee(@PathVariable String id) {
-        employeeService.deleteEmployee(id);
+    <span class="cmt">// DELETE — remove employee</span>
+    @RequestMapping(method = RequestMethod.DELETE, value = <span class="str">"/employees/{id}"</span>)
+    <span class="kw">public void</span> <span class="fn">deleteEmployee</span>(@PathVariable String id) {
+        employeeService.<span class="fn">deleteEmployee</span>(id);
     }
 }</code></pre>
 
-      <h3>Key Annotations</h3>
       <table>
         <tr><th>Annotation</th><th>Purpose</th></tr>
-        <tr><td>@RestController</td><td>Marks class as REST controller (= @Controller + @ResponseBody)</td></tr>
-        <tr><td>@RequestMapping</td><td>Maps URL to controller method</td></tr>
-        <tr><td>@PathVariable</td><td>Extracts value from URL path (e.g., /employees/101 → id=101)</td></tr>
-        <tr><td>@RequestBody</td><td>Deserializes JSON request body into Java object</td></tr>
-        <tr><td>@Autowired</td><td>Spring injects the dependency automatically</td></tr>
+        <tr><td>@RestController</td><td>Marks class as REST controller (combines @Controller + @ResponseBody)</td></tr>
+        <tr><td>@RequestMapping</td><td>Maps URL + HTTP method to a handler method</td></tr>
+        <tr><td>@PathVariable</td><td>Extracts value from URL segment (e.g., /employees/101 → id=101)</td></tr>
+        <tr><td>@RequestBody</td><td>Deserializes request JSON body into Java object</td></tr>
+        <tr><td>@Autowired</td><td>Spring auto-injects dependency</td></tr>
       </table>
     </div>
 
     <div class="q-block">
-      <div class="q-label">Q3 — 20 Marks</div>
-      <div class="q-title">Explain Maven — Lifecycle, Phases, Goals, and Plugins. How do you build a Java application using Maven?</div>
+      <div class="q-label">Important Question</div>
+      <div class="q-title">Explain Maven — Lifecycle, Phases, Goals, Plugins. How to build a Java application?</div>
 
-      <div class="def-box">Maven is a build automation and project management tool for Java. It manages the build lifecycle, dependencies, and project structure through configuration in <code>pom.xml</code>.</div>
+      <div class="def-box">Maven is a Java project build and dependency management tool. It standardizes the build process using a pom.xml configuration file and divides the build into Lifecycles → Phases → Goals.</div>
 
-      <h3>Maven's 3 Lifecycles</h3>
+      <h3>3 Maven Lifecycles</h3>
       <table>
         <tr><th>Lifecycle</th><th>Purpose</th></tr>
-        <tr><td>clean</td><td>Removes unneeded files/build artifacts from previous builds</td></tr>
-        <tr><td>default</td><td>Builds the project (compile, test, package, deploy)</td></tr>
-        <tr><td>site</td><td>Generates project documentation</td></tr>
+        <tr><td>clean</td><td>Remove build artifacts from previous builds (deletes target/ folder)</td></tr>
+        <tr><td>default</td><td>Main build lifecycle — compile, test, package, deploy</td></tr>
+        <tr><td>site</td><td>Generate project documentation and reports</td></tr>
       </table>
 
       <h3>Default Lifecycle Phases (in order)</h3>
       <ol>
-        <li><strong>validate</strong> — Check the project structure is correct</li>
-        <li><strong>compile</strong> — Compile source code</li>
-        <li><strong>test</strong> — Run unit tests</li>
-        <li><strong>package</strong> — Package compiled code into a JAR/WAR</li>
-        <li><strong>deploy</strong> — Deploy to remote repository/server</li>
+        <li><strong>validate</strong> — Verify project structure is correct</li>
+        <li><strong>compile</strong> — Compile all Java source files</li>
+        <li><strong>test</strong> — Run unit tests (using JUnit)</li>
+        <li><strong>package</strong> — Package compiled code into JAR or WAR</li>
+        <li><strong>deploy</strong> — Deploy packaged artifact to server/repository</li>
       </ol>
-      <div class="tip">⚠️ Running a later phase automatically runs all earlier phases. Running <code>mvn package</code> also runs validate, compile, and test first.</div>
 
-      <h3>Goals &amp; Plugins</h3>
-      <p>Each phase is composed of <strong>goals</strong> which are specific tasks. Goals are provided by <strong>plugins</strong>. Format: <code>plugin:goal</code></p>
+      <div class="tip">Running a later phase automatically runs all prior phases. <code>mvn package</code> runs validate → compile → test → package.</div>
+
+      <h3>Goals and Plugins</h3>
+      <p>Goals are discrete tasks within a phase, provided by plugins. Format: <code>pluginname:goalname</code></p>
       <ul>
-        <li><code>compiler:compile</code> — compiles main source</li>
-        <li><code>compiler:testCompile</code> — compiles test source</li>
+        <li><code>compiler:compile</code> — compiles main source code</li>
+        <li><code>compiler:testCompile</code> — compiles test source code</li>
       </ul>
 
-      <h3>Key Maven Commands</h3>
-<pre><code>mvn compile          # Compile source code
-mvn test             # Run tests
-mvn package          # Create JAR/WAR
-mvn clean            # Remove target/ folder
-mvn clean install    # Clean then build and install to local repo
-mvn foo:bar          # Run a specific goal directly</code></pre>
+      <h3>Common Maven Commands</h3>
+<pre><code>mvn compile        <span class="cmt"># Compile source code</span>
+mvn test           <span class="cmt"># Run unit tests</span>
+mvn package        <span class="cmt"># Build JAR/WAR file</span>
+mvn clean          <span class="cmt"># Delete target/ folder</span>
+mvn clean install  <span class="cmt"># Clean + build + install to local repo</span>
+mvn foo:bar        <span class="cmt"># Execute specific goal directly</span></code></pre>
 
       <h3>Sample pom.xml</h3>
 <pre><code>&lt;project&gt;
     &lt;groupId&gt;com.example&lt;/groupId&gt;
     &lt;artifactId&gt;myapp&lt;/artifactId&gt;
     &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+
     &lt;dependencies&gt;
         &lt;dependency&gt;
             &lt;groupId&gt;org.springframework&lt;/groupId&gt;
             &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;
             &lt;version&gt;5.3.0&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;mysql&lt;/groupId&gt;
+            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+            &lt;version&gt;8.0.26&lt;/version&gt;
         &lt;/dependency&gt;
     &lt;/dependencies&gt;
 &lt;/project&gt;</code></pre>
@@ -1020,246 +1094,1186 @@ mvn foo:bar          # Run a specific goal directly</code></pre>
   </div>
 </section>
 
-<!-- ══════════════ UNIT V ══════════════ -->
+<!-- ═══════════════════════════════════════════
+     UNIT V
+═══════════════════════════════════════════ -->
 <section class="unit" data-u="5" id="unit5">
   <div class="unit-header">
-    <span class="unit-badge">UNIT V</span>
-    <div class="unit-title">Databases &amp; Deployment — SQL, Normalization, Spring JDBC, Cloud</div>
+    <span class="unit-badge">UNIT V · 10 Hours</span>
+    <div class="unit-title">Databases &amp; Deployment — SQL, Normalization, Spring JDBC, Agile, Cloud</div>
   </div>
   <div class="unit-body">
 
     <div class="q-block">
-      <div class="q-label">Q1 — 20 Marks</div>
-      <div class="q-title">Explain SQL — DDL, DML, TCL with examples. Describe aggregation functions and GROUP BY.</div>
+      <div class="q-label">Important Question</div>
+      <div class="q-title">What is SQL? Explain DDL, DML, DQL, TCL with commands and examples.</div>
 
-      <div class="def-box">SQL (Structured Query Language) is used to create, maintain, and retrieve data in relational databases. It is case-insensitive. Used in MySQL, Oracle, SQL Server, PostgreSQL etc.</div>
+      <div class="def-box">SQL (Structured Query Language) is the standard language for relational databases. It is case-insensitive. Used with MySQL, Oracle, SQL Server, PostgreSQL etc.</div>
 
       <h3>DDL — Data Definition Language</h3>
-      <p>Defines the structure of the database. Commands: <code>CREATE</code>, <code>ALTER</code>, <code>DROP</code>, <code>RENAME</code></p>
-<pre><code>CREATE TABLE Student (
+      <p>Defines/alters database structure. Cannot be rolled back.</p>
+<pre><code><span class="cmt">-- Create table</span>
+CREATE TABLE Student (
     ROLL_NO INT PRIMARY KEY,
     NAME    VARCHAR(20) NOT NULL,
     ADDRESS VARCHAR(50),
+    PHONE   VARCHAR(15),
     AGE     INT
 );
 
-ALTER TABLE Student ADD PHONE VARCHAR(15);</code></pre>
+<span class="cmt">-- Add a column</span>
+ALTER TABLE Student ADD CGPA FLOAT;
+
+<span class="cmt">-- Drop a table</span>
+DROP TABLE Student;</code></pre>
 
       <h3>DML — Data Manipulation Language</h3>
-      <p>Manipulates data in tables. Commands: <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code></p>
-<pre><code>INSERT INTO Student VALUES (1, 'RAM', 'DELHI', 18);
+      <p>Manipulates records. Can be rolled back.</p>
+<pre><code>INSERT INTO Student VALUES (1, <span class="str">'RAM'</span>,    <span class="str">'DELHI'</span>,   <span class="str">'9455123451'</span>, 18);
+INSERT INTO Student VALUES (2, <span class="str">'RAMESH'</span>, <span class="str">'GURGAON'</span>, <span class="str">'9652431543'</span>, 18);
+
 UPDATE Student SET AGE = 20 WHERE ROLL_NO = 3;
+
 DELETE FROM Student WHERE ROLL_NO = 4;</code></pre>
 
       <h3>DQL — Data Query Language</h3>
-<pre><code>-- Select all
+<pre><code><span class="cmt">-- Select all</span>
 SELECT * FROM Student;
 
--- Select with condition
-SELECT ROLL_NO, NAME FROM Student WHERE ROLL_NO > 2;
+<span class="cmt">-- Select specific columns with condition</span>
+SELECT ROLL_NO, NAME FROM Student WHERE ROLL_NO &gt; 2;
 
--- ORDER BY
+<span class="cmt">-- Order by</span>
 SELECT * FROM Student ORDER BY AGE DESC;
 
--- DISTINCT
+<span class="cmt">-- Distinct values</span>
 SELECT DISTINCT ADDRESS FROM Student;
 
--- GROUP BY with aggregation
+<span class="cmt">-- Aggregation</span>
+SELECT COUNT(ROLL_NO) FROM Student;  <span class="cmt">-- 4</span>
+SELECT SUM(AGE)       FROM Student;  <span class="cmt">-- 74</span>
+SELECT AVG(AGE)       FROM Student;  <span class="cmt">-- 18.5</span>
+SELECT MAX(AGE)       FROM Student;  <span class="cmt">-- 20</span>
+SELECT MIN(AGE)       FROM Student;  <span class="cmt">-- 18</span>
+
+<span class="cmt">-- GROUP BY</span>
 SELECT ADDRESS, SUM(AGE) FROM Student GROUP BY (ADDRESS);</code></pre>
 
-      <h3>Aggregation Functions</h3>
-      <table>
-        <tr><th>Function</th><th>Purpose</th><th>Example</th></tr>
-        <tr><td>COUNT()</td><td>Count number of rows</td><td>SELECT COUNT(ROLL_NO) FROM Student;</td></tr>
-        <tr><td>SUM()</td><td>Sum of values</td><td>SELECT SUM(AGE) FROM Student;</td></tr>
-        <tr><td>AVG()</td><td>Average of values</td><td>SELECT AVG(AGE) FROM Student;</td></tr>
-        <tr><td>MAX()</td><td>Maximum value</td><td>SELECT MAX(AGE) FROM Student;</td></tr>
-        <tr><td>MIN()</td><td>Minimum value</td><td>SELECT MIN(AGE) FROM Student;</td></tr>
-      </table>
-
       <h3>TCL — Transaction Control Language</h3>
-      <p>Manages transactions. Commands: <code>COMMIT</code>, <code>ROLLBACK</code>, <code>SAVEPOINT</code></p>
 <pre><code>BEGIN TRANSACTION
-    UPDATE employees SET empname = 'Bob' WHERE empid = '001';
+    UPDATE employees SET empname = <span class="str">'Bob'</span> WHERE empid = <span class="str">'001'</span>;
+    UPDATE employees SET empname = <span class="str">'Bob'</span> WHERE city = <span class="str">'Hyderabad'</span>;
 IF @@ROWCOUNT = 5
-    COMMIT TRANSACTION
+    COMMIT TRANSACTION     <span class="cmt">-- save changes permanently</span>
 ELSE
-    ROLLBACK TRANSACTION</code></pre>
+    ROLLBACK TRANSACTION   <span class="cmt">-- undo all changes</span></code></pre>
+
       <table>
         <tr><th>Command</th><th>Purpose</th></tr>
         <tr><td>COMMIT</td><td>Permanently saves all DML changes in the transaction</td></tr>
-        <tr><td>ROLLBACK</td><td>Undoes changes back to last committed state</td></tr>
-        <tr><td>SAVEPOINT</td><td>Sets a point within a transaction to roll back to</td></tr>
-      </table>
-
-      <h3>DDL vs DML Summary</h3>
-      <table>
-        <tr><th>Feature</th><th>DDL</th><th>DML</th></tr>
-        <tr><td>Full Form</td><td>Data Definition Language</td><td>Data Manipulation Language</td></tr>
-        <tr><td>Purpose</td><td>Define/alter DB structure</td><td>Insert, update, delete records</td></tr>
-        <tr><td>Commands</td><td>CREATE, DROP, ALTER, RENAME</td><td>INSERT, UPDATE, DELETE</td></tr>
-        <tr><td>Rollback</td><td>Cannot be rolled back</td><td>Can be rolled back</td></tr>
+        <tr><td>ROLLBACK</td><td>Undoes changes back to the last committed state</td></tr>
+        <tr><td>SAVEPOINT name</td><td>Sets a checkpoint to rollback to</td></tr>
       </table>
     </div>
 
     <div class="q-block">
-      <div class="q-label">Q2 — 20 Marks</div>
-      <div class="q-title">Explain Normalization in SQL — what it is, why it is needed, and normal forms.</div>
+      <div class="q-label">Important Question</div>
+      <div class="q-title">What is Normalization? Explain its need, anomalies, and normal forms (1NF, 2NF, 3NF, BCNF).</div>
 
-      <div class="def-box">Normalization is the process of organizing database tables to reduce data redundancy and improve data integrity. It splits large tables into smaller related tables.</div>
+      <div class="def-box">Normalization is the process of organizing a relational database to reduce data redundancy and improve data integrity by splitting large tables into smaller, related tables.</div>
 
-      <h3>Why Normalization?</h3>
-      <p>Without normalization, databases suffer from three anomalies:</p>
+      <h3>Why Normalization? — The 3 Anomalies</h3>
       <ul>
-        <li><strong>Insert Anomaly</strong> — Cannot insert data without adding other unrelated data</li>
-        <li><strong>Update Anomaly</strong> — Updating one record requires updating multiple redundant copies</li>
-        <li><strong>Delete Anomaly</strong> — Deleting a record causes loss of other useful information</li>
+        <li><strong>Insert Anomaly:</strong> Cannot insert new data without adding unrelated data</li>
+        <li><strong>Update Anomaly:</strong> Updating one fact requires updating multiple redundant copies</li>
+        <li><strong>Delete Anomaly:</strong> Deleting a record accidentally removes other useful data</li>
       </ul>
 
       <h3>Normal Forms</h3>
       <table>
-        <tr><th>Normal Form</th><th>Condition</th></tr>
-        <tr><td>1NF</td><td>All columns have atomic (indivisible) values. No repeating groups.</td></tr>
-        <tr><td>2NF</td><td>Is in 1NF + every non-key attribute is fully dependent on the entire primary key (no partial dependency)</td></tr>
-        <tr><td>3NF</td><td>Is in 2NF + no transitive dependency (non-key attributes depend only on primary key, not on other non-key attributes)</td></tr>
-        <tr><td>BCNF</td><td>Stricter version of 3NF — every determinant must be a candidate key</td></tr>
+        <tr><th>NF</th><th>Condition Required</th></tr>
+        <tr><td>1NF</td><td>All column values are atomic (indivisible). No repeating groups or arrays in cells.</td></tr>
+        <tr><td>2NF</td><td>Is in 1NF + No partial dependency (every non-key attribute depends on the FULL primary key, not just part of it)</td></tr>
+        <tr><td>3NF</td><td>Is in 2NF + No transitive dependency (non-key attributes depend only on the primary key)</td></tr>
+        <tr><td>BCNF</td><td>Stricter version of 3NF — every determinant is a candidate key</td></tr>
+      </table>
+    </div>
+
+    <div class="q-block">
+      <div class="q-label">Important Question</div>
+      <div class="q-title">Describe different Cloud Computing Deployment Models with benefits and limitations.</div>
+
+      <div class="def-box">Cloud Computing is the on-demand delivery of IT resources (compute, storage, networking, software) over the internet with pay-per-use billing. Service models: IaaS, PaaS, SaaS.</div>
+
+      <h3>4 Deployment Models</h3>
+      <table>
+        <tr><th>Model</th><th>Description</th><th>Benefits</th><th>Limitations</th></tr>
+        <tr><td><strong>Public</strong></td><td>Open to everyone. Managed by AWS/Azure/GCP.</td><td>No upfront cost, no hardware setup, easy scaling</td><td>Security concerns, reliability risks</td></tr>
+        <tr><td><strong>Private</strong></td><td>Dedicated to one org. Hosted in-house or externally.</td><td>High security, data privacy, supports legacy</td><td>High cost, high maintenance</td></tr>
+        <tr><td><strong>Community</strong></td><td>Shared by orgs with common goals (e.g., hospitals).</td><td>Cost-effective, meets industry standards</td><td>Limited bandwidth/storage, less popular</td></tr>
+        <tr><td><strong>Hybrid</strong></td><td>Combination of public + private. Sensitive data in private, rest in public.</td><td>Cost-effective, flexible, good security</td><td>Complex setup, specific use cases</td></tr>
       </table>
 
-      <h3>Benefits of Normalization</h3>
+      <h3>Real-World Cloud Applications</h3>
       <ul>
-        <li>Eliminates redundant data storage</li>
-        <li>Ensures data consistency and integrity</li>
-        <li>Makes updates/inserts/deletes efficient</li>
-        <li>Simplifies database design</li>
+        <li><strong>Online Storage</strong> — Google Drive, Dropbox: store files anywhere</li>
+        <li><strong>Backup &amp; Recovery</strong> — Automatic backup, easy data recovery</li>
+        <li><strong>Big Data Analytics</strong> — Store and analyze massive datasets</li>
+        <li><strong>Testing &amp; Dev</strong> — Scalable on-demand dev/test environments</li>
+        <li><strong>E-Commerce</strong> — Manage products, customers, scale on demand</li>
+        <li><strong>Education</strong> — e-Learning platforms, student portals</li>
+        <li><strong>Healthcare</strong> — Patient records, remote doctor access</li>
+        <li><strong>Entertainment</strong> — Netflix, Spotify: On-Demand Entertainment (ODE)</li>
       </ul>
     </div>
 
-    <div class="q-block">
-      <div class="q-label">Q3 — 20 Marks</div>
-      <div class="q-title">Write programs for CRUD operations using Spring JDBC — Insert, Select, Update, Delete.</div>
+  </div>
+</section>
 
-      <div class="def-box">Spring JDBC simplifies JDBC usage by eliminating boilerplate code for connections and result set handling. The key class is <code>JdbcTemplate</code>.</div>
 
-      <h3>Student Table</h3>
-<pre><code>CREATE TABLE Student (
-    ID   INT NOT NULL AUTO_INCREMENT,
-    NAME VARCHAR(20) NOT NULL,
-    AGE  INT NOT NULL,
-    PRIMARY KEY (ID)
-);</code></pre>
+<!-- ═══════════════════════════════════════════
+     FULL PROGRAMS SECTION
+═══════════════════════════════════════════ -->
+<section class="unit prog-section" id="programs">
+  <div class="unit-header">
+    <span class="unit-badge">FULL PROGRAMS</span>
+    <div class="unit-title">Complete Code Examples — All 5 Units</div>
+  </div>
+  <div class="unit-body">
 
-      <h3>Beans.xml — DataSource Configuration</h3>
-<pre><code>&lt;bean id="dataSource"
-      class="org.springframework.jdbc.datasource.DriverManagerDataSource"&gt;
-    &lt;property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/&gt;
-    &lt;property name="url"      value="jdbc:mysql://localhost:3306/TEST"/&gt;
-    &lt;property name="username" value="root"/&gt;
-    &lt;property name="password" value="admin"/&gt;
-&lt;/bean&gt;
-&lt;bean id="studentJDBCTemplate" class="com.mrcet.StudentJDBCTemplate"&gt;
-    &lt;property name="dataSource" ref="dataSource"/&gt;
-&lt;/bean&gt;</code></pre>
+    <!-- ── UNIT I PROGRAMS ── -->
+    <div class="prog-block">
+      <div class="prog-label">Unit I — HTML &amp; CSS</div>
+      <div class="prog-title">Program 1: Complete HTML Page with Forms, Tables, Lists, and CSS</div>
+      <div class="prog-desc">A full HTML page demonstrating all key tags — forms, tables, ordered/unordered lists, anchors, images, and all three types of CSS styling.</div>
 
-      <h3>1. INSERT</h3>
-<pre><code>public void create(String name, Integer age) {
-    String SQL = "INSERT INTO Student (name, age) VALUES (?, ?)";
-    jdbcTemplateObject.update(SQL, name, age);
-    System.out.println("Created: " + name);
-}</code></pre>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Complete HTML Demo&lt;/title&gt;
 
-      <h3>2. SELECT (List All)</h3>
-<pre><code>// StudentMapper.java
-public class StudentMapper implements RowMapper&lt;Student&gt; {
-    public Student mapRow(ResultSet rs, int rowNum) throws SQLException {
-        Student s = new Student();
-        s.setId(rs.getInt("id"));
-        s.setName(rs.getString("name"));
-        s.setAge(rs.getInt("age"));
-        return s;
+    &lt;!-- Internal CSS --&gt;
+    &lt;style&gt;
+        body  { background-color: #f5f5f5; font-family: Arial, sans-serif; padding: 20px; }
+        h1    { color: darkblue; text-align: center; }
+        h2    { color: #c47a3a; border-bottom: 2px solid #c47a3a; }
+        table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+        th    { background-color: darkblue; color: white; padding: 10px; }
+        td    { border: 1px solid #ccc; padding: 8px; text-align: center; }
+        .section { background: white; padding: 20px; margin: 20px 0;
+                   border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        input[type="submit"] { background-color: darkblue; color: white;
+                               padding: 10px 20px; border: none;
+                               border-radius: 5px; cursor: pointer; }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;h1&gt;Full Stack Development Demo Page&lt;/h1&gt;
+
+    &lt;!-- SECTION 1: Anchor and Image --&gt;
+    &lt;div class="section"&gt;
+        &lt;h2&gt;Links and Images&lt;/h2&gt;
+        &lt;p&gt;Visit: &lt;a href="https://www.google.com" target="_blank"&gt;Google&lt;/a&gt;&lt;/p&gt;
+        &lt;img src="sample.jpg" alt="Sample Image" width="200" height="150"&gt;
+    &lt;/div&gt;
+
+    &lt;!-- SECTION 2: Table --&gt;
+    &lt;div class="section"&gt;
+        &lt;h2&gt;Student Marks Table&lt;/h2&gt;
+        &lt;table&gt;
+            &lt;tr&gt;&lt;th&gt;Roll No&lt;/th&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Subject&lt;/th&gt;&lt;th&gt;Marks&lt;/th&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;Ram&lt;/td&gt;&lt;td&gt;Math&lt;/td&gt;&lt;td&gt;85&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;2&lt;/td&gt;&lt;td&gt;Sita&lt;/td&gt;&lt;td&gt;Science&lt;/td&gt;&lt;td&gt;90&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;3&lt;/td&gt;&lt;td&gt;Laxman&lt;/td&gt;&lt;td&gt;English&lt;/td&gt;&lt;td&gt;78&lt;/td&gt;&lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/div&gt;
+
+    &lt;!-- SECTION 3: Lists --&gt;
+    &lt;div class="section"&gt;
+        &lt;h2&gt;Lists&lt;/h2&gt;
+        &lt;h3&gt;Ordered List&lt;/h3&gt;
+        &lt;ol&gt;
+            &lt;li&gt;HTML&lt;/li&gt;
+            &lt;li&gt;CSS&lt;/li&gt;
+            &lt;li&gt;JavaScript&lt;/li&gt;
+            &lt;li&gt;React&lt;/li&gt;
+        &lt;/ol&gt;
+        &lt;h3&gt;Unordered List&lt;/h3&gt;
+        &lt;ul type="square"&gt;
+            &lt;li&gt;Spring Boot&lt;/li&gt;
+            &lt;li&gt;MySQL&lt;/li&gt;
+            &lt;li&gt;Git&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+
+    &lt;!-- SECTION 4: Form --&gt;
+    &lt;div class="section"&gt;
+        &lt;h2&gt;Registration Form&lt;/h2&gt;
+        &lt;form action="#" method="post"&gt;
+            &lt;fieldset&gt;
+                &lt;legend&gt;Personal Information&lt;/legend&gt;
+
+                &lt;label&gt;Full Name:&lt;/label&gt;
+                &lt;input type="text" name="name" placeholder="Enter name"&gt;&lt;br&gt;&lt;br&gt;
+
+                &lt;label&gt;Email:&lt;/label&gt;
+                &lt;input type="email" name="email" placeholder="Enter email"&gt;&lt;br&gt;&lt;br&gt;
+
+                &lt;label&gt;Password:&lt;/label&gt;
+                &lt;input type="password" name="pass"&gt;&lt;br&gt;&lt;br&gt;
+
+                &lt;label&gt;Gender:&lt;/label&gt;
+                &lt;input type="radio" name="gender" value="male"&gt; Male
+                &lt;input type="radio" name="gender" value="female"&gt; Female&lt;br&gt;&lt;br&gt;
+
+                &lt;label&gt;Hobbies:&lt;/label&gt;
+                &lt;input type="checkbox" name="hobby" value="cricket"&gt; Cricket
+                &lt;input type="checkbox" name="hobby" value="reading"&gt; Reading
+                &lt;input type="checkbox" name="hobby" value="coding"&gt; Coding&lt;br&gt;&lt;br&gt;
+
+                &lt;label&gt;Country:&lt;/label&gt;
+                &lt;select name="country"&gt;
+                    &lt;option value="india"&gt;India&lt;/option&gt;
+                    &lt;option value="usa"&gt;USA&lt;/option&gt;
+                    &lt;option value="uk"&gt;UK&lt;/option&gt;
+                &lt;/select&gt;&lt;br&gt;&lt;br&gt;
+
+                &lt;label&gt;Address:&lt;/label&gt;&lt;br&gt;
+                &lt;textarea rows="3" cols="40" name="address"&gt;&lt;/textarea&gt;&lt;br&gt;&lt;br&gt;
+
+                &lt;input type="submit" value="Register"&gt;
+                &lt;input type="reset"  value="Clear"&gt;
+            &lt;/fieldset&gt;
+        &lt;/form&gt;
+    &lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+    </div>
+
+    <!-- ── UNIT II PROGRAMS ── -->
+    <div class="prog-block">
+      <div class="prog-label">Unit II — JavaScript</div>
+      <div class="prog-title">Program 2: JavaScript OOP — All 3 Object Creation Methods + DOM Manipulation</div>
+      <div class="prog-desc">Full standalone HTML file demonstrating object literal, new Object(), constructor functions, ES6 classes, and DOM manipulation via JavaScript.</div>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;JavaScript OOP Demo&lt;/title&gt;
+    &lt;style&gt;
+        body { font-family: Arial; padding: 20px; background: #f0f4ff; }
+        .box { background: white; padding: 15px; margin: 15px 0;
+               border-left: 4px solid darkblue; border-radius: 4px; }
+        button { padding: 8px 16px; background: darkblue; color: white;
+                 border: none; border-radius: 4px; cursor: pointer; margin: 5px; }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;JavaScript OOP Demo&lt;/h1&gt;
+
+    &lt;!-- 1. JavaScript can change HTML content --&gt;
+    &lt;div class="box"&gt;
+        &lt;h3&gt;1. Change HTML Content&lt;/h3&gt;
+        &lt;p id="demo1"&gt;Original content&lt;/p&gt;
+        &lt;button type="button" onclick="changeContent()"&gt;Click to Change&lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;!-- 2. Change HTML Style --&gt;
+    &lt;div class="box"&gt;
+        &lt;h3&gt;2. Change HTML Style&lt;/h3&gt;
+        &lt;p id="demo2"&gt;This text will be styled dynamically.&lt;/p&gt;
+        &lt;button type="button" onclick="changeStyle()"&gt;Change Style&lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;!-- 3. Object Literal --&gt;
+    &lt;div class="box"&gt;
+        &lt;h3&gt;3. Object Literal&lt;/h3&gt;
+        &lt;p id="demo3"&gt;&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;!-- 4. Constructor Function --&gt;
+    &lt;div class="box"&gt;
+        &lt;h3&gt;4. Constructor Function + new keyword&lt;/h3&gt;
+        &lt;p id="demo4"&gt;&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;!-- 5. ES6 Class --&gt;
+    &lt;div class="box"&gt;
+        &lt;h3&gt;5. ES6 Class&lt;/h3&gt;
+        &lt;p id="demo5"&gt;&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;script&gt;
+        // ── 1. Change HTML content ──
+        function changeContent() {
+            document.getElementById("demo1").innerHTML = "Content changed by JavaScript!";
+        }
+
+        // ── 2. Change style ──
+        function changeStyle() {
+            var el = document.getElementById("demo2");
+            el.style.fontSize        = "22px";
+            el.style.color           = "white";
+            el.style.backgroundColor = "darkblue";
+            el.style.padding         = "10px";
+        }
+
+        // ── 3. Object Literal ──
+        var emp1 = { id: 101, name: "Shyam Kumar", salary: 40000 };
+        document.getElementById("demo3").innerHTML =
+            "ID: " + emp1.id + ", Name: " + emp1.name + ", Salary: " + emp1.salary;
+
+        // ── 4. Constructor Function ──
+        function Employee(id, name, salary) {
+            this.id     = id;
+            this.name   = name;
+            this.salary = salary;
+            this.display = function() {
+                return "ID: " + this.id + ", Name: " + this.name +
+                       ", Salary: " + this.salary;
+            };
+        }
+        var e1 = new Employee(102, "Ravi Malik", 50000);
+        var e2 = new Employee(103, "Priya Singh", 60000);
+        document.getElementById("demo4").innerHTML =
+            e1.display() + "&lt;br&gt;" + e2.display();
+
+        // ── 5. ES6 Class ──
+        class Student {
+            constructor(id, name, marks) {
+                this.id    = id;
+                this.name  = name;
+                this.marks = marks;
+            }
+            grade() {
+                return this.marks &gt;= 90 ? "A" :
+                       this.marks &gt;= 75 ? "B" :
+                       this.marks &gt;= 60 ? "C" : "F";
+            }
+            display() {
+                return "ID: " + this.id + " | Name: " + this.name +
+                       " | Marks: " + this.marks + " | Grade: " + this.grade();
+            }
+        }
+        var s1 = new Student(1, "Pratheek", 92);
+        var s2 = new Student(2, "Ananya",   78);
+        var s3 = new Student(3, "Karan",    55);
+        document.getElementById("demo5").innerHTML =
+            s1.display() + "&lt;br&gt;" + s2.display() + "&lt;br&gt;" + s3.display();
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+    </div>
+
+    <div class="prog-block">
+      <div class="prog-label">Unit II — jQuery</div>
+      <div class="prog-title">Program 3: jQuery Events — click, focus, submit, mouseover, hide/show</div>
+      <div class="prog-desc">Complete HTML file with all major jQuery events demonstrated together.</div>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;jQuery Events Demo&lt;/title&gt;
+    &lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"&gt;
+    &lt;/script&gt;
+    &lt;style&gt;
+        body  { font-family: Arial; padding: 20px; background: #fff8f0; }
+        .box  { background: white; padding: 15px; margin: 15px 0;
+                border-left: 4px solid orange; border-radius: 4px; }
+        input[type="text"] { padding: 8px; width: 200px; border: 1px solid #ccc; }
+        input[type="text"]:focus { border-color: orange; outline: none; }
+        button { padding: 8px 14px; background: orange; color: white;
+                 border: none; border-radius: 4px; cursor: pointer; margin: 4px; }
+        #hoverBox { width: 200px; height: 80px; background: lightblue;
+                    display: flex; align-items: center; justify-content: center;
+                    border-radius: 6px; font-weight: bold; }
+        #message  { color: green; font-weight: bold; margin-top: 8px; }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;jQuery Events Demo&lt;/h1&gt;
+
+    &lt;!-- click() --&gt;
+    &lt;div class="box"&gt;
+        &lt;h3&gt;1. click() Event&lt;/h3&gt;
+        &lt;p id="clickPara"&gt;Click on this paragraph to change its color!&lt;/p&gt;
+        &lt;button id="hideBtn"&gt;Hide Paragraph&lt;/button&gt;
+        &lt;button id="showBtn"&gt;Show Paragraph&lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;!-- focus() and blur() --&gt;
+    &lt;div class="box"&gt;
+        &lt;h3&gt;2. focus() and blur() Events&lt;/h3&gt;
+        &lt;input type="text" id="nameInput" placeholder="Click to focus..."&gt;
+        &lt;span id="focusMsg"&gt;&lt;/span&gt;
+    &lt;/div&gt;
+
+    &lt;!-- submit() --&gt;
+    &lt;div class="box"&gt;
+        &lt;h3&gt;3. submit() Event&lt;/h3&gt;
+        &lt;form id="myForm"&gt;
+            &lt;input type="text" id="keyword" placeholder="Type 'MRCET' to submit"&gt;
+            &lt;input type="submit" value="Submit"&gt;
+        &lt;/form&gt;
+        &lt;p id="message"&gt;&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;!-- mouseover() / mouseout() --&gt;
+    &lt;div class="box"&gt;
+        &lt;h3&gt;4. mouseover() / mouseout() Events&lt;/h3&gt;
+        &lt;div id="hoverBox"&gt;Hover over me!&lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- jQuery UI: toggle --&gt;
+    &lt;div class="box"&gt;
+        &lt;h3&gt;5. toggle() — show / hide&lt;/h3&gt;
+        &lt;button id="toggleBtn"&gt;Toggle Content&lt;/button&gt;
+        &lt;div id="toggleDiv" style="background:#e0f0ff; padding:10px; margin-top:10px;"&gt;
+            This content toggles on/off!
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;script&gt;
+        $(document).ready(function () {
+
+            // 1. click() — change paragraph color
+            $("#clickPara").click(function () {
+                $(this).css("color", "darkblue").css("font-weight", "bold");
+            });
+            $("#hideBtn").click(function () { $("#clickPara").hide(400); });
+            $("#showBtn").click(function () { $("#clickPara").show(400); });
+
+            // 2. focus() and blur()
+            $("#nameInput").focus(function () {
+                $("#focusMsg").text(" ✔ Field is active").css("color", "green");
+            });
+            $("#nameInput").blur(function () {
+                $("#focusMsg").text(" Field lost focus").css("color", "gray");
+            });
+
+            // 3. submit()
+            $("#myForm").submit(function (event) {
+                event.preventDefault();
+                if ($("#keyword").val() === "MRCET") {
+                    $("#message").text("✔ Form submitted successfully!").css("color","green");
+                } else {
+                    $("#message").text("✘ Enter MRCET to submit").css("color","red");
+                }
+            });
+
+            // 4. mouseover() / mouseout()
+            $("#hoverBox").mouseover(function () {
+                $(this).css("background-color", "orange").text("Mouse is over!");
+            }).mouseout(function () {
+                $(this).css("background-color", "lightblue").text("Hover over me!");
+            });
+
+            // 5. toggle()
+            $("#toggleBtn").click(function () {
+                $("#toggleDiv").toggle(300);
+            });
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+    </div>
+
+    <div class="prog-block">
+      <div class="prog-label">Unit II — AJAX</div>
+      <div class="prog-title">Program 4: AJAX Demo — Load data from file without page reload</div>
+      <div class="prog-desc">Demonstrates AJAX using XMLHttpRequest to load external text file content asynchronously.</div>
+
+<pre><code>&lt;!-- index.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;AJAX Demo&lt;/title&gt;
+    &lt;style&gt;
+        body   { font-family: Arial; padding: 30px; background: #f0fff0; }
+        button { padding: 10px 20px; background: green; color: white;
+                 border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        #demo  { margin-top: 20px; padding: 15px; background: white;
+                 border: 2px solid green; border-radius: 8px;
+                 min-height: 50px; font-size: 18px; }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;AJAX Demo&lt;/h1&gt;
+    &lt;p&gt;Click the button to load data from a file WITHOUT reloading the page.&lt;/p&gt;
+
+    &lt;button onclick="loadData()"&gt;Load Data via AJAX&lt;/button&gt;
+    &lt;div id="demo"&gt;Data will appear here...&lt;/div&gt;
+
+    &lt;script&gt;
+        function loadData() {
+            var xhr = new XMLHttpRequest();
+
+            // Callback when response is received
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    document.getElementById("demo").innerHTML = xhr.responseText;
+                } else {
+                    document.getElementById("demo").innerHTML = "Error: " + xhr.status;
+                }
+            };
+
+            // Open: method, URL, async(true/false)
+            xhr.open("GET", "ajaxinfo.txt", true);
+            xhr.send();
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+<pre><code><span class="cmt">&lt;!-- ajaxinfo.txt --&gt;</span>
+Hello! This message was loaded asynchronously using AJAX.
+The page did not reload to show this content.</code></pre>
+    </div>
+
+    <!-- ── UNIT III PROGRAMS ── -->
+    <div class="prog-block">
+      <div class="prog-label">Unit III — React JS</div>
+      <div class="prog-title">Program 5: React — Class Components, State &amp; Props (Student List App)</div>
+      <div class="prog-desc">A complete React app with class components — parent passes data via props to child, state management, dynamic list rendering.</div>
+
+<pre><code><span class="cmt">// App.js</span>
+<span class="kw">import</span> React, { Component } <span class="kw">from</span> <span class="str">'react'</span>;
+
+<span class="kw">class</span> App <span class="kw">extends</span> React.Component {
+    <span class="fn">constructor</span>() {
+        <span class="kw">super</span>();
+        <span class="kw">this</span>.state = {
+            data: [
+                { name: <span class="str">"Abhishek"</span>, marks: <span class="num">92</span> },
+                { name: <span class="str">"Saharsh"</span>,  marks: <span class="num">78</span> },
+                { name: <span class="str">"Ajay"</span>,     marks: <span class="num">85</span> },
+            ]
+        };
+    }
+    <span class="fn">render</span>() {
+        <span class="kw">return</span> (
+            &lt;div&gt;
+                &lt;StudentHeader /&gt;
+                &lt;ul&gt;
+                    {<span class="kw">this</span>.state.data.map((item, i) =&gt;
+                        &lt;StudentCard key={i} data={item} /&gt;
+                    )}
+                &lt;/ul&gt;
+            &lt;/div&gt;
+        );
     }
 }
 
-// In StudentJDBCTemplate.java
-public List&lt;Student&gt; listStudents() {
-    String SQL = "SELECT * FROM Student";
-    return jdbcTemplateObject.query(SQL, new StudentMapper());
+<span class="kw">class</span> StudentHeader <span class="kw">extends</span> React.Component {
+    <span class="fn">render</span>() {
+        <span class="kw">return</span> &lt;h1&gt;Student Details&lt;/h1&gt;;
+    }
+}
+
+<span class="kw">class</span> StudentCard <span class="kw">extends</span> React.Component {
+    <span class="fn">render</span>() {
+        <span class="kw">const</span> { name, marks } = <span class="kw">this</span>.props.data;
+        <span class="kw">const</span> grade = marks &gt;= <span class="num">90</span> ? <span class="str">"A"</span> : marks &gt;= <span class="num">75</span> ? <span class="str">"B"</span> : <span class="str">"C"</span>;
+        <span class="kw">return</span> (
+            &lt;li&gt;
+                &lt;strong&gt;{name}&lt;/strong&gt; — Marks: {marks} — Grade: {grade}
+            &lt;/li&gt;
+        );
+    }
+}
+
+<span class="kw">export default</span> App;</code></pre>
+
+<pre><code><span class="cmt">// index.js</span>
+<span class="kw">import</span> React <span class="kw">from</span> <span class="str">'react'</span>;
+<span class="kw">import</span> ReactDOM <span class="kw">from</span> <span class="str">'react-dom'</span>;
+<span class="kw">import</span> App <span class="kw">from</span> <span class="str">'./App'</span>;
+ReactDOM.<span class="fn">render</span>(&lt;App /&gt;, document.<span class="fn">getElementById</span>(<span class="str">'root'</span>));</code></pre>
+    </div>
+
+    <div class="prog-block">
+      <div class="prog-label">Unit III — React Forms</div>
+      <div class="prog-title">Program 6: React Controlled Form — handling multiple inputs with state</div>
+      <div class="prog-desc">Full React controlled form example managing multiple input types (text, checkbox, number) through state using a single handler function.</div>
+
+<pre><code><span class="kw">import</span> React, { Component } <span class="kw">from</span> <span class="str">'react'</span>;
+
+<span class="kw">class</span> RegistrationForm <span class="kw">extends</span> React.Component {
+    <span class="fn">constructor</span>(props) {
+        <span class="kw">super</span>(props);
+        <span class="kw">this</span>.state = {
+            name:        <span class="str">''</span>,
+            email:       <span class="str">''</span>,
+            isAgreed:    <span class="kw">false</span>,
+            age:         <span class="num">18</span>
+        };
+        <span class="kw">this</span>.handleInputChange = <span class="kw">this</span>.handleInputChange.<span class="fn">bind</span>(<span class="kw">this</span>);
+        <span class="kw">this</span>.handleSubmit      = <span class="kw">this</span>.handleSubmit.<span class="fn">bind</span>(<span class="kw">this</span>);
+    }
+
+    <span class="fn">handleInputChange</span>(event) {
+        <span class="kw">const</span> target = event.target;
+        <span class="kw">const</span> value  = target.type === <span class="str">'checkbox'</span>
+                         ? target.checked
+                         : target.value;
+        <span class="kw">const</span> name   = target.name;
+        <span class="kw">this</span>.<span class="fn">setState</span>({ [name]: value });
+    }
+
+    <span class="fn">handleSubmit</span>(event) {
+        alert(<span class="str">'Registered: '</span> + <span class="kw">this</span>.state.name + <span class="str">' | '</span> + <span class="kw">this</span>.state.email);
+        event.<span class="fn">preventDefault</span>();
+    }
+
+    <span class="fn">render</span>() {
+        <span class="kw">return</span> (
+            &lt;form onSubmit={<span class="kw">this</span>.handleSubmit}&gt;
+                &lt;h2&gt;Registration Form&lt;/h2&gt;
+
+                &lt;label&gt;Name:
+                    &lt;input type=<span class="str">"text"</span>  name=<span class="str">"name"</span>
+                           value={<span class="kw">this</span>.state.name}
+                           onChange={<span class="kw">this</span>.handleInputChange} /&gt;
+                &lt;/label&gt;&lt;br/&gt;
+
+                &lt;label&gt;Email:
+                    &lt;input type=<span class="str">"email"</span> name=<span class="str">"email"</span>
+                           value={<span class="kw">this</span>.state.email}
+                           onChange={<span class="kw">this</span>.handleInputChange} /&gt;
+                &lt;/label&gt;&lt;br/&gt;
+
+                &lt;label&gt;Age:
+                    &lt;input type=<span class="str">"number"</span> name=<span class="str">"age"</span>
+                           value={<span class="kw">this</span>.state.age}
+                           onChange={<span class="kw">this</span>.handleInputChange} /&gt;
+                &lt;/label&gt;&lt;br/&gt;
+
+                &lt;label&gt;
+                    &lt;input type=<span class="str">"checkbox"</span> name=<span class="str">"isAgreed"</span>
+                           checked={<span class="kw">this</span>.state.isAgreed}
+                           onChange={<span class="kw">this</span>.handleInputChange} /&gt;
+                    I agree to the Terms and Conditions
+                &lt;/label&gt;&lt;br/&gt;
+
+                &lt;button type=<span class="str">"submit"</span> disabled={!<span class="kw">this</span>.state.isAgreed}&gt;
+                    Register
+                &lt;/button&gt;
+            &lt;/form&gt;
+        );
+    }
+}
+
+<span class="kw">export default</span> RegistrationForm;</code></pre>
+    </div>
+
+    <div class="prog-block">
+      <div class="prog-label">Unit III — React Router</div>
+      <div class="prog-title">Program 7: Complete React SPA with React Router — 3 pages with navigation and CSS</div>
+      <div class="prog-desc">A full Single Page Application using React Router with Home, About, and Contact pages plus styled navigation.</div>
+
+<pre><code><span class="cmt">// src/index.js</span>
+<span class="kw">import</span> React <span class="kw">from</span> <span class="str">"react"</span>;
+<span class="kw">import</span> ReactDOM <span class="kw">from</span> <span class="str">"react-dom"</span>;
+<span class="kw">import</span> Main <span class="kw">from</span> <span class="str">"./Main"</span>;
+<span class="kw">import</span> <span class="str">"./index.css"</span>;
+ReactDOM.<span class="fn">render</span>(&lt;Main /&gt;, document.<span class="fn">getElementById</span>(<span class="str">"root"</span>));</code></pre>
+
+<pre><code><span class="cmt">// src/Main.js</span>
+<span class="kw">import</span> React, { Component } <span class="kw">from</span> <span class="str">"react"</span>;
+<span class="kw">import</span> { Route, NavLink, HashRouter } <span class="kw">from</span> <span class="str">"react-router-dom"</span>;
+<span class="kw">import</span> Home    <span class="kw">from</span> <span class="str">"./Home"</span>;
+<span class="kw">import</span> About   <span class="kw">from</span> <span class="str">"./About"</span>;
+<span class="kw">import</span> Contact <span class="kw">from</span> <span class="str">"./Contact"</span>;
+
+<span class="kw">class</span> Main <span class="kw">extends</span> Component {
+    <span class="fn">render</span>() {
+        <span class="kw">return</span> (
+            &lt;HashRouter&gt;
+                &lt;div&gt;
+                    &lt;h1&gt;My React SPA&lt;/h1&gt;
+                    &lt;ul className=<span class="str">"header"</span>&gt;
+                        &lt;li&gt;&lt;NavLink exact to=<span class="str">"/"</span>&gt;Home&lt;/NavLink&gt;&lt;/li&gt;
+                        &lt;li&gt;&lt;NavLink to=<span class="str">"/about"</span>&gt;About&lt;/NavLink&gt;&lt;/li&gt;
+                        &lt;li&gt;&lt;NavLink to=<span class="str">"/contact"</span>&gt;Contact&lt;/NavLink&gt;&lt;/li&gt;
+                    &lt;/ul&gt;
+                    &lt;div className=<span class="str">"content"</span>&gt;
+                        &lt;Route exact path=<span class="str">"/"</span>        component={Home}    /&gt;
+                        &lt;Route       path=<span class="str">"/about"</span>   component={About}   /&gt;
+                        &lt;Route       path=<span class="str">"/contact"</span> component={Contact} /&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/HashRouter&gt;
+        );
+    }
+}
+<span class="kw">export default</span> Main;</code></pre>
+
+<pre><code><span class="cmt">// src/Home.js</span>
+<span class="kw">import</span> React, { Component } <span class="kw">from</span> <span class="str">"react"</span>;
+<span class="kw">class</span> Home <span class="kw">extends</span> Component {
+    <span class="fn">render</span>() {
+        <span class="kw">return</span> (
+            &lt;div&gt;
+                &lt;h2&gt;Home Page&lt;/h2&gt;
+                &lt;p&gt;Welcome to our website! This is the home page of our React SPA.&lt;/p&gt;
+                &lt;p&gt;Navigate using the links above — no page reload happens!&lt;/p&gt;
+            &lt;/div&gt;
+        );
+    }
+}
+<span class="kw">export default</span> Home;
+
+<span class="cmt">// src/About.js</span>
+<span class="kw">import</span> React, { Component } <span class="kw">from</span> <span class="str">"react"</span>;
+<span class="kw">class</span> About <span class="kw">extends</span> Component {
+    <span class="fn">render</span>() {
+        <span class="kw">return</span> (
+            &lt;div&gt;
+                &lt;h2&gt;About Page&lt;/h2&gt;
+                &lt;p&gt;This application was built using ReactJS and React Router.&lt;/p&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;React v17&lt;/li&gt;
+                    &lt;li&gt;React Router DOM&lt;/li&gt;
+                    &lt;li&gt;Single Page Application&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/div&gt;
+        );
+    }
+}
+<span class="kw">export default</span> About;
+
+<span class="cmt">// src/Contact.js</span>
+<span class="kw">import</span> React, { Component } <span class="kw">from</span> <span class="str">"react"</span>;
+<span class="kw">class</span> Contact <span class="kw">extends</span> Component {
+    <span class="fn">render</span>() {
+        <span class="kw">return</span> (
+            &lt;div&gt;
+                &lt;h2&gt;Contact Page&lt;/h2&gt;
+                &lt;p&gt;Email: contact@myreactapp.com&lt;/p&gt;
+                &lt;p&gt;Phone: +91-9876543210&lt;/p&gt;
+            &lt;/div&gt;
+        );
+    }
+}
+<span class="kw">export default</span> Contact;</code></pre>
+
+<pre><code><span class="cmt">/* src/index.css */</span>
+body { background-color: #FFCC00; padding: 20px; margin: 0; }
+h1, h2, p, ul, li { font-family: sans-serif; }
+ul.header { background-color: #111; padding: 0; list-style: none; }
+ul.header li { display: inline; }
+ul.header li a { color: #FFF; font-weight: bold; text-decoration: none;
+                 padding: 20px; display: inline-block; }
+.content { background-color: #FFF; padding: 20px; }
+.active  { background-color: #0099FF; }</code></pre>
+    </div>
+
+    <!-- ── UNIT IV PROGRAMS ── -->
+    <div class="prog-block">
+      <div class="prog-label">Unit IV — Spring MVC</div>
+      <div class="prog-title">Program 8: Complete Spring MVC Hello World Application</div>
+      <div class="prog-desc">Full Spring MVC project structure — web.xml, servlet config, controller, JSP view.</div>
+
+<pre><code><span class="cmt">&lt;!-- web.xml --&gt;</span>
+&lt;web-app&gt;
+    &lt;display-name&gt;Spring MVC Application&lt;/display-name&gt;
+    &lt;servlet&gt;
+        &lt;servlet-name&gt;HelloWeb&lt;/servlet-name&gt;
+        &lt;servlet-class&gt;
+            org.springframework.web.servlet.DispatcherServlet
+        &lt;/servlet-class&gt;
+        &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+    &lt;/servlet&gt;
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;HelloWeb&lt;/servlet-name&gt;
+        &lt;url-pattern&gt;/&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+&lt;/web-app&gt;</code></pre>
+
+<pre><code><span class="cmt">&lt;!-- HelloWeb-servlet.xml --&gt;</span>
+&lt;beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"&gt;
+
+    &lt;context:component-scan base-package="com.example"/&gt;
+
+    &lt;bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"&gt;
+        &lt;property name="prefix" value="/WEB-INF/jsp/"/&gt;
+        &lt;property name="suffix" value=".jsp"/&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;</code></pre>
+
+<pre><code><span class="cmt">// HelloController.java</span>
+<span class="kw">package</span> com.example;
+<span class="kw">import</span> org.springframework.stereotype.Controller;
+<span class="kw">import</span> org.springframework.ui.ModelMap;
+<span class="kw">import</span> org.springframework.web.bind.annotation.*;
+
+@Controller
+<span class="kw">public class</span> HelloController {
+
+    @RequestMapping(value = <span class="str">"/hello"</span>, method = RequestMethod.GET)
+    <span class="kw">public</span> String <span class="fn">printHello</span>(ModelMap model) {
+        model.<span class="fn">addAttribute</span>(<span class="str">"message"</span>, <span class="str">"Hello Spring MVC Framework!"</span>);
+        model.<span class="fn">addAttribute</span>(<span class="str">"student"</span>, <span class="str">"Pratheek Gaba"</span>);
+        <span class="kw">return</span> <span class="str">"hello"</span>;   <span class="cmt">// resolves to /WEB-INF/jsp/hello.jsp</span>
+    }
 }</code></pre>
 
-      <h3>3. UPDATE</h3>
-<pre><code>public void update(Integer id, Integer age) {
-    String SQL = "UPDATE Student SET age = ? WHERE id = ?";
-    jdbcTemplateObject.update(SQL, age, id);
-    System.out.println("Updated Record with ID = " + id);
+<pre><code><span class="cmt">&lt;!-- /WEB-INF/jsp/hello.jsp --&gt;</span>
+&lt;html&gt;
+&lt;head&gt;&lt;title&gt;Hello Spring MVC&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;
+    &lt;h2&gt;${message}&lt;/h2&gt;
+    &lt;p&gt;Student: ${student}&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      <div class="output">Hello Spring MVC Framework!<br>Student: Pratheek Gaba</div>
+    </div>
+
+    <div class="prog-block">
+      <div class="prog-label">Unit IV — Spring REST</div>
+      <div class="prog-title">Program 9: Complete Spring REST CRUD API — Employee Management</div>
+      <div class="prog-desc">Full Employee CRUD REST API with Model, Service, and Controller classes. All 5 HTTP operations: GET all, GET one, POST, PUT, DELETE.</div>
+
+<pre><code><span class="cmt">// Employee.java — Model</span>
+<span class="kw">package</span> com.example.rest;
+
+<span class="kw">public class</span> Employee {
+    <span class="kw">private</span> String id;
+    <span class="kw">private</span> String name;
+    <span class="kw">private</span> String address;
+
+    <span class="kw">public</span> <span class="fn">Employee</span>() {}
+
+    <span class="kw">public</span> <span class="fn">Employee</span>(String id, String name, String address) {
+        <span class="kw">this</span>.id = id; <span class="kw">this</span>.name = name; <span class="kw">this</span>.address = address;
+    }
+
+    <span class="kw">public</span> String <span class="fn">getId</span>()             { <span class="kw">return</span> id; }
+    <span class="kw">public void</span>   <span class="fn">setId</span>(String id)    { <span class="kw">this</span>.id = id; }
+    <span class="kw">public</span> String <span class="fn">getName</span>()           { <span class="kw">return</span> name; }
+    <span class="kw">public void</span>   <span class="fn">setName</span>(String n)   { <span class="kw">this</span>.name = n; }
+    <span class="kw">public</span> String <span class="fn">getAddress</span>()        { <span class="kw">return</span> address; }
+    <span class="kw">public void</span>   <span class="fn">setAddress</span>(String a){ <span class="kw">this</span>.address = a; }
 }</code></pre>
 
-      <h3>4. DELETE</h3>
-<pre><code>public void delete(Integer id) {
-    String SQL = "DELETE FROM Student WHERE id = ?";
-    jdbcTemplateObject.update(SQL, id);
-    System.out.println("Deleted Record with ID = " + id);
+<pre><code><span class="cmt">// EmployeeService.java — Business Logic</span>
+<span class="kw">package</span> com.example.rest;
+<span class="kw">import</span> org.springframework.stereotype.Service;
+<span class="kw">import</span> java.util.*;
+
+@Service
+<span class="kw">public class</span> EmployeeService {
+
+    List&lt;Employee&gt; employeeList = <span class="kw">new</span> ArrayList&lt;&gt;(Arrays.<span class="fn">asList</span>(
+        <span class="kw">new</span> <span class="fn">Employee</span>(<span class="str">"e001"</span>, <span class="str">"Peter Parker"</span>,   <span class="str">"New York"</span>),
+        <span class="kw">new</span> <span class="fn">Employee</span>(<span class="str">"e002"</span>, <span class="str">"Bruce Wayne"</span>,    <span class="str">"Gotham City"</span>),
+        <span class="kw">new</span> <span class="fn">Employee</span>(<span class="str">"e003"</span>, <span class="str">"Clark Kent"</span>,     <span class="str">"Metropolis"</span>),
+        <span class="kw">new</span> <span class="fn">Employee</span>(<span class="str">"e004"</span>, <span class="str">"Tony Stark"</span>,     <span class="str">"New York"</span>)
+    ));
+
+    <span class="kw">public</span> List&lt;Employee&gt; <span class="fn">getEmployees</span>() { <span class="kw">return</span> employeeList; }
+
+    <span class="kw">public</span> Employee <span class="fn">getEmployee</span>(String id) {
+        <span class="kw">return</span> employeeList.stream()
+                .filter(e -&gt; e.<span class="fn">getId</span>().<span class="fn">equals</span>(id))
+                .findFirst().orElse(<span class="kw">null</span>);
+    }
+
+    <span class="kw">public void</span> <span class="fn">addEmployee</span>(Employee emp) { employeeList.<span class="fn">add</span>(emp); }
+
+    <span class="kw">public void</span> <span class="fn">updateEmployee</span>(Employee emp, String id) {
+        <span class="kw">for</span> (<span class="kw">int</span> i = <span class="num">0</span>; i &lt; employeeList.<span class="fn">size</span>(); i++) {
+            <span class="kw">if</span> (employeeList.<span class="fn">get</span>(i).<span class="fn">getId</span>().<span class="fn">equals</span>(id)) {
+                employeeList.<span class="fn">set</span>(i, emp); <span class="kw">break</span>;
+            }
+        }
+    }
+
+    <span class="kw">public void</span> <span class="fn">deleteEmployee</span>(String id) {
+        employeeList.<span class="fn">removeIf</span>(e -&gt; e.<span class="fn">getId</span>().<span class="fn">equals</span>(id));
+    }
 }</code></pre>
 
-      <h3>MainApp.java</h3>
-<pre><code>ApplicationContext context =
-    new ClassPathXmlApplicationContext("Beans.xml");
-StudentJDBCTemplate t =
-    (StudentJDBCTemplate) context.getBean("studentJDBCTemplate");
+<pre><code><span class="cmt">// EmployeeController.java — REST Controller</span>
+<span class="kw">package</span> com.example.rest;
+<span class="kw">import</span> org.springframework.beans.factory.annotation.Autowired;
+<span class="kw">import</span> org.springframework.web.bind.annotation.*;
+<span class="kw">import</span> java.util.List;
 
-t.create("Zara", 11);          // INSERT
-t.update(2, 20);               // UPDATE
-t.delete(3);                   // DELETE
-List&lt;Student&gt; list = t.listStudents();  // SELECT ALL
-for (Student s : list) {
-    System.out.println(s.getId() + " " + s.getName() + " " + s.getAge());
+@RestController
+<span class="kw">public class</span> EmployeeController {
+
+    @Autowired
+    <span class="kw">private</span> EmployeeService employeeService;
+
+    <span class="cmt">// GET http://localhost:8080/employees</span>
+    @RequestMapping(<span class="str">"/employees"</span>)
+    <span class="kw">public</span> List&lt;Employee&gt; <span class="fn">getAll</span>() {
+        <span class="kw">return</span> employeeService.<span class="fn">getEmployees</span>();
+    }
+
+    <span class="cmt">// GET http://localhost:8080/employees/e001</span>
+    @RequestMapping(<span class="str">"/employees/{id}"</span>)
+    <span class="kw">public</span> Employee <span class="fn">getOne</span>(@PathVariable String id) {
+        <span class="kw">return</span> employeeService.<span class="fn">getEmployee</span>(id);
+    }
+
+    <span class="cmt">// POST http://localhost:8080/employees</span>
+    @RequestMapping(method = RequestMethod.POST, value = <span class="str">"/employees"</span>)
+    <span class="kw">public</span> String <span class="fn">create</span>(@RequestBody Employee emp) {
+        employeeService.<span class="fn">addEmployee</span>(emp);
+        <span class="kw">return</span> <span class="str">"Employee added: "</span> + emp.<span class="fn">getName</span>();
+    }
+
+    <span class="cmt">// PUT http://localhost:8080/employees/e001</span>
+    @RequestMapping(method = RequestMethod.PUT, value = <span class="str">"/employees/{id}"</span>)
+    <span class="kw">public</span> String <span class="fn">update</span>(@RequestBody Employee emp, @PathVariable String id) {
+        employeeService.<span class="fn">updateEmployee</span>(emp, id);
+        <span class="kw">return</span> <span class="str">"Employee updated: "</span> + id;
+    }
+
+    <span class="cmt">// DELETE http://localhost:8080/employees/e001</span>
+    @RequestMapping(method = RequestMethod.DELETE, value = <span class="str">"/employees/{id}"</span>)
+    <span class="kw">public</span> String <span class="fn">delete</span>(@PathVariable String id) {
+        employeeService.<span class="fn">deleteEmployee</span>(id);
+        <span class="kw">return</span> <span class="str">"Employee deleted: "</span> + id;
+    }
 }</code></pre>
     </div>
 
-    <div class="q-block">
-      <div class="q-label">Q4 — 20 Marks</div>
-      <div class="q-title">Describe different types of Cloud Computing Deployment Models and Real-World Applications.</div>
+    <!-- ── UNIT V PROGRAMS ── -->
+    <div class="prog-block">
+      <div class="prog-label">Unit V — SQL</div>
+      <div class="prog-title">Program 10: Complete SQL Script — DDL, DML, DQL, Aggregation, GROUP BY, TCL</div>
+      <div class="prog-desc">Full SQL script covering all operations on a Student table — create, insert, query, update, delete, transactions, aggregations.</div>
 
-      <div class="def-box">Cloud Computing is the on-demand availability of IT resources (servers, storage, databases, software) over the Internet. Resources are delivered as services and billed on a pay-per-use basis.</div>
+<pre><code><span class="cmt">-- ── DDL: Create Table ──────────────────────────────</span>
+CREATE TABLE Student (
+    ROLL_NO INT          PRIMARY KEY,
+    NAME    VARCHAR(20)  NOT NULL,
+    ADDRESS VARCHAR(50),
+    PHONE   VARCHAR(15),
+    AGE     INT
+);
 
-      <h3>Service Models</h3>
-      <table>
-        <tr><th>Model</th><th>Full Form</th><th>Description</th></tr>
-        <tr><td>IaaS</td><td>Infrastructure as a Service</td><td>Provides virtualized computing resources (VMs, storage, networking)</td></tr>
-        <tr><td>PaaS</td><td>Platform as a Service</td><td>Provides platform for deploying applications (runtime, middleware)</td></tr>
-        <tr><td>SaaS</td><td>Software as a Service</td><td>Delivers software applications over the internet (Gmail, Office 365)</td></tr>
-      </table>
+<span class="cmt">-- ── DML: Insert Records ─────────────────────────────</span>
+INSERT INTO Student VALUES (1, <span class="str">'RAM'</span>,    <span class="str">'DELHI'</span>,   <span class="str">'9455123451'</span>, 18);
+INSERT INTO Student VALUES (2, <span class="str">'RAMESH'</span>, <span class="str">'GURGAON'</span>, <span class="str">'9652431543'</span>, 18);
+INSERT INTO Student VALUES (3, <span class="str">'SUJIT'</span>,  <span class="str">'ROHTAK'</span>,  <span class="str">'9156253131'</span>, 20);
+INSERT INTO Student VALUES (4, <span class="str">'SURESH'</span>, <span class="str">'DELHI'</span>,   <span class="str">'9156768971'</span>, 18);
 
-      <h3>Cloud Deployment Models</h3>
+<span class="cmt">-- ── DQL: Queries ─────────────────────────────────────</span>
+SELECT * FROM Student;                          <span class="cmt">-- all records</span>
+SELECT ROLL_NO, NAME FROM Student;              <span class="cmt">-- specific columns</span>
+SELECT * FROM Student WHERE ROLL_NO &gt; 2;        <span class="cmt">-- with condition</span>
+SELECT * FROM Student ORDER BY AGE ASC;         <span class="cmt">-- ascending</span>
+SELECT * FROM Student ORDER BY AGE DESC;        <span class="cmt">-- descending</span>
+SELECT DISTINCT ADDRESS FROM Student;           <span class="cmt">-- no duplicates</span>
 
-      <p><strong>1. Public Cloud</strong></p>
-      <p>Accessible to the general public. Managed by cloud providers (AWS, Azure, GCP). Pay-per-use. Best for fluctuating demands.</p>
-      <p>✅ Minimal upfront cost, no hardware setup &nbsp; ❌ Data security concerns, reliability issues</p>
+<span class="cmt">-- ── Aggregation Functions ────────────────────────────</span>
+SELECT COUNT(ROLL_NO) AS Total_Students FROM Student;    <span class="cmt">-- 4</span>
+SELECT SUM(AGE)       AS Total_Age      FROM Student;    <span class="cmt">-- 74</span>
+SELECT AVG(AGE)       AS Average_Age   FROM Student;    <span class="cmt">-- 18.5</span>
+SELECT MAX(AGE)       AS Max_Age        FROM Student;    <span class="cmt">-- 20</span>
+SELECT MIN(AGE)       AS Min_Age        FROM Student;    <span class="cmt">-- 18</span>
 
-      <p><strong>2. Private Cloud</strong></p>
-      <p>Dedicated to a single organization. Hosted internally or externally. Greater control over data and security.</p>
-      <p>✅ High security, supports legacy systems &nbsp; ❌ Higher cost, high maintenance</p>
+<span class="cmt">-- ── GROUP BY ─────────────────────────────────────────</span>
+SELECT ADDRESS, COUNT(*) AS Count, SUM(AGE) AS TotalAge
+FROM Student
+GROUP BY ADDRESS;
 
-      <p><strong>3. Community Cloud</strong></p>
-      <p>Shared among organizations with common objectives (e.g., government agencies, hospitals). Managed internally or by a vendor.</p>
-      <p>✅ Cost-effective, meets industry standards &nbsp; ❌ Shared bandwidth, limited capacity</p>
+<span class="cmt">-- ── DML: Update and Delete ───────────────────────────</span>
+UPDATE Student SET AGE = 21 WHERE ROLL_NO = 3;
+DELETE FROM Student WHERE ROLL_NO = 4;
 
-      <p><strong>4. Hybrid Cloud</strong></p>
-      <p>Combination of public and private cloud. Sensitive data on private, less sensitive data on public. Supports "cloud bursting" — overflow to public during peak load.</p>
-      <p>✅ Cost-effective, flexible, more secure &nbsp; ❌ Complex to set up and manage</p>
+<span class="cmt">-- ── DDL: Alter Table ─────────────────────────────────</span>
+ALTER TABLE Student ADD CGPA FLOAT;
+ALTER TABLE Student DROP COLUMN PHONE;
 
-      <h3>Real-World Applications of Cloud Computing</h3>
-      <table>
-        <tr><th>Application Area</th><th>Description</th></tr>
-        <tr><td>Online Data Storage</td><td>Store files, images, audio, video (Google Drive, Dropbox)</td></tr>
-        <tr><td>Backup and Recovery</td><td>Automatic data backup; easy recovery without physical media</td></tr>
-        <tr><td>Big Data Analytics</td><td>Store and analyze large datasets using cloud processing power</td></tr>
-        <tr><td>Testing &amp; Development</td><td>Scalable environments for development and testing</td></tr>
-        <tr><td>Anti-Virus</td><td>Cloud-based antivirus monitors and protects systems remotely</td></tr>
-        <tr><td>E-Commerce</td><td>Manage customer/product data; respond quickly to market</td></tr>
-        <tr><td>Education</td><td>e-Learning platforms, student portals, online exams</td></tr>
-        <tr><td>Healthcare</td><td>Store patient records; enable remote access by doctors and labs</td></tr>
-        <tr><td>E-Governance</td><td>Government services management, digital records</td></tr>
-        <tr><td>Entertainment</td><td>Streaming services (Netflix, Spotify) — On-Demand Entertainment</td></tr>
-      </table>
+<span class="cmt">-- ── TCL: Transaction Control ─────────────────────────</span>
+BEGIN TRANSACTION;
+    UPDATE Student SET AGE = 25 WHERE ROLL_NO = 1;
+    SAVEPOINT sp1;
+    UPDATE Student SET AGE = 26 WHERE ROLL_NO = 2;
+    ROLLBACK TO sp1;   <span class="cmt">-- undo second update only</span>
+COMMIT;               <span class="cmt">-- save first update permanently</span></code></pre>
+    </div>
+
+    <div class="prog-block">
+      <div class="prog-label">Unit V — Spring JDBC</div>
+      <div class="prog-title">Program 11: Complete Spring JDBC CRUD — Insert, Select, Update, Delete on Student Table</div>
+      <div class="prog-desc">Full Spring JDBC application with all 4 CRUD operations — DAO interface, model class, RowMapper, JdbcTemplate, and XML config.</div>
+
+<pre><code><span class="cmt">// Student.java — Model Class</span>
+<span class="kw">package</span> com.mrcet;
+
+<span class="kw">public class</span> Student {
+    <span class="kw">private</span> Integer id;
+    <span class="kw">private</span> String  name;
+    <span class="kw">private</span> Integer age;
+
+    <span class="kw">public</span> Integer <span class="fn">getId</span>()            { <span class="kw">return</span> id; }
+    <span class="kw">public void</span>    <span class="fn">setId</span>(Integer id)   { <span class="kw">this</span>.id = id; }
+    <span class="kw">public</span> String  <span class="fn">getName</span>()          { <span class="kw">return</span> name; }
+    <span class="kw">public void</span>    <span class="fn">setName</span>(String n)   { <span class="kw">this</span>.name = n; }
+    <span class="kw">public</span> Integer <span class="fn">getAge</span>()           { <span class="kw">return</span> age; }
+    <span class="kw">public void</span>    <span class="fn">setAge</span>(Integer age) { <span class="kw">this</span>.age = age; }
+}</code></pre>
+
+<pre><code><span class="cmt">// StudentDAO.java — Interface</span>
+<span class="kw">package</span> com.mrcet;
+<span class="kw">import</span> java.util.List;
+<span class="kw">import</span> javax.sql.DataSource;
+
+<span class="kw">public interface</span> StudentDAO {
+    <span class="kw">void</span>            <span class="fn">setDataSource</span>(DataSource ds);
+    <span class="kw">void</span>            <span class="fn">create</span>(String name, Integer age);
+    Student         <span class="fn">getStudent</span>(Integer id);
+    List&lt;Student&gt;   <span class="fn">listStudents</span>();
+    <span class="kw">void</span>            <span class="fn">update</span>(Integer id, Integer age);
+    <span class="kw">void</span>            <span class="fn">delete</span>(Integer id);
+}</code></pre>
+
+<pre><code><span class="cmt">// StudentMapper.java — RowMapper</span>
+<span class="kw">package</span> com.mrcet;
+<span class="kw">import</span> java.sql.*;
+<span class="kw">import</span> org.springframework.jdbc.core.RowMapper;
+
+<span class="kw">public class</span> StudentMapper <span class="kw">implements</span> RowMapper&lt;Student&gt; {
+    <span class="kw">public</span> Student <span class="fn">mapRow</span>(ResultSet rs, <span class="kw">int</span> rowNum) <span class="kw">throws</span> SQLException {
+        Student s = <span class="kw">new</span> Student();
+        s.<span class="fn">setId</span>(rs.<span class="fn">getInt</span>(<span class="str">"id"</span>));
+        s.<span class="fn">setName</span>(rs.<span class="fn">getString</span>(<span class="str">"name"</span>));
+        s.<span class="fn">setAge</span>(rs.<span class="fn">getInt</span>(<span class="str">"age"</span>));
+        <span class="kw">return</span> s;
+    }
+}</code></pre>
+
+<pre><code><span class="cmt">// StudentJDBCTemplate.java — DAO Implementation</span>
+<span class="kw">package</span> com.mrcet;
+<span class="kw">import</span> java.util.List;
+<span class="kw">import</span> javax.sql.DataSource;
+<span class="kw">import</span> org.springframework.jdbc.core.JdbcTemplate;
+
+<span class="kw">public class</span> StudentJDBCTemplate <span class="kw">implements</span> StudentDAO {
+
+    <span class="kw">private</span> DataSource   dataSource;
+    <span class="kw">private</span> JdbcTemplate jdbcTemplateObject;
+
+    <span class="kw">public void</span> <span class="fn">setDataSource</span>(DataSource ds) {
+        <span class="kw">this</span>.dataSource = ds;
+        <span class="kw">this</span>.jdbcTemplateObject = <span class="kw">new</span> JdbcTemplate(ds);
+    }
+
+    <span class="cmt">// ── INSERT ──────────────────────────────────────────</span>
+    <span class="kw">public void</span> <span class="fn">create</span>(String name, Integer age) {
+        String SQL = <span class="str">"INSERT INTO Student (name, age) VALUES (?, ?)"</span>;
+        jdbcTemplateObject.<span class="fn">update</span>(SQL, name, age);
+        System.out.<span class="fn">println</span>(<span class="str">"Inserted: "</span> + name);
+    }
+
+    <span class="cmt">// ── SELECT ALL ──────────────────────────────────────</span>
+    <span class="kw">public</span> List&lt;Student&gt; <span class="fn">listStudents</span>() {
+        String SQL = <span class="str">"SELECT * FROM Student"</span>;
+        <span class="kw">return</span> jdbcTemplateObject.<span class="fn">query</span>(SQL, <span class="kw">new</span> StudentMapper());
+    }
+
+    <span class="cmt">// ── SELECT ONE ──────────────────────────────────────</span>
+    <span class="kw">public</span> Student <span class="fn">getStudent</span>(Integer id) {
+        String SQL = <span class="str">"SELECT * FROM Student WHERE id = ?"</span>;
+        <span class="kw">return</span> jdbcTemplateObject.<span class="fn">queryForObject</span>(
+            SQL, <span class="kw">new</span> Object[]{id}, <span class="kw">new</span> StudentMapper()
+        );
+    }
+
+    <span class="cmt">// ── UPDATE ──────────────────────────────────────────</span>
+    <span class="kw">public void</span> <span class="fn">update</span>(Integer id, Integer age) {
+        String SQL = <span class="str">"UPDATE Student SET age = ? WHERE id = ?"</span>;
+        jdbcTemplateObject.<span class="fn">update</span>(SQL, age, id);
+        System.out.<span class="fn">println</span>(<span class="str">"Updated ID = "</span> + id);
+    }
+
+    <span class="cmt">// ── DELETE ──────────────────────────────────────────</span>
+    <span class="kw">public void</span> <span class="fn">delete</span>(Integer id) {
+        String SQL = <span class="str">"DELETE FROM Student WHERE id = ?"</span>;
+        jdbcTemplateObject.<span class="fn">update</span>(SQL, id);
+        System.out.<span class="fn">println</span>(<span class="str">"Deleted ID = "</span> + id);
+    }
+}</code></pre>
+
+<pre><code><span class="cmt">// MainApp.java — Entry Point</span>
+<span class="kw">package</span> com.mrcet;
+<span class="kw">import</span> java.util.List;
+<span class="kw">import</span> org.springframework.context.*;
+<span class="kw">import</span> org.springframework.context.support.ClassPathXmlApplicationContext;
+
+<span class="kw">public class</span> MainApp {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+
+        ApplicationContext ctx = <span class="kw">new</span>
+            ClassPathXmlApplicationContext(<span class="str">"Beans.xml"</span>);
+
+        StudentJDBCTemplate t =
+            (StudentJDBCTemplate) ctx.<span class="fn">getBean</span>(<span class="str">"studentJDBCTemplate"</span>);
+
+        <span class="cmt">// INSERT</span>
+        t.<span class="fn">create</span>(<span class="str">"Zara"</span>,  <span class="num">11</span>);
+        t.<span class="fn">create</span>(<span class="str">"Nuha"</span>,  <span class="num">2</span>);
+        t.<span class="fn">create</span>(<span class="str">"Ayan"</span>,  <span class="num">15</span>);
+
+        <span class="cmt">// SELECT ALL</span>
+        System.out.<span class="fn">println</span>(<span class="str">"--- All Students ---"</span>);
+        List&lt;Student&gt; list = t.<span class="fn">listStudents</span>();
+        <span class="kw">for</span> (Student s : list) {
+            System.out.<span class="fn">println</span>(
+                <span class="str">"ID: "</span> + s.<span class="fn">getId</span>() +
+                <span class="str">", Name: "</span> + s.<span class="fn">getName</span>() +
+                <span class="str">", Age: "</span>  + s.<span class="fn">getAge</span>()
+            );
+        }
+
+        <span class="cmt">// UPDATE</span>
+        t.<span class="fn">update</span>(<span class="num">2</span>, <span class="num">20</span>);
+
+        <span class="cmt">// GET ONE</span>
+        Student s = t.<span class="fn">getStudent</span>(<span class="num">2</span>);
+        System.out.<span class="fn">println</span>(<span class="str">"After update: "</span> + s.<span class="fn">getName</span>() + <span class="str">", Age: "</span> + s.<span class="fn">getAge</span>());
+
+        <span class="cmt">// DELETE</span>
+        t.<span class="fn">delete</span>(<span class="num">3</span>);
+    }
+}</code></pre>
+
+<pre><code><span class="cmt">&lt;!-- Beans.xml --&gt;</span>
+&lt;beans&gt;
+    &lt;bean id="dataSource"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource"&gt;
+        &lt;property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/&gt;
+        &lt;property name="url"      value="jdbc:mysql://localhost:3306/TEST"/&gt;
+        &lt;property name="username" value="root"/&gt;
+        &lt;property name="password" value="admin"/&gt;
+    &lt;/bean&gt;
+
+    &lt;bean id="studentJDBCTemplate" class="com.mrcet.StudentJDBCTemplate"&gt;
+        &lt;property name="dataSource" ref="dataSource"/&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;</code></pre>
+
+      <div class="output">
+        Inserted: Zara<br>
+        Inserted: Nuha<br>
+        Inserted: Ayan<br>
+        --- All Students ---<br>
+        ID: 1, Name: Zara, Age: 11<br>
+        ID: 2, Name: Nuha, Age: 2<br>
+        ID: 3, Name: Ayan, Age: 15<br>
+        Updated ID = 2<br>
+        After update: Nuha, Age: 20<br>
+        Deleted ID = 3
+      </div>
     </div>
 
   </div>
@@ -1268,7 +2282,6 @@ for (Student s : list) {
 </div><!-- end container -->
 
 <script>
-// Smooth scroll for TOC links
 document.querySelectorAll('.toc-nav a').forEach(a => {
   a.addEventListener('click', e => {
     e.preventDefault();
